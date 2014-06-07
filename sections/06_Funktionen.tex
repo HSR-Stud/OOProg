@@ -88,7 +88,7 @@
 				\lstinputlisting[language=C,tabsize=2]{code/c_makro.c}
 			\end{minipage}
 			\hspace*{0.5cm}
-			\begin{minipage}[t]{10 cm}	
+			\begin{minipage}[t]{11 cm}	
 				\subsubsection{$inline$-Funktionen}
 					\begin{compactitem}
 						\item Lösen das Overhead-Problem.
@@ -101,5 +101,47 @@
 			\end{minipage}	
 		
 	\subsection{Vorbelegte Parameter \verweiscpp{7.6}}
-		\begin{compactitem}
-		\end{compactitem}
+		\begin{minipage}[t]{7 cm}
+			\begin{compactitem}
+				\item Parametern können im Funktionsprototypen Defaultwerte	zugewiesen werden. 
+				\item Beim Funktionsaufruf können (aber müssen nicht) die Parameter mit Defaultwerten weggelassen	werden.
+				\item Achtung: Hinter (rechts von) einem Default-Argument darf kein nicht vorbelegter Parameter mehr folgen, d.h. wenn bei einem Parameter ein Default definiert wird, dann müssen bei allen weiteren Parametern dieser Funktion ebenfalls Defaults definiert werden.
+			\end{compactitem}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{10 cm}	
+			\vspace*{-0.5cm}
+			\lstinputlisting[language=C++,tabsize=2]{code/default_parameter.cpp}
+		\end{minipage}
+		
+	\subsection{Überladene Funktionen \verweiscpp{7.7.1}}
+		\begin{minipage}[t]{7 cm}
+			\begin{compactitem}
+				\item Die Identifikation einer Funktion erfolgt über die Signatur, nicht nur über den Namen. Die Signatur besteht aus dem Namen der Funktion plus der Parameterliste (Reihenfolge, Anzahl, Typ). Der Returntyp wird nicht berücksichtigt.
+				\item Der Name der Funktionen ist identisch.
+				\item Die Implementation muss für jede überladene Funktion separat erfolgen.
+				\item Overloading sollte zurückhaltend eingesetzt werden. Wenn möglich sind Default-Argumente vorzuziehen.
+			\end{compactitem}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{11.5 cm}
+			\vspace*{-0.25cm}
+			\subsubsection{Regeln}
+				\begin{compactitem}
+					\item Entsprechen Rückgabetyp und Parameterliste der zweiten Deklaration denen der ersten, so wird die zweite als gültige Redeklaration der ersten aufgefasst.
+					\item Unterscheiden sich die beiden Deklarationen nur bezüglich ihrer Rückgabetypen, so behandelt der Compiler die zweite Deklaration als fehlerhafte Re-Deklaration der ersten. Der Rückgabetyp von Funktionen kann nicht als Unterscheidungskriterium verwendet werden.
+					\item Nur wenn beide Deklarationen sich in Anzahl oder Typ ihrer Parameter unterscheiden, werden sie als zwei verschiedene Deklarationen mit demselben Funktionsnamen betrachtet (überladene Funktionen).
+				\end{compactitem}
+		\end{minipage}
+		
+		\subsubsection{Beispiel Default-Parameter vs. Overloading \verweiscpp{7.7.2}}
+			\begin{minipage}[t]{11 cm}
+				\vspace*{-0.5cm}
+				\lstinputlisting[language=C++,tabsize=2]{code/default_parameter_vs_overloading.cpp}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{7.5 cm}
+				\begin{compactitem}
+					\item \textbf{Auf keinen Fall sind Default-Parameter in überladenen Funktionen zu verwenden!}
+				\end{compactitem}
+			\end{minipage}
