@@ -35,7 +35,11 @@
 \usepackage{listings}
 
 \definecolor{red}{rgb}{1,0,0}
-\newcommand{\verweis}[1]{$_{\textcolor{red}{\mbox{\small{Kapitel #1}}}}$}
+\definecolor{blue}{rgb}{0,0,1}
+\definecolor{black}{rgb}{0,0,0}
+\newcommand{\verweisc}[1]{$_{\textcolor{red}{\mbox{\small{C Kap. #1}}}}$}
+\newcommand{\verweiscpp}[1]{$_{\textcolor{blue}{\mbox{\small{C++ Kap. #1}}}}$}
+\newcommand{\verweisboth}[2]{$_{\textcolor{red}{\mbox{\small{C Kap. #1}}}}$$_{\textcolor{black}{\mbox{\small{, }}}}$$_{\textcolor{blue}{\mbox{\small{C++ Kap. #2}}}}$}
 \newcommand{\verweishoch}[1]{${\textcolor{red}{\mbox{\small{Kapitel #1}}}}$}
 
 %Document Anfang
@@ -47,36 +51,36 @@
 	\tableofcontents
 	\newpage
 
-	\input{sections/01_Ein_und_Ausgabe}
+	\include{sections/01_Ein_und_Ausgabe}
 
-	\input{sections/02_Lexikalische_Elemente}
+	\include{sections/02_Lexikalische_Elemente}
 		
-	\input{sections/03_Einfache_Deklarationen_und_Basisdatentypen}	
+	\include{sections/03_Einfache_Deklarationen_und_Basisdatentypen}	
 	
-	\input{sections/04_Ausdruecke}	
+	\include{sections/04_Ausdruecke}	
 
-	\input{sections/05_Anweisungen}
+	\include{sections/05_Anweisungen}
 
-	\input{sections/06_Funktionen}
+	\include{sections/06_Funktionen}
 	
-	\input{sections/07_Hoehere_Datentypen_und_strukturierte_Datentypen}
+	\include{sections/07_Hoehere_Datentypen_und_strukturierte_Datentypen}
 
-	\input{sections/08_Gueltigkeitsbereiche_Namensraeume_und_Sichtbarkeit}
+	\include{sections/08_Gueltigkeitsbereiche_Namensraeume_und_Sichtbarkeit}
 		
-	\input{sections/09_Module_und_Datenkapseln}
+	\include{sections/09_Module_und_Datenkapseln}
 	
-	\input{sections/10_Klassenkonzept}
+	\include{sections/10_Klassenkonzept}
 	
-	\input{sections/11_Templates}	
+	\include{sections/11_Templates}	
 	
-	\input{sections/12_Vererbung}
+	\include{sections/12_Vererbung}
 	
-	\input{sections/13_Polymorphismus}
+	\include{sections/13_Polymorphismus}
 	
-	\input{sections/14_Exception_Handling}
+	\include{sections/14_Exception_Handling}
 	
-	\input{sections/15_Ein_Ausgabe_in_Cpp_Streams}
+	\include{sections/15_Ein_Ausgabe_in_Cpp_Streams}
 	
-	\input{sections/16_Anhang_Beispiele}			
+	\include{sections/16_Anhang_Beispiele}			
 
 \end{document}
