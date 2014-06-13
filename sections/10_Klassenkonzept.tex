@@ -1,2 +1,86 @@
 \section{Klassenkonzept}
-L. Leuenberger
+	\begin{minipage}[t]{7 cm}
+		\subsection{Begriff der Klasse}
+		\begin{compactitem}
+			\item Eine Klasse ist eine Struktur (eine Struktur besteht nur aus Daten), die mit den 	Funktionen, welche auf diesen Daten arbeiten, erweitert wurde.
+			\item Eine Klasse ist also eine Struktur, welche die Daten und die Funktionen auf diesen Daten in ein syntaktisches Konstrukt packt.
+			\item Die Klasse ist die Umsetzung der Datenkapsel.
+			\item Eine Klassendeklaration ist eine Typendefinition. Die Variablen einer Klasse
+			werden als Objekte bezeichnet.
+		\end{compactitem}
+	\end{minipage}
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{11 cm}
+		\subsection{UML-Notation einer Klasse}
+			\begin{tikzpicture}
+				\begin{class}[text width=9.5cm]{ClassName}{0 ,0}
+					\attribute {-attribute1: int = 0}
+					\attribute {-attribute2: int = 0}
+					\operation {+method1()}
+					\operation {+method2()}
+				\end{class}
+			\end{tikzpicture}
+			\begin{compactitem}
+				\item Eine Klasse ist der Bauplan für Objekte.
+				\item Eine Klasse besteht aus Daten (Attribute) und den Funktionen (Methoden) auf diesen Daten.
+				\item Sichtbarkeit: 
+				\begin{compactitem}
+					\item $+$ : $public$
+					\item $-$ : $private$
+					\item $\#$ : $protected$
+				\end{compactitem}
+			\end{compactitem}
+	\end{minipage}
+	
+	\begin{minipage}[t]{8 cm}	
+		\subsection{Üblicher Aufbau einer Klassensyntax \verweiscpp{11.1.1}}
+			\lstinputlisting[language=C++,tabsize=2]{code/klassenschnittstelle.cpp} 
+	\end{minipage}
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{10 cm}		
+			\subsubsection{Zugriffsschutz \verweiscpp{11.4}}
+			\begin{compactitem}
+				\item Innerhalb der Klasse hat jede Methode der Klasse auf alle Elemente Zugriff. (innerhalb der Klasse sind die Attribute "lokale globale" Datenfelder)
+				\item Von ausserhalb der Klasse gibt es grundsätzlich keinen Zugriff auf Elemente der Klasse (default, d.h. wenn nichts explizit steht). 
+				\item Alles, was von aussen zugreifbar sein soll, muss mit $public:$ gekennzeichnet werden.
+				\item Obwohl nicht unbedingt notwendig, werden die nach aussen nicht sichtbaren Elemente üblicherweise explizit mit $private:$ gekennzeichnet.
+			\end{compactitem}
+	\end{minipage}
+	
+	\begin{minipage}[t]{9 cm}
+		\subsubsection{Operationen einer Klasse}
+			Operationen eine Klasse (= Funktionen, die im Klassenrumpf definiert sind) werden als
+			Elementfunktionen oder Methoden bezeichnet.	Üblicherweise beginnen Elementfunktionen mit einem Kleinbuchstaben und werden in camelCase (mixedCase) notiert.	
+			\begin{lstlisting}[language=C++,tabsize=2]
+				isEmpty();
+			\end{lstlisting}	
+	\end{minipage}
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{9 cm}	
+		\subsubsection{Information Hiding}
+			\begin{compactitem}
+				\item Klassen exportieren generell ausschliesslich Methoden. Alle Daten sind im Innern (private-Abschnitt) verborgen, der Zugriff erfolgt über die so genannten Elementfunktionen.
+				\item Jede Klasse besteht damit aus zwei Dateien, der Schnittstellendatei ($.h$) und	der Implementierungsdatei ($.cpp$).
+			\end{compactitem}
+	\end{minipage}
+
+\newpage
+		\subsubsection{Beispiel an der Klasse Rechteck}
+			\begin{minipage}[t]{9cm}
+				\lstinputlisting[language=C++,tabsize=2]{code/class_rectangle_header.cpp}				
+				\begin{tikzpicture}
+					\begin{class}[text width=8cm]{Rectangle}{0 ,0}
+						\attribute{-a : double}
+						\attribute{-b : double}
+						\operation{+setA(in newA : double)}
+						\operation{+setB(in newB : double)}
+						\operation{+getA() : double}
+						\operation{+getB() : double}
+						\operation{+getArea() : double}
+					\end{class}
+				\end{tikzpicture}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{9 cm}
+				\lstinputlisting[language=C++,tabsize=2]{code/class_rectangle.cpp} 
+			\end{minipage}

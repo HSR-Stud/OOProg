@@ -1,0 +1,9 @@
+class Classname // Deklaration der Klasse
+{
+	public:
+		...
+	protected:
+		...
+	private:
+		...
+};         // Strichpunkt nicht vergessen
