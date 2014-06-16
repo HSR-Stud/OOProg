@@ -40,10 +40,21 @@
 	\begin{minipage}[t]{10 cm}		
 			\subsubsection{Zugriffsschutz \verweiscpp{11.4}}
 			\begin{compactitem}
-				\item Innerhalb der Klasse hat jede Methode der Klasse auf alle Elemente Zugriff. (innerhalb der Klasse sind die Attribute "lokale globale" Datenfelder)
-				\item Von ausserhalb der Klasse gibt es grundsätzlich keinen Zugriff auf Elemente der Klasse (default, d.h. wenn nichts explizit steht). 
-				\item Alles, was von aussen zugreifbar sein soll, muss mit $public:$ gekennzeichnet werden.
-				\item Obwohl nicht unbedingt notwendig, werden die nach aussen nicht sichtbaren Elemente üblicherweise explizit mit $private:$ gekennzeichnet.
+				\item $public$ - Elemente können innerhalb und von ausserhalb der Klasse
+				angesprochen werden.
+					\begin{compactitem}
+						\item fast alle Methoden sind $public$
+						\item Attribute sollen nie $public$ sein
+					\end{compactitem}
+				\item $protected$ - Elemente können von innerhalb der Klasse und von abgeleiteten
+				Klassen angesprochen werden.
+					\begin{compactitem}
+						\item nur sparsam einsetzen!
+					\end{compactitem}
+				\item $private$ - Elemente können nur innerhalb der Klasse angesprochen werden.
+					\begin{compactitem}
+						\item grundsätzlich für alle Attribute und für einzelne (lokale) Methoden
+					\end{compactitem}
 			\end{compactitem}
 	\end{minipage}
 	
@@ -84,3 +95,75 @@
 			\begin{minipage}[t]{9 cm}
 				\lstinputlisting[language=C++,tabsize=2]{code/class_rectangle.cpp} 
 			\end{minipage}
+			
+	\begin{minipage}[t]{9cm}
+		\subsection{Elementfunktionen \verweiscpp{11.2}}
+			\begin{compactitem}
+				\item sind Funktionen, die in der Schnittstelle der Klasse spezifiziert sind.
+				\item Elementfunktionen haben vollen Zugriff auf alle Klassenelemente (auch auf
+				solche, die mit private: gekennzeichnet sind.
+				\item Auf Elementfunktionen kann nur unter Bezugnahme auf ein Objekt der Klasse, bzw. mit dem Scope-Operator (::) zugegriffen werden.
+				\item Elementfunktionen sollen prinzipiell in der Implementierungsdatei (.cpp) implementiert werden. Dem Funktionsnamen muss dabei der Klassenname gefolgt von $::$ vorangestellt werden. (Beispiel: $int$ $Stack::pop()$)
+			\end{compactitem}
+	\end{minipage}
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{9 cm}
+			\subsubsection{Klassifizierung von Elementfunktionen}
+				\begin{compactitem}
+					\item Konstruktoren / Destruktoren
+						\begin{compactitem}
+							\item Konstruktor: erzeugen eines Objekts
+							\item Destruktur: vernichten, freigeben eines Objekts
+						\end{compactitem}
+					\item Modifikatoren
+						\begin{compactitem}
+							\item ändern den Zustand eines Objekts (Attribute ändern)
+						\end{compactitem}
+					\item Selektoren
+						\begin{compactitem}
+							\item greifen nur lesend auf ein Objekt zu (immer const definieren!)
+							\item Beispiel: $bool$ $Stack::isEmpty()$ $const;$
+						\end{compactitem}
+					\item Iteratoren
+						\begin{compactitem}
+							\item Erlauben, auf Elemente eines Objekts in einer definierten Reihenfolge	zuzugreifen
+						\end{compactitem}
+				\end{compactitem}
+	\end{minipage}
+		
+	\begin{minipage}[t]{9cm}
+			\subsubsection{$inline$-Funktionen \verweiscpp{11.2.1}}
+				\begin{compactitem}
+					\item Elementfunktionen, die innerhalb der Deklaration der Klassenschnittstelle (im	.h-File) implementiert sind, werden als (implizite) $inline$ - Funktionen
+					behandelt.
+					\item Elementfunktionen können in der Klassenimplementation explizit mit dem
+					Schlüsselwort $inline$ gekennzeichnet werden.
+					\item Implizite $inline$ - Funktionen verletzen zwar das Information Hiding Prinzip	und sollten deshalb grundsätzlich vermieden werden.
+					\item Jedoch: die impliziten $inline$ - Funktionen sind die Funktionen, die garantiert immer $inline$ verwendet werden (mit einigen wenigen
+					Ausnahmen).
+				\end{compactitem}	
+	\end{minipage}
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{9 cm}			
+			\subsubsection{$const$-Elementfunktion \verweiscpp{11.2.2}}
+				\begin{compactitem}
+					\item Elementfunktionen, die den Zustand eines Objekts nicht ändern (Selektoren)
+					sollen explizit mit dem Schlüsselwort $const$ gekennzeichnet werden.
+					\item Das Schlüsselwort $const$ muss sowohl im Prototypen als auch in der
+					Implementierung geschrieben werden.
+				\end{compactitem}
+				\lstinputlisting[language=C++,tabsize=2]{code/elementfunktion_const.cpp} 
+	\end{minipage}
+\newpage	
+	\begin{minipage}[t]{6cm}
+			\paragraph{$mutable$ - Attribut}
+				Ein Datenelement, das nie $const$ werden soll (auch nicht bei $const$-Elementfunktionen) kann	mit	$mutable$ gekennzeichnet werden.
+				\lstinputlisting[language=C++,tabsize=2]{code/mutable.cpp}
+	\end{minipage}
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{12cm}			
+		\subsection{$this$-Pointer \verweiscpp{11.3}}
+			Der $this$-Pointer ist ein Pointer auf das eigene aktuelle Objekt, welches eine
+			Methode aufgerufen hat.
+			\lstinputlisting[language=C++,tabsize=2]{code/this_pointer.cpp}
+	\end{minipage}
