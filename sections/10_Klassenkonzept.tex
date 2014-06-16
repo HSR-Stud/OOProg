@@ -35,6 +35,19 @@
 	\begin{minipage}[t]{8 cm}	
 		\subsection{Üblicher Aufbau einer Klassensyntax \verweiscpp{11.1.1}}
 			\lstinputlisting[language=C++,tabsize=2]{code/klassenschnittstelle.cpp} 
+			
+			\subsubsection{Operationen einer Klasse}
+					Operationen eine Klasse (= Funktionen, die im Klassenrumpf definiert sind) werden als
+					Elementfunktionen oder Methoden bezeichnet.	Üblicherweise beginnen Elementfunktionen mit einem Kleinbuchstaben und werden in camelCase (mixedCase) notiert.	
+					\begin{lstlisting}[language=C++,tabsize=2]
+						isEmpty();
+					\end{lstlisting}
+
+			\subsubsection{Information Hiding}
+				\begin{compactitem}
+					\item Klassen exportieren generell ausschliesslich Methoden. Alle Daten sind im Innern (private-Abschnitt) verborgen, der Zugriff erfolgt über die so genannten Elementfunktionen.
+					\item Jede Klasse besteht damit aus zwei Dateien, der Schnittstellendatei ($.h$) und	der Implementierungsdatei ($.cpp$).
+				\end{compactitem}
 	\end{minipage}
 	\hspace*{0.5cm}
 	\begin{minipage}[t]{10 cm}		
@@ -56,23 +69,16 @@
 						\item grundsätzlich für alle Attribute und für einzelne (lokale) Methoden
 					\end{compactitem}
 			\end{compactitem}
-	\end{minipage}
-	
-	\begin{minipage}[t]{9 cm}
-		\subsubsection{Operationen einer Klasse}
-			Operationen eine Klasse (= Funktionen, die im Klassenrumpf definiert sind) werden als
-			Elementfunktionen oder Methoden bezeichnet.	Üblicherweise beginnen Elementfunktionen mit einem Kleinbuchstaben und werden in camelCase (mixedCase) notiert.	
-			\begin{lstlisting}[language=C++,tabsize=2]
-				isEmpty();
-			\end{lstlisting}	
-	\end{minipage}
-	\hspace*{0.5cm}
-	\begin{minipage}[t]{9 cm}	
-		\subsubsection{Information Hiding}
-			\begin{compactitem}
-				\item Klassen exportieren generell ausschliesslich Methoden. Alle Daten sind im Innern (private-Abschnitt) verborgen, der Zugriff erfolgt über die so genannten Elementfunktionen.
-				\item Jede Klasse besteht damit aus zwei Dateien, der Schnittstellendatei ($.h$) und	der Implementierungsdatei ($.cpp$).
-			\end{compactitem}
+				
+				\paragraph{$friend$-Elemente \verweiscpp{11.4.2}}
+					\begin{compactitem}
+						\item $friend$ - Jede Klasse kann andere Klassen oder Funktionen zum Freund	erklären. Dadurch werden die Zugriffsregeln durchbrochen.
+						\item Jeder $friend$ darf auf alle Elemente der Klasse zugreifen.
+						\item $friend$ ist eine $C++$ - Spezialität, welche die meisten anderen
+						Programmiersprachen (z.B. $Java$) nicht anbieten.
+						\item $friends$, insbesondere $friend$-Klassen, können ein Anzeichen für
+						schlechtes Design sein. Sie durchbrechen wichtige Prinzipien der objektorientierten Programmierung.
+					\end{compactitem}
 	\end{minipage}
 
 \newpage
@@ -145,7 +151,7 @@
 	\end{minipage}
 	\hspace*{0.5cm}
 	\begin{minipage}[t]{9 cm}			
-			\subsubsection{$const$-Elementfunktion \verweiscpp{11.2.2}}
+			\subsubsection{$const$ - Elementfunktion \verweiscpp{11.2.2}}
 				\begin{compactitem}
 					\item Elementfunktionen, die den Zustand eines Objekts nicht ändern (Selektoren)
 					sollen explizit mit dem Schlüsselwort $const$ gekennzeichnet werden.
@@ -162,8 +168,25 @@
 	\end{minipage}
 	\hspace*{0.5cm}
 	\begin{minipage}[t]{12cm}			
-		\subsection{$this$-Pointer \verweiscpp{11.3}}
+		\subsection{$this$ - Pointer \verweiscpp{11.3}}
 			Der $this$-Pointer ist ein Pointer auf das eigene aktuelle Objekt, welches eine
 			Methode aufgerufen hat.
 			\lstinputlisting[language=C++,tabsize=2]{code/this_pointer.cpp}
+			
+		\subsection{$static$ - Klassenelemente \verweiscpp{11.5}}
+			\begin{compactitem}
+				\item Grundsätzlich besitzt jedes Objekt einer Klasse seine eigene private Instanz
+				aller Attribute einer Klasse.
+				\item Wenn ein Attribut mit $static$ gekennzeichnet wird, dann teilen sich alle
+				Objekte dieser Klasse eine einzige Instanz dieses Attributs, d.h. ein
+				statisches Attribut ist nur einmal für alle Objekte einer Klasse im Speicher
+				vorhanden.
+				\item $static$ - Elemente befinden sich ausserhalb eines Objektkontexts.
+				\item $static$ - Elemente können auch über den Klassennamen angesprochen
+				werden (da sie sich im Kontext einer Klasse befinden).
+			\end{compactitem}
 	\end{minipage}
+	
+	\subsection{Konstruktor \verweiscpp{11.7.1}}
+	
+	
