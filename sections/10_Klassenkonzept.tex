@@ -276,9 +276,65 @@
 			\end{compactitem}
 			
 		\subsubsection{Explizite Konstruktoren}
-			\begin{compactitem}
-				\item Die implicit calls (bei Ctors mit einem Parameter) \\
-				$TString$ $str2$ $=$ $12345;$ \\
-				$str2$ $=$ $789;$ \\
-				sind gelegentlich nicht erwünscht.
-			\end{compactitem}
+			\begin{minipage}[t]{12cm}
+				\begin{compactitem}
+					\item Die implicit calls (bei Konstruktoren mit einem Parameter) \\
+					$TString$ $str2$ $=$ $12345;$ \\
+					$str2$ $=$ $789;$ \\
+					sind gelegentlich nicht erwünscht.
+					\item Wenn der Konstruktor mit $explicit$ gekennzeichnet wird, kann dieser Konstruktor	nicht mehr implizit, sondern nur explizit aufgerufen werden.
+					\lstinputlisting[language=C++,tabsize=2]{code/constructor_explicit_1.cpp}
+				\end{compactitem}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{6cm}
+					\vspace*{-0.5cm}
+					\lstinputlisting[language=C++,tabsize=2]{code/constructor_explicit_2.cpp}
+			\end{minipage}
+			
+		\subsubsection{Copy-Konstruktor}
+			\begin{minipage}[t]{10cm}
+				\begin{compactitem}
+					\item Der Copy-Konstruktor wird dazu verwendet, Objekte zu kopieren.
+					\item Der Copy-Konstruktor erhält als Parameter immer eine konstante Referenz auf
+					ein Objekt der Klasse. Für $TString$ sieht er wie folgt aus: 
+					$TString(const$ $TString\&$ $s);$
+				\end{compactitem}
+				Der Copy-Konstruktor wird automatisch aufgerufen, wenn ...
+				\begin{compactitem}
+					\item ... ein Objekt mit einem anderen Objekt derselben Klasse initialisiert wird.
+					\item ... ein Objekt als Wertparameter (by value) an eine Funktion übergeben wird
+					(nicht aber bei Referenzparametern).
+					\item ... ein Objekt by value als Resultat einer Funktion zurückgegeben wird (nicht bei Referenzrückgabewerten).
+				\end{compactitem}
+				Ein Copy-Konstruktor wird nur dann benutzt, wenn ein neues Objekt erzeugt wird, aber nicht bei Zuweisungen, also Änderungen von Objekten.
+				Bei Zuweisungen wird der vom System bereitgestellte Zuweisungsoperator benutzt,
+				sofern kein eigener definiert wurde.
+				
+				\paragraph{Shallow Copy vs. Deep Copy}
+					\begin{compactitem}
+						\item Wenn für eine Klasse kein Copy-Konstruktor definiert wird, erzeugt das System einen Standard-Copy-Konstruktor.
+						\item Dieser kopiert alle Datenelemente (memberwise assignment). Bei Pointern, welche auf den Heap zeigen, wird nur die Adresse kopiert, nicht aber der Speicher auf dem Heap. Man nennt das shallow copy. (shallow = flach).
+						\item Bei einer deep copy werden auch die Speicherbereiche, auf welche Pointer
+						zeigen, kopiert. Die deep copy muss in einem selbst definierten Copy-Konstruktor implementiert werden.
+					\end{compactitem}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{6cm}
+				\vspace*{-0.5cm}
+				\lstinputlisting[language=C++,tabsize=2]{code/constructor_copy.cpp}
+				\lstinputlisting[language=C++,tabsize=2]{code/constructor_copy_2.cpp}
+			\end{minipage} \\
+			
+			\begin{minipage}[t]{9cm}
+				\paragraph{Shallow-Copy}
+					\includegraphics[width=1\textwidth]{pics/shallow_copy.jpg}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{9cm}
+				\paragraph{Deep-Copy}
+					\includegraphics[width=1\textwidth]{pics/deep_copy.jpg}
+			\end{minipage}
+			
+	\subsection{Destruktor \verweiscpp{11.7.2}}
+		
