@@ -403,3 +403,248 @@
 		Häufig werden Typumwandlungen aber auch mit Hilfe von Konstruktoren implementiert:
 		$VeryLargeInt(int);$
 		
+	\subsection{Überladen von Operatoren \verweiscpp{11.7.3}}
+		Operatoren (z.B. +, ==, etc.) können wie Funktionen überladen werden.
+		
+		\subsubsection{Überladbare Operatorfunktionen in C++}
+			\begin{minipage}[c]{2.2 cm}
+	 			\begin{compactitem}
+	 				\item $new$
+	 				\item $delete$				
+	 				\item $new[$ $]$				
+	 				\item $delete[$ $]$ 	
+	 				\item $+$
+	 				\item $-$							
+	 			\end{compactitem}
+ 			\end{minipage}
+ 			\begin{minipage}[c]{2.3 cm}
+	 			\begin{compactitem}	
+	 				\item $*$
+	 				\item $/$			
+	 				\item $\%$
+	 				\item $\textasciicircum$	 
+	 				\item $\&$	
+	 				\item $|$		
+	 			\end{compactitem}
+ 			\end{minipage}
+ 			\begin{minipage}[c]{2.2 cm}
+	 			\begin{compactitem}	
+	 			 	\item $\textasciitilde$
+	  			 	\item $!$	
+	 			 	\item $=$ 			 	
+	 			 	\item $<$ 	
+	 			 	\item $>$	 		 	
+	 			\end{compactitem}
+ 			\end{minipage}
+ 			\begin{minipage}[c]{2.2 cm}
+	 			\begin{compactitem}	
+	 			 	\item $+=$			 	
+	 			 	\item $-=$			 	
+	 			 	\item $*=$		
+	 			 	\item $/=$	
+	 			 	\item $\%=$		 	
+	 			\end{compactitem}
+	 		\end{minipage}
+ 			\begin{minipage}[c]{2.2 cm}
+	 			\begin{compactitem} 
+	 			 	\item $\textasciicircum=$			 	
+	 			 	\item $\&=$ 		 	
+	 			 	\item $|=$			 	
+	 			 	\item $<<$ 		
+	 			 	\item $>>$	 	
+	 			\end{compactitem}
+	 		\end{minipage}
+ 			\begin{minipage}[c]{2.2 cm}
+	 			\begin{compactitem}		 
+	 			 	\item $>>=$ 			 	
+	 			 	\item $<<=$ 			 	
+	 			 	\item $==$ 			 	
+	 			 	\item $!=$
+	 			 	\item $<=$	
+	 			\end{compactitem}
+	 		\end{minipage}
+ 			\begin{minipage}[c]{2.2 cm}
+	 			\begin{compactitem}		 	
+	 			 	\item $>=$ 		 	
+	 			 	\item $\&\&$ 			 	
+	 			 	\item $||$ 			 	
+	 			 	\item $++$ 		
+	 			 	\item $--$	 	
+	 			\end{compactitem}
+	 		\end{minipage}
+ 			\begin{minipage}[c]{2.4 cm}
+	 			\begin{compactitem}		 	
+	 			 	\item $,$ 			 	
+	 			 	\item $->*$	
+	 			 	\item $->$		 	
+	 			 	\item $()$
+	 			 	\item $[$ $]$
+	 			\end{compactitem}
+	 		\end{minipage}
+	 		
+		\subsubsection{Randbedingungen}
+			\begin{compactitem}
+				\item Die Anzahl der Operanden (Argumente) muss gleich sein wie beim ursprünglichen Operator.
+				\item Die Priorität des überladenen Operators kann nicht ändern.
+				\item Neue Operatoren können nicht eingeführt werden.
+				\item Default-Argumente sind bei Operatoren nicht möglich.
+			\end{compactitem}
+			
+		\begin{minipage}[t]{9cm}	
+			\subsubsection{Operator Overloading als Elementfunktion}
+				Der neu definierte Operator wird als Elementfunktion implementiert. Damit ist
+				der Zugriff auf $private$ und $protected$ Attribute der Klasse möglich.
+				\lstinputlisting[language=C++,tabsize=2]{code/operator_overloading_element.cpp}
+				Zwingend als Elementfunktion zu implementieren sind: 
+				\begin{compactitem}
+					\item Zuweisungsoperator $=$
+					\item Indexaufruf $[$ $]$
+					\item Funktionsaufruf $()$
+					\item Zeigeroperator $->$
+				\end{compactitem}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{9cm}	
+			\subsubsection{Operator Overloading als normale Funktion}
+				Die Operatorfunktionen werden meist als normale Funktion implementiert. Dadurch besteht jedoch kein Zugriff mehr auf die $private$ und $protected$ Elemente der Klasse. Die Operatorfunktion muss deshalb als $friend$ deklariert werden.
+				\lstinputlisting[language=C++,tabsize=2]{code/operator_overloading_normal.cpp}
+		\end{minipage} \\
+		
+	\subsection{Strukturen und Unionen \verweisboth{11}{11.8.2}}
+		\subsubsection{Strukturen \verweisc{11.1}}
+			\paragraph{Eigenschaften}
+				\begin{compactitem}
+					\item Daten, welche logisch zusammengehören, können zusammengenommen werden
+					\item Die Struktur ist ein zusammengesetzter Datentyp, sie setzt sich aus den Feldern zusammen
+					\item Die einzelnen Felder der Strukturen können (müssen aber nicht) unterschiedliche Typen haben
+					\item Jedes Feld wird mit einem innerhalb der Struktur eindeutigen Namen versehen $\rightarrow$ Strukturspezifische Präfixe für die Feldnamen (z.B. $Angestellter\_Vorname$) sind deshalb sinnlos. 
+				\end{compactitem}
+			
+			\begin{minipage}[t]{10 cm}
+				\paragraph{Definition von Strukturtypen}
+					\vspace*{-0.2cm}
+					\lstinputlisting[language=C,tabsize=2]{code/strukturen1.c}
+					\vspace*{0.3cm}
+					\begin{compactitem}
+						\item $StructName$ kann frei gewählt werden
+						\item $struct$ $StructName$ ist hier ein selbst\\ definierter Typ, der weiter verwendet werden kann
+						\item Der Datentyp ist definiert durch den Inhalt der\\ geschweiften Klammer
+						\item Der Feldtyp kann wiederum eine Struktur sein
+					\end{compactitem}
+			\end{minipage}
+			\hspace*{0.5cm}	
+			\begin{minipage}[t]{8 cm}
+				\paragraph{Beispiel}
+					\vspace*{-0.2cm}
+					\lstinputlisting[language=C,tabsize=2]{code/strukturen2.c}
+			\end{minipage}
+\newpage		
+			\paragraph{Beispiele für die Definition von Strukturvariablen}
+				\vspace*{-0.2cm}
+				\lstinputlisting[language=C,tabsize=2]{code/strukturen3.c}
+				\vspace*{0.3cm}	
+					
+			\paragraph{Operationen auf Strukturvariablen}
+				\begin{compactitem}
+					\item Zuweisung: liegen zwei Strukturvariablen a und b vom gleichen Strukturtyp vor, so kann der Wert der einen Variablen der anderen zugewiesen werden $\rightarrow$ $a=b;$
+					\item Ermittlung der Grösse der Struktur: mit $sizeof$-Operator
+					\item Ermittlung der Adresse der Strukturvariablen: mit Adressoperator $\&$
+				\end{compactitem}
+				
+			\paragraph{Zugriff auf eine Strukturvariable und deren Felder}
+				Der Zugriff auf ein Feld einer Strukturvariablen erfolgt über
+				\begin{compactitem}
+					\item den Namen der Strukturvariablen,
+					\item gefolgt von einem Punkt
+					\item und dem Namen des Feldes 
+				\end{compactitem}			
+				\vspace*{0.2cm}
+				... wenn der Zugriff über einen Pointer auf eine Strukturvariable erfolgt, über
+				\begin{compactitem}
+					\item den Namen des Pointers,
+					\item gefolgt von einem Pfeil (--\textgreater)
+					\item und dem Namen des Feldes 
+				\end{compactitem}
+							
+			\paragraph{Beispiele für den Zugriff auf eine Strukturvariable}
+				\vspace*{-0.2cm}
+				\lstinputlisting[language=C,tabsize=2]{code/strukturen4.c}
+				\vspace*{0.3cm}
+\newpage
+			\begin{minipage}[c]{8 cm}
+				\paragraph{Lage im Speicher}
+					\begin{compactitem}
+						\item Die Felder einer Strukturvariablen werden nacheinander gemäss der Definition in den Speicher gelegt.
+						\item Gewisse Datentypen verlangen unter Umständen, dass sie auf eine Wortgrenze (gerade Adresse) gelegt werden. Dies nennt man Alignment.
+						\item Durch das Alignment kann es vorkommen, dass einzelne Bytes nicht verwendet werden, d.h. im Speicher ausgelassen werden.
+						\item Die Grösse einer Strukturvariablen kann nicht durch Addieren der Grössen der Felder ermittelt werden, nur $sizeof()$ liefert den genauen Wert
+					\end{compactitem}
+			\end{minipage}
+			\hspace*{2cm}
+			\begin{minipage}[c]{7 cm}
+				\includegraphics[width=0.5\textwidth]{pics/alignment.png}
+			\end{minipage}
+			\hspace*{-3cm}	
+			\begin{minipage}[c]{3 cm}
+				\lstinputlisting[language=C,tabsize=2]{code/strukturen5.c}
+				\vspace*{0.5cm}
+				Das int-Feld zahl muss auf einer geraden Adresse beginnen!
+			\end{minipage}
+			
+			\paragraph{Übergabe und Rückgabe von Strukturvariablen}
+				\begin{compactitem}
+					\item Strukturvariablen können komplett an Funktionen übergeben werden
+					\item Der Rückgabetyp einer Funktion kann eine Struktur sein. Dabei wird die Strukturvariable direkt komplett übergeben
+					\item Zu beachten ist der Kopieraufwand bei der Übergabe, bzw. Rückgabe eines Wertes. In der Praxis soll deshalb mit Pointern gearbeitet werden!
+					\lstinputlisting[language=C,tabsize=2]{code/strukturen7.c} 
+				\end{compactitem}
+			
+			\paragraph{Initialisierung einer Strukturvariablen}
+				Eine Initialisierung einer Strukturvariablen kann direkt bei der Definition der Strukturvariablen mit Hilfe einer Initialisierungsliste durchgeführt werden (Reihenfolge beachten). Natürlich muss der Datentyp $struct$ $Angestellter$ bereits bekannt sein. 
+				\lstinputlisting[language=C,tabsize=2]{code/strukturen6.c} 	
+							
+		\subsubsection{Unions \verweisboth{11.2}{11.8.2}}
+			\paragraph{Eigenschaften}
+				\begin{compactitem}
+					\item ähnlich wie Struktur
+					\item beinhaltet auch mehrere Felder unterschiedlichen Typs
+					\item im Gegensatz zur Struktur ist aber nur ein einziges Feld jeweils aktiv (abhängig vom Typ)
+					\item Die Grösse einer $Union$ ist so gross wie das grösste Feld der $Union$
+					\item Bei der Union sind dieselben Operationen wie bei einer Struktur definiert 
+				\end{compactitem}	
+			\begin{minipage}[t]{10 cm}
+				\paragraph{Definition von Uniontypen}
+					\vspace*{-0.2cm}
+					\lstinputlisting[language=C,tabsize=2]{code/unions1.c}
+					\vspace*{0.3cm}
+						\begin{compactitem}
+							\item $UnionName$ kann frei gewählt werden
+							\item $union$ $UnionName$ ist ein hier selbst definierter Typ, \\der weiter verwendet werden kann
+							\item Der Datentyp ist definiert durch den Inhalt der \\geschweiften Klammer
+							\item Der Feldtyp kann wiederum eine Union oder \\auch eine Struktur sein
+						\end{compactitem}
+			\end{minipage}
+			\hspace*{1.5cm}	
+			\begin{minipage}[t]{8 cm}
+				\paragraph{Beispiel}
+					\vspace*{-0.2cm}
+					\lstinputlisting[language=C,tabsize=2]{code/unions2.c}
+					\vspace*{0.5cm}
+					\includegraphics[width=0.5\textwidth]{pics/union.png}
+			\end{minipage}
+			\vspace*{0.8cm}
+			
+		\subsubsection{Allgemeines zu Strukturen und Unions}
+			\paragraph{Codierstil}
+				\begin{compactitem}
+					\item $Strukturname$ und $Unionname$ mit einem grossen Buchstaben beginnen!\\
+					$struct$ $Angestellter;$\\
+					$union$ $Vario;$
+					\item Struktur- und Unionvariablen mit einem kleinen Buchstaben beginnen
+					\item Bei Feldern von $Strukturen$ und $Union$ soll kein Präfix bei den Feldnamen verwendet werden
+				\end{compactitem}
+				
+			\paragraph{Vorsicht bei Unions}	
+				\begin{compactitem}
+					\item Der Programmierer muss verfolgen, welcher Typ jeweils in der $Union$ gespeichert ist. Der Datentyp, der entnommen wird, muss der sein, der zuletzt gespeichert wurde. 
+				\end{compactitem}			
