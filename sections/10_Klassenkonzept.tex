@@ -362,5 +362,44 @@
 				\end{compactitem}	
 		\end{minipage}
 			
-
+	\subsection{Kanonische Form von Klassen \verweiscpp{11.7.5}}
+		\begin{compactitem}
+			\item Als kanonische Form einer Klasse bezeichnet man jene Form, die es erlaubt,
+			eine Klasse wie einen "normalen" Datentyp zu benutzen. Dies ist für alle Klassen anzustreben.
+			\item Dazu müssen drei Bedingungen erfüllt sein:
+			\begin{compactitem}
+				\item Ein korrekter Default-Konstruktor, plus evtl. weitere Konstruktoren müssen
+				vorhanden sein
+				\item Wenn die Klasse dynamische Daten enthält, braucht es auch einen
+				Zuweisungsoperator und einen Copy-Konstruktor
+				\item Ein (virtueller) Destruktor garantiert die korrekte Zerstörung von Objekten
+			\end{compactitem}
+		\end{compactitem}
+		
+	\subsection{Benutzerdefinierte Typumwandlung \verweiscpp{11.7.6}}
+		Wenn zwei ganze Zahlen unterschiedlichen Typs (z.B. $int$ und $short$) addiert werden, so ist der Additionsoperator vom System für folgende Varianten	definiert:
+		\begin{compactitem}
+			\item $int+int$
+			\item $int+short$
+			\item $short+int$
+			\item $short+short$
+		\end{compactitem}
+		Wenn nun eine neue Klasse $VeryLargeInt$ eingeführt wird, so sind die Operatoren für diese Klasse noch nicht definiert. Nur schon für den Additionsoperator zwischen $VeryLargeInt$ und $int$ müssten folgende Varianten definiert werden:
+		\begin{compactitem}
+			\item $int+VeryLargeInt$
+			\item $VeryLargeInt+int$
+			\item $VeryLargeInt+VeryLargeInt$
+		\end{compactitem}
+		Dasselbe gilt auch für alle weiteren Operatoren. Für die Grundoperatoren +, -, *,
+		/, +=, -=, *=, /= müssten somit 24 Operatoren definiert werden. \\
+		Die einfachere Variante ist, wenn für jeden Typ eine Typumwandlung definiert
+		wird. Somit braucht es pro Typ eine Umwandlungsfunktion, die Operatoren arbeiten
+		anschliessend nur noch mit der Klasse $VeryLargeInt$.
+		\begin{compactitem}
+			\item $VeryLargeInt+VeryLargeInt$
+		\end{compactitem}
+		Für die Grundoperatoren +, -, *, /, +=, -=, *=, /= müssten nur noch die 8
+		Operatoren definiert werden. Zusätzlich müsste noch die Typumwandlung von jedem Typ ($short$, $int$, etc.) in $VeryLargeInt$ definiert werden. \\
+		Häufig werden Typumwandlungen aber auch mit Hilfe von Konstruktoren implementiert:
+		$VeryLargeInt(int);$
 		
