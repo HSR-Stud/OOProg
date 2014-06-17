@@ -231,7 +231,7 @@
 			\begin{minipage}[t]{5cm}
 				\lstinputlisting[language=C++,tabsize=2]{code/constructor_default.cpp}
 			\end{minipage}
-			
+\newpage			
 		\subsubsection{Implementation/Initialisierung}
 			Es gibt zwei Arten den Konstruktor zu implementieren. \\
 			\begin{minipage}[t]{9cm}
@@ -337,4 +337,30 @@
 			\end{minipage}
 			
 	\subsection{Destruktor \verweiscpp{11.7.2}}
+		\begin{minipage}[t]{7cm}
+			\subsubsection{Aufgaben des Destruktors}
+				\begin{compactitem}
+					\item die vollständige Zerstörung eines nicht mehr benötigten Objekts
+					\item das saubere Entfernen eines Objekts
+					\item die häufigste Aufgabe ist die Freigabe von nicht mehr benötigtem Speicher auf dem Heap
+					\item sehr häufig (wenn kein Speicher auf dem Heap vorhanden ist) wird kein
+					Destruktor definiert, da das System dann automatisch aufräumt
+				\end{compactitem}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{11cm}
+			\subsubsection{Eigenschaften des Destruktors}
+				\begin{compactitem}
+					\item Destruktoren haben keine Argumente und keinen Rückgabetyp
+					\item Ihr Name besteht aus dem Klassennamen mit vorgestellter Tilde. Der
+					Destruktor soll meist virtual deklariert werden (wenn es einen Destruktor
+					braucht): $virtual$ $~TString();$					
+					\item Destruktoren werden automatisch aufgerufen, wenn der Gültigkeitsbereich des definierten Objektes ausläuft 
+					\item Die Reihenfolge des Aufrufs der Destruktoren ist umgekehrt wie die der
+					Konstruktoren
+					\item Nicht definierte Destruktoren werden automatisch erzeugt
+				\end{compactitem}	
+		\end{minipage}
+			
+
 		
