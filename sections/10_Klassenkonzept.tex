@@ -187,6 +187,98 @@
 			\end{compactitem}
 	\end{minipage}
 	
-	\subsection{Konstruktor \verweiscpp{11.7.1}}
-	
-	
+	\subsection{Konstruktor (am Beispiel der Klasse $TString$) \verweiscpp{11.7.1}}
+		\begin{minipage}[t]{9cm}
+			\subsubsection{Aufgaben des Konstruktors}
+				\begin{compactitem}
+					\item die Neugründung eines Objekts einer Klasse
+					\item das saubere Initialisieren des Objekts, d.h. alle Attribute des Objekts
+					müssen auf einen definierten Wert gesetzt werden
+					\item Der Konstruktor hat in $C++$ denselben Namen wie die Klasse, hat keinen
+					Rückgabetyp (auch nicht $void$) und kann überladen werden. Beispiel: $Stack::Stack();$ $//(Default-)Konstruktor$
+				\end{compactitem}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{9cm}
+			\subsubsection{Aufruf des Konstuktors}
+				\begin{compactitem}
+					\item Der Konstruktor soll nie explizit aufgerufen werden.
+					\item Der Konstruktor wird vom System automatisch (implizit) aufgerufen, wenn
+					ein Objekt erzeugt wird: $Stack$ $s;$
+					\item Wenn durch den $new$-Operator Speicher angefordert und erhalten wird,
+					dann wird der Konstruktor vom System ebenfalls automatisch aufgerufen: \\ $Stack*$ $pS$ $=$ $new$ $Stack;$
+				\end{compactitem}	
+		\end{minipage}
+		
+		\subsubsection{Default-Konstruktor}
+			\begin{minipage}[t]{13cm}
+				\begin{compactitem}
+					\item Der Default-Konstruktor ist der Konstruktor ohne Parameter: \\
+					$Stack::Stack();$ \\
+					Er wird immer aufgerufen, wenn bei der Objekterzeugung keine Parameter
+					mitgegeben werden: \\
+					$Stack$ $s;$
+					\item Der Default-Konstruktor wird vom System automatisch erzeugt, wenn für
+					eine Klasse kein Konstruktor explizit definiert ist.
+					\item Der Default-Konstruktor kann selbst definiert werden.
+					\begin{compactitem}
+						\item Das ist insbesondere dann notwendig, wenn innerhalb des Objekts Speicher
+						dynamisch alloziert werden muss (bei der Objekterzeugung).
+					\end{compactitem}
+				\end{compactitem}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{5cm}
+				\lstinputlisting[language=C++,tabsize=2]{code/constructor_default.cpp}
+			\end{minipage}
+			
+		\subsubsection{Implementation/Initialisierung}
+			Es gibt zwei Arten den Konstruktor zu implementieren. \\
+			\begin{minipage}[t]{9cm}
+				\paragraph{Implementation mit Anweisung}
+					\lstinputlisting[language=C++,tabsize=2]{code/constructor_init_default.cpp}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{9cm}
+				\paragraph{Implementation mit Initialisierungsliste}
+					\lstinputlisting[language=C++,tabsize=2]{code/constructor_init_list.cpp}
+			\end{minipage} \\
+			Objektinitialisierungen werden, sofern dies möglich ist, über die Initialisierungsliste des Konstruktors und nicht im Anweisungsteil durchgeführt. (Effizienzgründe) \\
+			
+		\subsubsection{Überladen von Konstruktoren}
+			\begin{minipage}[t]{6cm}
+				\begin{compactitem}
+					\item Der Default-Konstruktor wird implizit aufgerufen mit \\
+					$TString$ $str;$
+					\item Ein $TString$-Objekt soll auch z.B. mit folgenden Anweisungen gegründet
+					werden können: \\
+					$TString$ $str1$ $=$ $"Hello";$ $//$ $implicit$ $call$ \\
+					$TString$ $str2$ $=$ $TString("Guten$ $Morgen");$ $//$ $explicit$ $call$
+					\item Dazu bedarf es anderer (überladener) Konstruktoren.
+				\end{compactitem}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{6cm}
+				\vspace*{-0.5cm}
+				\lstinputlisting[language=C++,tabsize=2]{code/constructor_overload.cpp}
+			\end{minipage}
+			\begin{minipage}[t]{6cm}
+				\vspace*{-0.5cm}
+				\lstinputlisting[language=C++,tabsize=2]{code/constructor_overload_implement.cpp}
+			\end{minipage}
+			
+		\subsubsection{Konstruktoren und Function Casts}
+			\begin{compactitem}
+				\item Konstruktoren mit nur einem Parameter können dazu verwendet werden, ein
+				Objekt vom Typ T aus einem anderen Objekt zu erzeugen (Typumwandlung).
+				\item Beispiel:	TString soll so erweitert werden, dass dem Konstruktor eine ganze Zahl übergeben wird und dieser daraus den entsprechenden String erzeugt.
+				\lstinputlisting[language=C++,tabsize=2]{code/constructor_function_cast.cpp}
+			\end{compactitem}
+			
+		\subsubsection{Explizite Konstruktoren}
+			\begin{compactitem}
+				\item Die implicit calls (bei Ctors mit einem Parameter) \\
+				$TString$ $str2$ $=$ $12345;$ \\
+				$str2$ $=$ $789;$ \\
+				sind gelegentlich nicht erwünscht.
+			\end{compactitem}
