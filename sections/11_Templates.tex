@@ -1,2 +1,76 @@
 \section{Templates}
-L. Leuenberger
+	\subsection{Motivation \verweiscpp{12.1}}
+		Wesentliche Vorteile von Templates sind:
+		\begin{compactitem}
+			\item Single-Source-Prinzip: Für x Varianten derselben Datenstruktur existiert genau eine Version des Sourcecodes, der geändert und gewartet werden muss.
+			\item Höhere Wiederverwendbarkeit: Klassen-Templates sind bei geeigneter Wahl ihrer Parameter allgemein einsetzbar und einfach wiederverwendbar.
+			\item Statische Bindung: Die Bindung zur Übersetzungszeit hat in Bezug auf Typsicherheit und Fehlererkennung zweifellos grosse Vorteile gegenüber generischen C-Lösungen mit $void*$-Zeigern, aber zum Teil auch gegenüber typisch objektorientierten Varianten wie sie zum Beispiel in Smalltalk üblich sind.
+			\item Dead Code: Traditionelle Bibliotheken belegen Speicher unabhängig davon, ob eine
+			einzelne Funktion wirklich verwendet wird. Dies kann zu Dead Code führen,
+			d.h. zu Code, der niemals ausgeführt wird.
+		\end{compactitem}
+		
+	\subsection{Funktions-Templates \verweiscpp{12.2}}
+		\begin{compactitem}
+			\item Templates verwenden den Typ als Variable.
+			\item Die Algorithmen können unabhängig vom Typ (generisch) implementiert
+			werden.
+			\item Templates sind keine Funktionsdefinitionen, sie beschreiben dem Compiler
+			nur, wie er den Code definieren soll, d.h. der Compiler nimmt den konkret
+			verwendeten Typ, setzt diesen in das Template ein und compiliert den so
+			erhaltenen Code.
+			\item Die Bindung zum konkreten Typ geschieht bereits zur Compiletime (early
+			binding), sobald bekannt ist, mit welchem Typ das Template aufgerufen
+			(benutzt) wird.
+		\end{compactitem}
+		
+		\subsubsection{Syntax}
+			\begin{minipage}[t]{10.5cm}
+				\begin{compactitem}
+					\item Vor den Funktionsnamen wird das Schlüsselwort template, gefolgt von einer
+					in spitzen Klammern eingeschlossenen Parameterliste gestellt.
+					\item Die Parameterliste enthält eine (nicht leere) Liste von Typ- und
+					Klassenparametern, die mit dem Schlüsselwort class oder typename
+					beginnen. Die einzelnen Parameter werden mit Komma getrennt.
+				\end{compactitem}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{7cm}
+				\vspace*{-0.5cm}\lstinputlisting[language=C++,tabsize=2]{code/template_syntax.cpp}
+			\end{minipage} \\
+		
+		\begin{minipage}[t]{11cm}
+			\subsubsection{$inline$ bei Templates}
+				$inline$ muss zwischen $template$ und dem Returntyp stehen.
+				Achtung: Bei Verwendung von $inline$ speziell zusammen mit Templates besteht die Gefahr von Code Bloat.
+							
+			\subsubsection{Ausprägung \verweiscpp{12.2.1}}
+				\begin{compactitem}
+					\item Sobald ein Typ in einem Funktions-Template verwendet wird, erkennt der
+					Compiler, dass es sich um ein Template handelt und prägt es für diesen Typ aus
+					(implizite Ausprägung).
+					\item Für die Auflösung werden nur die Funktionsparameter betrachtet, der
+					Rückgabetyp wird nicht ausgewertet.			
+				\end{compactitem}
+				\lstinputlisting[language=C++,tabsize=2]{code/template_auspraegung.cpp}
+				
+			\subsubsection{Explizite Qualifizierung}
+				\begin{compactitem}
+					\item Funktions-Templates können explizit mit einem Typ qualifiziert werden.		
+				\end{compactitem}
+				\lstinputlisting[language=C++,tabsize=2]{code/template_explizit.cpp}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{7cm}			
+			\subsubsection{Überladen \verweiscpp{12.2.2}}
+				\begin{compactitem}
+					\item Funktions-Templates können mit anderen Funktionstemplates und auch mit
+					normalen Funktionen überladen werden.
+					\item Namensauflösung:
+					\begin{compactitem}
+						\item Compiler geht Liste der möglicherweise passenden Funktions-Templates durch und erzeugt die entsprechenden Template-Funktionen.
+						\item Ergebnis ist eine Reihe von (eventuell) passenden Template-Funktionen, ergänzt durch die vorhandenen normalen Funktionen.
+						\item Aus dieser ganzen Auswahl wird die am besten passende Funktion ausgewählt.
+					\end{compactitem}	
+				\end{compactitem}
+		\end{minipage}
