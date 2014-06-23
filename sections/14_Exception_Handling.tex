@@ -41,6 +41,7 @@
 	
 	\begin{minipage}[t]{9 cm}
 		\subsubsection{Exception-Hierarchie in $C++$}
+			\vspace*{-0.4cm}\verweiscpp{15.4} \\ 		 	
 			Ausnahmeobjekte können beliebigen Typs sein (z.B. auch int). Meist werden jedoch spezifische hierarchisch organisierte Ausnahmeklassen verwendet.
 			\includegraphics[width=0.8\textwidth]{pics/exception.jpg}
 	\end{minipage}
@@ -67,7 +68,7 @@
 	\end{minipage}
 	\hspace*{0.5cm}
 	\begin{minipage}[t]{9 cm}
-		\subsubsection{Exception Handler}
+		\subsubsection{Exception Handler \verweiscpp{15.5}}
 			\begin{compactitem}
 				\item Ein oder mehrere Exception Handler können hintereinander definiert werden.
 				\item Die einzelnen $catch$-Handler müssen sich in den Parametern unterscheiden.
@@ -75,8 +76,9 @@
 				genommen. Ein passender Handler macht ein $catch$ auf genau diese Exception oder auf eine Basisklasse derselben.
 				\item Deshalb (sehr wichtig): Der allgemeinste Handler (am meisten oben in der Hierarchie) muss als letzter definiert werden.
 			\end{compactitem}
-	\end{minipage}
+	\end{minipage} \\
 	
+		\begin{minipage}[t]{9 cm}
 			\paragraph{Aufruf}
 				\begin{compactitem}
 					\item Wenn kein Handler passt, dann wird im Aufrufstack nach oben gesucht, ob ein	passender Handler vorhanden ist.
@@ -85,6 +87,30 @@
 					\item Catch all: Der folgende Handler fängt ausnahmslos alle Exceptions ab (und muss wenn gewünscht deshalb immer als letzter aufgeführt werden):\\
 					$catch(...)$\\
 					$\{$\\
-					$\}$\\
-					
+					$\}$\\					
 				\end{compactitem}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{9 cm}				
+			\paragraph{Exception Specification}
+				$void$ $foo()$ $throw(/*$ $Liste$ $der$ $Exceptions$ $*/);$
+				\begin{compactitem}
+					\item Liste beschreibt, welche Exceptions von einem Aufrufer von $foo()$ erwartet werden müssen.
+					\item Aber: garantiert auch, dass das Programm abstürzt, wenn eine andere als die	spezifizierten Exceptions ausgeworfen wird, d.h. $foo()$ muss dafür sorgen, dass wirklich nur die aufgelisteten Exceptions ausgeworfen werden.
+					\item Genauer: falls eine nicht spezifizierte Exception ausgeworfen wird, dann wird die Funktion $unexpected()$ aufgerufen, welche üblicherweise das Programm abbricht.
+					\item $unexpected()$ kann selbst definiert werden.
+				\end{compactitem}
+		\end{minipage}
+		
+	\subsection{Handling Strategie von System Exceptions}
+		\begin{compactitem}
+			\item In $Java$ und $C\#$ gelangen die System Exceptions in die Sprache, d.h. eine LowLevel Exception wird in eine Exception der Programmiersprache gemappt.
+			\item Die Sprache $C++$ betreibt kein solches Exception Mapping, d.h. Low-Level 
+			Exceptions werden nicht von $C++$ geworfen und können auch nicht mit
+			$catch(...)$ abgefangen werden.
+			\item Der Hauptgrund dafür ist einmal mehr Effizienz. Wenn ständig Exceptions
+			herumfliegen (auch wenn sie nicht abgefangen werden), dann beeinträchtigt
+			das die Performance.
+			\item Einzelne Systemumgebungen betreiben dennoch Exception Mapping in $C++$
+			(z.B. $Microsoft$ in $Visual$ $C++$).
+		\end{compactitem}
