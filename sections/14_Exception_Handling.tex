@@ -1,2 +1,61 @@
-\section{Exception Handling}
-L. Leuenberger
+\section{Exception Handling \verweiscpp{15}}
+	\begin{minipage}[t]{7 cm}
+		\subsection{Exception vs. Error}
+			\begin{compactitem}
+				\item Error: Abweichung zur Spezifikation ("falsch implementiert").	Errors sollten bei der Verifikation (Testen) entdeckt und eliminiert werden.
+				\item Exception: abnormale (aber vorhersehbare und mögliche) Bedingung bei der
+				Programmausführung.
+			\end{compactitem}			
+	\end{minipage}
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{11 cm}
+			\subsubsection{Mögliche Reaktionen auf Ausnahmen \verweiscpp{15.1}}
+				\begin{compactitem}
+				 	\item Ignorieren: Motto: Augen zu und durch, eine sehr risikoreiche Variante.
+				 	\item Programmabbruch: 	Merkt immerhin, dass etwas nicht in Ordnung ist, die Reaktion ist aber unbefriedigend. Ist Exception Detection aber nicht eigentlich Exception Handling.
+				 	\item Exceptioncodes (nicht Fehlercodes): Funktionen geben als Rückgabewert, als Parameter oder global einen	Ausnahmecode an.
+				\end{compactitem}
+	\end{minipage}
+		
+	\begin{minipage}[t]{7 cm}
+		\subsection{Exceptionhandling in $C++$ \verweiscpp{15.2}}
+			\begin{compactitem}
+				\item Exceptions werden in Form eines Objekts am Ort ihres Auftretens ausgeworfen (explizit oder auch "automatisch").
+				\item Exception Handler versuchen, diese Exception-Objekte aufzufangen.
+			\end{compactitem}
+			
+			\subsubsection{Auslösen (Werfen) von Ausnahmen}
+				\begin{compactitem}
+					\item Ausnahmen können mit dem Schlüsselwort $throw$ explizit ausgeworfen werden.
+					\item Nach einem $throw$-Befehl wird das Programm abgebrochen und beim ersten passenden umgebenden Handler fortgesetzt.
+					\item Dabei werden alle lokalen Objekte wieder automatisch zerstört (Stack unwinding).
+					\item Geworfen werden kann ein beliebiges Objekt (üblich: ein spezifisches Ausnahmeobjekt).
+					\item (Ausschliesslich) innerhalb eines Exception Handlers ist auch die Form
+					$throw;$ erlaubt. Dadurch wird die Exception an den	nächsten Handler weitergereicht (Exception propagation).
+				\end{compactitem}	
+	\end{minipage}
+	\hspace*{1cm}
+	\begin{minipage}[t]{11 cm}
+		\lstinputlisting[language=C++,tabsize=2]{code/exception_handling.cpp}
+	\end{minipage}
+	
+	\begin{minipage}[t]{9 cm}
+		\subsubsection{Exception-Hierarchie in $C++$}
+			\includegraphics[width=1\textwidth]{pics/exception.jpg}
+	\end{minipage}
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{9 cm}
+		\subsubsection{Laufzeit- vs. Logische Fehler}
+			\begin{compactitem}
+				\item Logische "Fehler" (logic\_error)
+				\begin{compactitem}
+					\item Ausnahmen im Programmablauf, die bereits zur Entwicklungszeit ihre Ursache	haben.
+					\item Theoretisch könnten diese Ausnahmen verhindert werden.
+				\end{compactitem}
+				\item Laufzeit "Fehler" (runtime\_error)
+				\begin{compactitem}
+					\item Nicht vorhersehbare (?) Ausnahmen wie z.B. arithmetische Überläufe.
+					\item Diese Ausnahmen treten erst zur Laufzeit auf, z.B. durch eine nicht erlaubte Benutzereingabe.
+				\end{compactitem}
+			\end{compactitem}
+	\end{minipage}
