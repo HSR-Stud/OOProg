@@ -74,3 +74,39 @@
 					\end{compactitem}	
 				\end{compactitem}
 		\end{minipage}
+		
+	\subsection{Klassen-Templates \verweiscpp{12.3}}
+		\begin{minipage}[t]{7 cm}
+			\subsubsection{Definition \verweiscpp{12.3.1}}
+				\begin{compactitem}
+					\item Klassen-Templates sind mit Typen oder Konstanten parametrisierbare Klassen.
+					\item Im Gegensatz zu Funktions-Templates können in Klassen-Templates auch die
+					Attribute der Klassen mit variablen Typen ausgestattet sein.
+					\item Ein Klassen-Template kann auch von Ausdrücken abhängig sein. Diese Ausdrücke müssen aber zur Compiletime aufgelöst werden können.
+				\end{compactitem}
+				
+			\subsubsection{Syntax}
+				\begin{compactitem}
+					\item Die Syntax ist analog zu den Funktions-Templates.
+					\item Vor die Klassendeklaration wird das Schlüsselwort $template$, gefolgt von
+					einer in spitzen Klammern eingeschlossenen Parameterliste gestellt.
+					\item Die Parameterliste enthält eine (nicht leere) Liste von Typ- und
+					Klassenparametern, die mit dem Schlüsselwort $class$ oder $typename$
+					beginnen oder auch von Ausdrücken. Die einzelnen Parameter werden mit Komma getrennt.
+				\end{compactitem}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{11 cm}
+			\lstinputlisting[language=C++,tabsize=2]{code/template_class.cpp}
+		\end{minipage}
+		
+	\subsection{Klassen-Templates und getrennte Übersetzung}
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{Möglichkeit 1}
+				\includegraphics[width=1\textwidth]{pics/template_klasse_1.jpg}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{Möglichkeit 2}
+				\includegraphics[width=1\textwidth]{pics/template_klasse_2.jpg}
+		\end{minipage}
