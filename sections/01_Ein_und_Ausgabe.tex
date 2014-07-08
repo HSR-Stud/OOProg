@@ -1,2 +1,38 @@
 \section{Ein- und Ausgabe}
-M. Ehrler is the best! Nope :-)
+Um die C++ Ein- und Ausgabe nutzen zu können, muss man die Bibliothek iostream einbinden. Das geschieht mit:
+\lstinputlisting[language=C++,tabsize=2]{code/iostream.cpp}
+Danach müssen die Befehle daraus bekannt gegeben werden, da sie sich in einem speziellen Namensraum befinden. Was Namensräume sind und wofür man sie einsetzt, wird später erklärt. Um nun die Ein- und Ausgabebefehle nutzen zu können, muss man dem Compiler sagen: Benutze den Namensraum std. Dies erreicht man mit folgender Zeile:
+\lstinputlisting[language=C++,tabsize=2]{code/using_namespace_std.cpp}
+	\subsection{Streamkonzept}
+		\begin{compactitem}
+			\item Ein Stream repräsentiert einen sequentiellen Datenstrom.
+			\item Die Operatoren auf dem Stream sind << und >>.\newline
+			Für vordefinierte Datentypen sind diese Operatoren schon definiert, für eigene selbstdefinierte Klassen
+			können diese Operatoren überladen werden (folgt später).
+			\item C++ stellt 4 Standardströme zur Verfügung:
+				\begin{compactitem}
+					\item cin: Standard-Eingabestrom, normalerweise die Tastatur
+					\item cout: Standard-Ausgabestrom, normalerweise der Bildschirm
+					\item cerr: Standard-Fehlerausgabestrom, normalerweise der Bildschirm
+					\item clog: mit cerr gekoppelt
+				\end{compactitem}
+			\item Alle diese Ströme können auch mit einer Datei verbunden werden.	
+		\end{compactitem}
+	\subsection{Ausgabe}
+	Die Klasse ostream stellt Methoden zur Ausgabe aller vordefinierten Datentypen (char, bool, int, etc) zur Verfügung. Alle Ausgabemethoden sind überladene Versionen des Operators <<. Die verschiedenen Versionen unterscheiden sich dabei in ihren Parametern und haben etwa folgende Schnittstelle:
+	\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_1.cpp}
+	Nutzung mit cout (vordefiniertes Objekt der Klasse ostream):
+	\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_2.cpp}
+	\subsection{Eingabe}
+	Die Eingabe ist ähnlich organisiert wie die Ausgabe. Die Klasse istream ist die Abstraktion eines Eingabestroms und stellt unter anderem folgende Möglichkeiten zur Verfügung: 
+	\lstinputlisting[language=C++,tabsize=2]{code/eingabe_1.cpp}
+	Nutzung mit cin (vordefiniertes Objekt der Klasse istream):
+	\lstinputlisting[language=C++,tabsize=2]{code/eingabe_2.cpp}
+	\subsection{Formatierte Ein- und Ausgabe}
+	ios, eine Basisklasse von iostream, stellt verschiedene Möglichkeiten (Format Flags) vor, um die Ein- und Ausgabe
+	zu beeinflussen:
+	\newline \newline
+	\textbf {boolalpha:} bool-Werte werden textuell ausgegeben
+	\subsection{Diverse Beispiele}
+	\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_3.cpp}
+	
