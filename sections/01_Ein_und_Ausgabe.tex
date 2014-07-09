@@ -1,5 +1,5 @@
 \section{Ein- und Ausgabe}
-Um die C++ Ein- und Ausgabe nutzen zu können, muss man die Bibliothek iostream einbinden. Das geschieht mit:
+Um die C++ Ein- und Ausgaben nutzen zu können, muss man die Bibliothek iostream einbinden. Das geschieht mit:
 \lstinputlisting[language=C++,tabsize=2]{code/iostream.cpp}
 Danach müssen die Befehle daraus bekannt gegeben werden, da sie sich in einem speziellen Namespace befinden. Um nun die Ein- und Ausgabebefehle nutzen zu können, muss man dem Compiler sagen: Benutze den Namenspace std. Man könnte vor jeden Ein- Ausgabebefehl std:: schreiben. Da dies aber mühsam ist, kann man mit folgender Zeile dieses Problem umgehen:
 \lstinputlisting[language=C++,tabsize=2]{code/using_namespace_std.cpp}
@@ -25,79 +25,99 @@ Danach müssen die Befehle daraus bekannt gegeben werden, da sie sich in einem sp
 	\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_1.cpp}
 	Nutzung mit cout (vordefiniertes Objekt der Klasse ostream):
 	\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_2.cpp}
-	
+	endl bewirkt bei einer Bildschirmausgabe einen Sprung zum Anfang der nächsten Zeile und das Leeren des Puffers auf das Ausgabemedium. Es bewirkt eigentlich das gleiche wie die Zeile:
+	\lstinputlisting[language=C++,tabsize=2]{code/endl.cpp}	 
+	flush bewirkt das Leeren des Puffers auf das Ausgabemedium.
+	\subsubsection{Ausgabebeispiele}
+		\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_3.cpp}
+		\vspace{0.5cm}
+		\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_4.cpp}\newpage
+		
+		
 	\subsection{Eingabe}
 	Die Eingabe ist ähnlich organisiert wie die Ausgabe. Die Klasse istream ist die Abstraktion eines Eingabestroms und stellt unter anderem folgende Möglichkeiten zur Verfügung: 
 	\lstinputlisting[language=C++,tabsize=2]{code/eingabe_1.cpp}
 	Nutzung mit cin (vordefiniertes Objekt der Klasse istream):
-	\lstinputlisting[language=C++,tabsize=2]{code/eingabe_2.cpp}\newpage
-	
+	\lstinputlisting[language=C++,tabsize=2]{code/eingabe_2.cpp}	
+		\subsubsection{Eingabebeispiele}
+			\lstinputlisting[language=C++,tabsize=2]{code/eingabe_3.cpp}
+		\vspace{0.5cm}
 	\subsection{Formatierte Ein- und Ausgabe: Manipulatoren ohne Parameter}
 	ios, eine Basisklasse von iostream, stellt verschiedene Möglichkeiten (Format Flags) vor, um die Ein- und Ausgabe zu beeinflussen.\newline
 		\begin{minipage}[t]{9 cm}
 			\subsubsection{boolalpha} 
 				bool-Werte werden textuell ausgegeben.
-				\lstinputlisting[language=C++,tabsize=2]{code/boolalpha.cpp
+				\lstinputlisting[language=C++,tabsize=2]{code/boolalpha.cpp}
 		\end{minipage}
-		\hspace*{0.5cm}	
+		\hspace*{0.8cm}	
 		\begin{minipage}[t]{9 cm}
 			\subsubsection{showbase} 
 				Zahlenbasis wird gezeigt.
-				\lstinputlisting[language=C++,tabsize=2]{code/showbase.cpp
+				\lstinputlisting[language=C++,tabsize=2]{code/showbase.cpp}
 		\end{minipage}
 		\newline
 		\begin{minipage}[t]{9 cm}
 			\subsubsection{showpoint} 
 				Dezimalpunkt wird immer ausgegeben.
-				\lstinputlisting[language=C++,tabsize=2]{code/showpoint.cpp
+				\lstinputlisting[language=C++,tabsize=2]{code/showpoint.cpp}
 		\end{minipage}
-		\hspace*{0.5cm}			
+		\hspace*{0.8cm}			
 		\begin{minipage}[t]{9 cm}
 			\subsubsection{showpos} 
 				Vorzeichen bei positiven Zahlen wird angezeigt.
-				\lstinputlisting[language=C++,tabsize=2]{code/showpos.cpp
+				\lstinputlisting[language=C++,tabsize=2]{code/showpos.cpp}
 		\end{minipage}
 		\newline
 		\begin{minipage}[t]{9 cm}
 			\subsubsection{skipws} 
 				Führende Whitespaces werden nicht angezeigt.
 		\end{minipage}	
-		\hspace*{0.5cm}					
+		\hspace*{0.8cm}					
 		\begin{minipage}[t]{9 cm}
 			\subsubsection{unitbuf} 
 				Leert Buffer des Outputstreams nach Schreiben.
 		\end{minipage}
-		\newline		
+		\vspace{0.6cm}		
 		\begin{minipage}[t]{9 cm}
 			\subsubsection{uppercase} 
 				Alle Kleinbuchstaben in Grossbuchstaben wandeln.
-				\lstinputlisting[language=C++,tabsize=2]{code/uppercase.cpp
+				\lstinputlisting[language=C++,tabsize=2]{code/uppercase.cpp}
 		\end{minipage}
-		\hspace*{0.5cm}
+		\hspace*{0.8cm}
 		\begin{minipage}[t]{9 cm}
 			\subsubsection{dec, hex, oct} 
 				Ausgabe erfolgt in dezimal, hexadezimal oder oktal.
-				\lstinputlisting[language=C++,tabsize=2]{code/dec_hex_oct.cpp
-		\end{minipage}	
-		\newline		
+				\lstinputlisting[language=C++,tabsize=2]{code/dec_hex_oct.cpp}
+		\end{minipage}			
 		\begin{minipage}[t]{9 cm}
 			\subsubsection{fixed, scientific} 
 				Gleitkommazahlen im Fixpunktformat oder wissenschaftlich.
-				\lstinputlisting[language=C++,tabsize=2]{code/fixed_scientific.cpp
+				\lstinputlisting[language=C++,tabsize=2]{code/fixed_scientific.cpp}
 		\end{minipage}
-		\hspace*{0.5cm}			
+		\hspace*{0.8cm}			
 		\begin{minipage}[t]{9 cm}
 			\subsubsection{internal, left, right} 
 				Ausgabe innerhalb Feld bzw. links oder rechtsbündig.
-				\lstinputlisting[language=C++,tabsize=2]{code/internal_left_right.cpp 
+				\lstinputlisting[language=C++,tabsize=2]{code/internal_left_right.cpp} 
 		\end{minipage}
 
 	\subsection{Formatierte Ein- und Ausgabe: Manipulatoren mit Parameter} 
 		Hier muss zwingend <iomanip> eingebunden werden!\newline\newline
-		\textbf {setw():} Angabe der Feldbreite \newline
-		\textbf {setprecision():} Angabe der Genauigkeit einer Zahl\newline
-		\textbf {setfill():} Kann ein beliebiges Füllzeichen eingestellt werden
-		\lstinputlisting[language=C++,tabsize=2]{code/setfill.cpp}
-	\subsection{Diverse Beispiele}
-	\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_3.cpp}
+			\begin{minipage}[t]{9 cm}
+				\subsubsection{setw()} 
+					Angabe der Feldbreite.
+					\lstinputlisting[language=C++,tabsize=2]{code/setw.cpp} 
+			\end{minipage}
+			\hspace*{0.8cm}
+			\begin{minipage}[t]{9 cm}
+				\subsubsection{setprecision()} 
+					Angabe der Genauigkeit einer Zahl.
+					\lstinputlisting[language=C++,tabsize=2]{code/setprecision.cpp} 
+			\end{minipage}
+			\newline
+			\begin{minipage}[t]{9 cm}
+				\subsubsection{setfill()} 
+					Kann ein beliebiges Füllzeichen verwendet werden.
+					\lstinputlisting[language=C++,tabsize=2]{code/setfill.cpp} 
+			\end{minipage}						
 	

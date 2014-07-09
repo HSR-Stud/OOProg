@@ -1,2 +1,76 @@
-\section{Einfache Deklarationen und Basisdatentypen}
-M. Ehrler
+\section{Einfache Deklarationen und Basisdatentypen \verweiscpp{4}}
+	\subsection{Definition und Deklaration \verweiscpp{4.1}}
+	Die Begriffe Deklaration und Definition werden oft synonym verwendet. Sie bezeichnen aber
+	verschiedene Dinge: Eine Deklaration führt einen oder mehrere Namen in einem Programm ein. Dem Compiler werden zwar mit dem Namen Informationen über einen Typ oder eine Funktion bekanntgegeben, es wird aber kein Programmcode erzeugt oder Speicherplatz für ein Objekt angelegt. Eine Definition wiederum vereinbart konkrete Objekte im Programm, also Variablen (inklusive deren
+	Speicherplatz) oder ausführbaren Code. Jede Definition ist damit zugleich eine Deklaration. Ebenso sind
+	sehr viele Deklarationen zugleich Definitionen.
+	
+	\subsection{Die One Definition Rule \verweiscpp{4.2}}
+	Die One Definition Rule besagt vereinfacht dargestellt, dass ein Name genau einmal in einem Programm definiert sein darf. Es gibt jedoch einen Fall, bei dem diese Regel nicht verletzt wird und man trotzdem zwei Mal denselben Namen verwenden kann:
+	
+	\lstinputlisting[language=C++,tabsize=2]{code/one_definition_rule.cpp}
+	
+	Hier liegt keine Verletzung vor. A ist in beiden Definitionen identisch und wird daher als eine einzelne Definition betrachtet. Ein Fehler läge dann vor, wenn die beiden Definitionen unterschiedlich wären.
+	
+	\subsection{Basisdatentypen \verweiscpp{4.3}}
+	Basisdatentypen sind vordefinierte einfache Datentypen. Sie umfassen Wahrheitswerte (bool), Zahlen (int, short int, long int, float, double), Zeichen (char, wchar\_t) und den Typ "nichts" (void).
+		\subsection{Übersicht über alle Standard-Datentypen \verweisc{5.2}}
+				\begin{tabular}{|c|c|c|c|c|}
+						\hline
+							\textbf{Datentyp} & \textbf{Anzahl Bytes} & \textbf{Wertebereich (dezimal)} & Typ & Verwendung\\
+						\hline
+						\hline
+							$char$ & 1 & $-128$ bis $+127$ & Ganzzahltyp & speichern eines Zeichens\\
+						\hline
+							$unsigned$ $char$ & 1 & $0$ bis $+255$ & Ganzzahltyp & speichern eines Zeichens\\
+						\hline
+							$signed$ $char$ & 1 & $-128$ bis $+127$ & Ganzzahltyp & speichern eines Zeichens\\
+						\hline
+						\hline
+							$int$ & 4 (in der Regel) & $-2'147'483'648$ bis $+2'147'483'647$ & Ganzzahltyp & effizienteste Grösse\\
+						\hline
+							$unsigned$ $int$ & 4 (in der Regel) & $0$ bis $+4'294'967'295$ & Ganzzahltyp & effizienteste Grösse\\
+						\hline
+						\hline
+							$short$ $int$ & 2 (in der Regel) & $-32'768$ bis $+32'767$ & Ganzzahltyp & kleine ganzzahlige Werte\\
+						\hline
+							$unsigned$ $short$ $int$ & 2 (in der Regel) & $0$ bis $+65'535$ & Ganzzahltyp & kleine ganzzahlige Werte\\
+						\hline
+						\hline
+							$long$ $int$ & 4 (in der Regel) & $-2'147'483'648$ bis $+2'147'483'647$ & Ganzzahltyp & grosse ganzzahlige Werte\\
+						\hline
+							$unsigned$ $long$ $int$ & 4 (in der Regel) & $0$ bis $+4'294'967'295$ & Ganzzahltyp & grosse ganzzahlige Werte\\
+						\hline
+						\hline
+							$float$ & 4 (in der Regel) & $-3.4*10^{38}$ bis $+3.4*10^{38}$ & Gleitpunkttyp & Gleitpunktzahl\\
+						\hline
+							$double$ & 8 (in der Regel) & $-1.7*10^{308}$ bis $+1.7*10^{308}$ & Gleitpunkttyp & höhere Genauigkeit\\
+						\hline
+							$long$ $double$ & 4 (in der Regel) & $-1.1*10^{4932}$ bis $+1.1*10^{4932}$ & Gleitpunkttyp & noch höhere Genauigkeit\\
+						\hline
+					\end{tabular}
+		\subsubsection{Datentyp bool \verweiscpp{4.3.1}}
+		Der Datentyp für Wahrheitswerte heisst in C++ bool, was eine Abkürzung für boolean ist. Er kann nur zwei Zustände annehmen: true (wahr) oder false (falsch). Obwohl eigentlich 1 Bit ausreichen würde, hat bool mindestens eine Grösse von einem Byte (also 8 Bit), denn 1 Byte ist die kleinste adressierbare Einheit und somit die Minimalgrösse für jeden Datentyp. 
+		\subsubsection{Datentyp void \verweiscpp{4.3.5}}
+		void ist ein spezieller Typ, der anzeigt, dass kein Wert vorhanden ist. Es ist nicht möglich, ein Objekt
+		vom Typ void anzulegen. Vielmehr findet der Datentyp Anwendung bei der Deklaration von speziellen Zeigern, von denen nicht bekannt ist, auf welchen Typ sie verweisen, oder bei Funktionen, die keinen Rückgabewert liefern.
+		\lstinputlisting[language=C++,tabsize=2]{code/void.cpp}
+
+	\subsection{Deklaration von Konstanten \verweiscpp{4.5}}
+	\subsection{Enumerations (Aufzählungstyp)}
+	 	\begin{minipage}[t]{9 cm}
+		 	\vspace*{-0.5cm}
+		 	\lstinputlisting[language=C,tabsize=2]{code/enum1.c}
+		 \end{minipage}
+		 \hspace*{0.5 cm}
+		 \begin{minipage}[t]{8 cm}
+		 	\begin{compactitem}
+		 		\item Aufzählungskonstanten haben einen konstanten ganzzahligen Wert.
+		 		\item Die erste Konstante erhält den Wert $0$, die zweite $1$, etc.
+		 		\item Werte können auch explizit zugewiesen werden
+		 	\end{compactitem}
+		\end{minipage}
+		 		
+		\subsubsection{Anonyme Enumerations}
+			$enums$ können auch verwendet werden, um ganzzahlige symbolische Konstanten zu definieren. Der $enum$ erhält dann keinen Namen, er wird nur dazu verwendet, die einzelnen Konstanten festzulegen. Bessere Alternative zu $\#define$ für ganzzahlige Konstanten!!
+		 		\lstinputlisting[language=C,tabsize=2]{code/enum2.c}
