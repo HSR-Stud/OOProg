@@ -1,8 +1,9 @@
 \section{Ein- und Ausgabe}
 Um die C++ Ein- und Ausgabe nutzen zu können, muss man die Bibliothek iostream einbinden. Das geschieht mit:
 \lstinputlisting[language=C++,tabsize=2]{code/iostream.cpp}
-Danach müssen die Befehle daraus bekannt gegeben werden, da sie sich in einem speziellen Namensraum befinden. Was Namensräume sind und wofür man sie einsetzt, wird später erklärt. Um nun die Ein- und Ausgabebefehle nutzen zu können, muss man dem Compiler sagen: Benutze den Namensraum std. Dies erreicht man mit folgender Zeile:
+Danach müssen die Befehle daraus bekannt gegeben werden, da sie sich in einem speziellen Namespace befinden. Um nun die Ein- und Ausgabebefehle nutzen zu können, muss man dem Compiler sagen: Benutze den Namenspace std. Man könnte vor jeden Ein- Ausgabebefehl std:: schreiben. Da dies aber mühsam ist, kann man mit folgender Zeile dieses Problem umgehen:
 \lstinputlisting[language=C++,tabsize=2]{code/using_namespace_std.cpp}
+	
 	\subsection{Streamkonzept}
 		\begin{compactitem}
 			\item Ein Stream repräsentiert einen sequentiellen Datenstrom.
@@ -18,21 +19,85 @@ Danach müssen die Befehle daraus bekannt gegeben werden, da sie sich in einem sp
 				\end{compactitem}
 			\item Alle diese Ströme können auch mit einer Datei verbunden werden.	
 		\end{compactitem}
+	
 	\subsection{Ausgabe}
 	Die Klasse ostream stellt Methoden zur Ausgabe aller vordefinierten Datentypen (char, bool, int, etc) zur Verfügung. Alle Ausgabemethoden sind überladene Versionen des Operators <<. Die verschiedenen Versionen unterscheiden sich dabei in ihren Parametern und haben etwa folgende Schnittstelle:
 	\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_1.cpp}
 	Nutzung mit cout (vordefiniertes Objekt der Klasse ostream):
 	\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_2.cpp}
+	
 	\subsection{Eingabe}
 	Die Eingabe ist ähnlich organisiert wie die Ausgabe. Die Klasse istream ist die Abstraktion eines Eingabestroms und stellt unter anderem folgende Möglichkeiten zur Verfügung: 
 	\lstinputlisting[language=C++,tabsize=2]{code/eingabe_1.cpp}
 	Nutzung mit cin (vordefiniertes Objekt der Klasse istream):
-	\lstinputlisting[language=C++,tabsize=2]{code/eingabe_2.cpp}
-	\subsection{Formatierte Ein- und Ausgabe}
-	ios, eine Basisklasse von iostream, stellt verschiedene Möglichkeiten (Format Flags) vor, um die Ein- und Ausgabe
-	zu beeinflussen:
-	\newline \newline
-	\textbf {boolalpha:} bool-Werte werden textuell ausgegeben
+	\lstinputlisting[language=C++,tabsize=2]{code/eingabe_2.cpp}\newpage
+	
+	\subsection{Formatierte Ein- und Ausgabe: Manipulatoren ohne Parameter}
+	ios, eine Basisklasse von iostream, stellt verschiedene Möglichkeiten (Format Flags) vor, um die Ein- und Ausgabe zu beeinflussen.\newline
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{boolalpha} 
+				bool-Werte werden textuell ausgegeben.
+				\lstinputlisting[language=C++,tabsize=2]{code/boolalpha.cpp
+		\end{minipage}
+		\hspace*{0.5cm}	
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{showbase} 
+				Zahlenbasis wird gezeigt.
+				\lstinputlisting[language=C++,tabsize=2]{code/showbase.cpp
+		\end{minipage}
+		\newline
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{showpoint} 
+				Dezimalpunkt wird immer ausgegeben.
+				\lstinputlisting[language=C++,tabsize=2]{code/showpoint.cpp
+		\end{minipage}
+		\hspace*{0.5cm}			
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{showpos} 
+				Vorzeichen bei positiven Zahlen wird angezeigt.
+				\lstinputlisting[language=C++,tabsize=2]{code/showpos.cpp
+		\end{minipage}
+		\newline
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{skipws} 
+				Führende Whitespaces werden nicht angezeigt.
+		\end{minipage}	
+		\hspace*{0.5cm}					
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{unitbuf} 
+				Leert Buffer des Outputstreams nach Schreiben.
+		\end{minipage}
+		\newline		
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{uppercase} 
+				Alle Kleinbuchstaben in Grossbuchstaben wandeln.
+				\lstinputlisting[language=C++,tabsize=2]{code/uppercase.cpp
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{dec, hex, oct} 
+				Ausgabe erfolgt in dezimal, hexadezimal oder oktal.
+				\lstinputlisting[language=C++,tabsize=2]{code/dec_hex_oct.cpp
+		\end{minipage}	
+		\newline		
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{fixed, scientific} 
+				Gleitkommazahlen im Fixpunktformat oder wissenschaftlich.
+				\lstinputlisting[language=C++,tabsize=2]{code/fixed_scientific.cpp
+		\end{minipage}
+		\hspace*{0.5cm}			
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{internal, left, right} 
+				Ausgabe innerhalb Feld bzw. links oder rechtsbündig.
+				\lstinputlisting[language=C++,tabsize=2]{code/internal_left_right.cpp 
+		\end{minipage}
+
+	\subsection{Formatierte Ein- und Ausgabe: Manipulatoren mit Parameter} 
+		Hier muss zwingend <iomanip> eingebunden werden!\newline\newline
+		\textbf {setw():} Angabe der Feldbreite \newline
+		\textbf {setprecision():} Angabe der Genauigkeit einer Zahl\newline
+		\textbf {setfill():} Kann ein beliebiges Füllzeichen eingestellt werden
+		\lstinputlisting[language=C++,tabsize=2]{code/setfill.cpp}
 	\subsection{Diverse Beispiele}
 	\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_3.cpp}
 	
