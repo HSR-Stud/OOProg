@@ -5,13 +5,18 @@
 	Speicherplatz) oder ausführbaren Code. Jede Definition ist damit zugleich eine Deklaration. Ebenso sind
 	sehr viele Deklarationen zugleich Definitionen.
 	
+	\subsection{Variablendeklaration}
+	\lstinputlisting[language=C++,tabsize=2]{code/variablendeklaration.cpp}
+	\subsection{Variableninitialisierung}
+	Um eine Variable zu initialisieren, gibt es mehrere Möglichkeiten:
+	\lstinputlisting[language=C++,tabsize=2]{code/variableninit1.cpp}
+	Eine Variable muss nicht sofort mit einem Wert initialisiert werden. Es ist auch möglich, sie zunächst nur zu definieren und ihr später einen Wert zuzuweisen.
 	\subsection{Die One Definition Rule \verweiscpp{4.2}}
-	Die One Definition Rule besagt vereinfacht dargestellt, dass ein Name genau einmal in einem Programm definiert sein darf. Es gibt jedoch einen Fall, bei dem diese Regel nicht verletzt wird und man trotzdem zwei Mal denselben Namen verwenden kann:
-	
-	\lstinputlisting[language=C++,tabsize=2]{code/one_definition_rule.cpp}
-	
-	Hier liegt keine Verletzung vor. A ist in beiden Definitionen identisch und wird daher als eine einzelne Definition betrachtet. Ein Fehler läge dann vor, wenn die beiden Definitionen unterschiedlich wären.
-	
+		Die One Definition Rule besagt vereinfacht dargestellt, dass ein Name genau einmal in einem Programm definiert sein darf. Es gibt jedoch einen Fall, bei dem diese Regel nicht verletzt wird und man trotzdem zwei Mal denselben Namen verwenden kann:
+		
+		\lstinputlisting[language=C++,tabsize=2]{code/one_definition_rule.cpp}
+		
+		Hier liegt keine Verletzung vor. A ist in beiden Definitionen identisch und wird daher als eine einzelne Definition betrachtet. Ein Fehler läge dann vor, wenn die beiden Definitionen unterschiedlich wären.
 	\subsection{Basisdatentypen \verweiscpp{4.3}}
 	Basisdatentypen sind vordefinierte einfache Datentypen. Sie umfassen Wahrheitswerte (bool), Zahlen (int, short int, long int, float, double), Zeichen (char, wchar\_t) und den Typ "nichts" (void).
 		\subsection{Übersicht über alle Standard-Datentypen \verweisc{5.2}}
@@ -57,6 +62,15 @@
 		\lstinputlisting[language=C++,tabsize=2]{code/void.cpp}
 
 	\subsection{Deklaration von Konstanten \verweiscpp{4.5}}
+	Eine Konstante wird deklariert, indem vor dem eigentlichen Typ das Schlüsselwort const notiert wird:
+	\lstinputlisting[language=C++,tabsize=2]{code/const1.cpp}
+	Wird versucht, während der Programmausführung der Konstante val einen Wert zuzuweisen, so führt dies zu einem Übersetzungsfehler. \\\\Wichtig: Es gäbe noch eine Variante mit \#define (vorallem C). Diese Variante sollte in C++ keinesfalls verwendet werden, da nur eine textuelle Ersetzung erfolgt! 
+		\subsubsection{Zeichenkonstanten}
+			\lstinputlisting[language=C++,tabsize=2]{code/const2.cpp}
+		\subsubsection{Integerkonstanten}
+			\lstinputlisting[language=C++,tabsize=2]{code/const3.cpp}
+		\subsubsection{Fliesskommakonstanten}
+			\lstinputlisting[language=C++,tabsize=2]{code/const4.cpp}
 	\subsection{Enumerations (Aufzählungstyp)}
 	 	\begin{minipage}[t]{9 cm}
 		 	\vspace*{-0.5cm}
@@ -74,3 +88,5 @@
 		\subsubsection{Anonyme Enumerations}
 			$enums$ können auch verwendet werden, um ganzzahlige symbolische Konstanten zu definieren. Der $enum$ erhält dann keinen Namen, er wird nur dazu verwendet, die einzelnen Konstanten festzulegen. Bessere Alternative zu $\#define$ für ganzzahlige Konstanten!!
 		 		\lstinputlisting[language=C,tabsize=2]{code/enum2.c}
+		 		
+		
