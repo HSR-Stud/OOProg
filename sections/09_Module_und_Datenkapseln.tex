@@ -3,7 +3,7 @@
 		\subsection{Motivation \verweiscpp{10.1}}
 		\begin{compactitem}
 			\item Arbeitsteilung: Grosse Programme werden von mehreren Personen entwickelt. Praktikabel ist, wenn nur eine Person an einer bestimmten Datei arbeitet.
-			\item Effizienz: Eine Üœbersetzungseinheit (Datei) muss bei jeder Ä„nderung neu übersetzt werden (je grösser die Datei desto langsamer die Üœbersetzung)
+			\item Effizienz: Eine Übersetzungseinheit (Datei) muss bei jeder Änderung neu übersetzt werden (je grösser die Datei desto langsamer die Übersetzung)
 			\item Strukturierung: Ein grosses Programm in mehrere vernünftige Teile (Baugruppen, Units) aufteilen (Divide and conquer) 
 		\end{compactitem}
 	\end{minipage}
@@ -27,13 +27,13 @@
 	
 	\begin{minipage}[t]{8 cm}	
 		\subsection{Vom Modul zur Datenkapsel \verweiscpp{10.2}}
-			\begin{compactitem}	
 			Eigenschaften einer Unit (eines Moduls):
+			\begin{compactitem}	
 				\item realisiert eine in sich abgeschlossene Aufgabe
 				\item kommuniziert über ihre Schnittstelle mit der Umgebung
 				\item kann ohne Kenntnisse ihres inneren Verhaltens in ein Gesamtsystem integriert werden (include Header)
 				\item ihre Korrektheit kann ohne Kenntnis ihrer Einbettung in einem Gesamtsystem nachgewiesen werden (mittels Unittest)
-			Die Schnittstelle beschreibt, was das Modul zur Verfügung stellt verbirgt dabei wie das Verhalten konkret realisiert ist (Geheimnisprinzip, Information Hiding). Der User der Unit darf keine Annahme Ã¼ber den inneren Aufbau machen. Der Entwickler der Unit kann deren inneren Aufbau verändern solange die Schnittstelle dadurch nicht ändert. 
+			Die Schnittstelle beschreibt, was das Modul zur Verfügung stellt verbirgt dabei wie das Verhalten konkret realisiert ist (Geheimnisprinzip, Information Hiding). Der User der Unit darf keine Annahme über den inneren Aufbau machen. Der Entwickler der Unit kann deren inneren Aufbau verändern solange die Schnittstelle dadurch nicht ändert. 
 			\end{compactitem}
 		\subsection{Unitkonzept / Module und Datenkapseln in C++ \verweiscpp{10.3}}
 			\begin{compactitem}	
@@ -42,14 +42,14 @@
 			\item Das Interface wird in einer Headerdatei (*.h) beschrieben, die Implementation liegt in einer *.cpp- Datei
 			\end{compactitem}
 			\subsection{Die Schnittstellen-/Headerdatei \verweiscpp{10.3.1}}
-			    Jede .h-Datei enthÃ¤lt als erste Anweisungsfolge (Umfasst die Punkte 2-7) eine Include-Guard welche MehrfacheinfÃ¼gen verhindert. Der Syntax lautet:
+			    Jede .h-Datei enthält als erste Anweisungsfolge (Umfasst die Punkte 2-7) eine Include-Guard welche Mehrfacheinfügen verhindert. Der Syntax lautet:
 			    \lstinputlisting[language=C,tabsize=2]{code/includeguard.c}
 			    Deklarationsreihenfolge in Headerdatei (*.h)  (Beispiel Kap 16.1)
 				\begin{enumerate}
 				\item Dateikommentar
-				\item #include der verwendeten System-Header (iostream, etc.)
-				      #include <...>
-				\item #include der projektbezogenen Header (#include "...")
+				\item \#include der verwendeten System-Header (iostream, etc.)
+				      \#include <...>
+				\item \#include der projektbezogenen Header (\#include "...")
 				\item Konstantendefinitionen
 				\item typedefs und Definition von Strukturen
 				\item Allenfalls extern-Deklaration von globalen Variablen
@@ -59,10 +59,10 @@
 				Deklarationsreihenfolge in Implementierungsdatei (*.cpp) (Beispiel Kap 16.1)
 				\begin{enumerate}
 			 		\item Dateikommentar
-					\item #include der verwendeten System-Header (iostream, etc.)
-					      #include <...>
-					\item #include der projektbezogenen Header (#include "...")
-					\item PrÃ¤prozessor-Direktiven
+					\item \#include der verwendeten System-Header (iostream, etc.)
+					      \#include <...>
+					\item \#include der projektbezogenen Header (\#include "...")
+					\item Präprozessor-Direktiven
 					\item typedefs und Definition von Strukturen
 					\item Funktionsprototypen von lokalen, internen Funktionen
 					\item Definition von Funktionen und Klassen (Kommentare aus Headerdatei nicht wiederholen!!)
@@ -71,21 +71,21 @@
 		
 		\begin{minipage}[t]{11 cm}
 			\subsection{Buildprozess / Makefile}
-			    Der Buildprozess erstellt aus den einzelnen Dateien einen ausfÃ¼hrbaren Code. Dazu werden zuerst alle *.cpp-Files compiliert.
-			    Die daraus entstandenen Objektdatei mÃ¼ssen anschliessend gelinkt und somit zu einer aufÃ¼hrbaren Datei zusammengesetzt. Die Eingabe in der Konsole sieht wie folt aus:
+			    Der Buildprozess erstellt aus den einzelnen Dateien einen ausführbaren Code. Dazu werden zuerst alle *.cpp-Files compiliert.
+			    Die daraus entstandenen Objektdatei müssen anschliessend gelinkt und somit zu einer auführbaren Datei zusammengesetzt. Die Eingabe in der Konsole sieht wie folgt aus:
 			    \lstinputlisting[language=C,tabsize=2]{code/compileUnit.c}
 				\begin{compactitem}
 					\item Ein Programmbaustein wird traditionell mit Modul (der oder das Modul) bezeichnet
 					\item Der Test eines Moduls heisst folglich Modultest
 					\item Das Vorgehen, welches Module generiert, heisst Modularisierung 
-					\item Heute Ã¼blicher wird Modul mit Unit, der Test mit Unittest bezeichnet, das Vorgehen heisst weiterhin Modularisierung 
+					\item Heute üblicher wird Modul mit Unit, der Test mit Unittest bezeichnet, das Vorgehen heisst weiterhin Modularisierung 
 				\end{compactitem}
 			\subsection{Ziele der Modularisierung}
 				\begin{compactitem}
-					\item Klare, mÃ¶glichst schlanke Schnittstellen definieren
-					\item Units so bilden, das ZusammengehÃ¶rendes in einer Unit isoliert wird (KohÃ¤sion soll hoch sein)
+					\item Klare, möglichst schlanke Schnittstellen definieren
+					\item Units so bilden, das Zusammengehörendes in einer Unit isoliert wird (Kohäsion soll hoch sein)
 					\item Schnittstellen zwischen den Units sollen klein sein (Kopplung soll klein sein)
-					\item AbhÃ¤ngigkeiten unter den Units sollen eine Hierarchie bilden, zirkulÃ¤re (gegenseitige) AbhÃ¤ngigkeiten mÃ¼ssen vermieden werden
+					\item Abhängigkeiten unter den Units sollen eine Hierarchie bilden, zirkuläre (gegenseitige) Abhängigkeiten müssen vermieden werden
 				\end{compactitem}
 		\end{minipage}
 		
