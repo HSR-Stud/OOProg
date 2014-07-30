@@ -5,13 +5,14 @@
 			\item Arbeitsteilung: Grosse Programme werden von mehreren Personen entwickelt. Praktikabel ist, wenn nur eine Person an einer bestimmten Datei arbeitet.
 			\item Effizienz: Eine Übersetzungseinheit (Datei) muss bei jeder Änderung neu übersetzt werden (je grösser die Datei desto langsamer die Übersetzung)
 			\item Strukturierung: Ein grosses Programm in mehrere vernünftige Teile (Baugruppen, Units) aufteilen (Divide and conquer) 
+			\linebreak
 		\end{compactitem}
 	\end{minipage}
 	\hspace*{0.5cm}
 	\begin{minipage}[t]{12 cm}
 		\subsection{Nomenklatur Modul vs. Unit}
 			\begin{compactitem}
-				\item Ein Programmbaustein wird traditionell mit Modul (der oder das Modul) bezeichnet
+				\item Ein Programmbaustein wird traditionell mit Modul bezeichnet
 				\item Der Test eines Moduls heisst folglich Modultest
 				\item Das Vorgehen, welches Module generiert, heisst Modularisierung 
 				\item Heute üblicher wird Modul mit Unit, der Test mit Unittest bezeichnet, das Vorgehen heisst weiterhin Modularisierung 
@@ -25,7 +26,7 @@
 			\end{compactitem}
 	\end{minipage}
 
-	\begin{minipage}[t]{8 cm}	
+	\begin{minipage}[t]{10 cm}	
 		\subsection{Vom Modul zur Datenkapsel \verweiscpp{10.2}}
 			Eigenschaften einer Unit (eines Moduls):
 			\begin{compactitem}	
@@ -33,52 +34,86 @@
 				\item kommuniziert über ihre Schnittstelle mit der Umgebung
 				\item kann ohne Kenntnisse ihres inneren Verhaltens in ein Gesamtsystem integriert werden (include Header)
 				\item ihre Korrektheit kann ohne Kenntnis ihrer Einbettung in einem Gesamtsystem nachgewiesen werden (mittels Unittest)
-			Die Schnittstelle beschreibt, was das Modul zur Verfügung stellt verbirgt dabei wie das Verhalten konkret realisiert ist (Geheimnisprinzip, Information Hiding). Der User der Unit darf keine Annahme über den inneren Aufbau machen. Der Entwickler der Unit kann deren inneren Aufbau verändern solange die Schnittstelle dadurch nicht ändert. 
+				\item \textbf{Die Datenkapsel fordert nun zusätzlich, dass auf die Daten nicht direkt zugegriffen werden darf, sondern nur über Zugriffsfunktionen.}
 			\end{compactitem}
+			Die Schnittstelle beschreibt, was das Modul zur Verfügung stellt, verbirgt dabei wie das Verhalten konkret realisiert ist (Geheimnisprinzip, Information Hiding). Der User der Unit darf keine Annahme über den inneren Aufbau machen. Der Entwickler der Unit kann deren inneren Aufbau verändern, solange die Schnittstelle dadurch nicht ändert. 
 	\end{minipage}
 	\hspace*{0.5cm}
-	\begin{minipage}[t]{8 cm}
+	\begin{minipage}[t]{8.5 cm}
 		\subsection{Unitkonzept / Module und Datenkapseln in C++ \verweiscpp{10.3}}
-			\begin{compactitem}	
-			\item Interface definiert die Schnittstelle, d.h. die Deklarationen wie Funktionsprototypen, etc. (Schaufenster)
-			\item Implementation: in diesem Teil sind die Unterprogramme definiert, d.h. auscodiert (Werkstatt)
-			\item Das Interface wird in einer Headerdatei (*.h) beschrieben, die Implementation liegt in einer *.cpp- Datei
+		    \begin{compactitem}	
+			  	\item Interface definiert die Schnittstelle, d.h. die Deklarationen wie Funktionsprototypen, etc. (Schaufenster)
+			  	\item Implementation: in diesem Teil sind die Unterprogramme definiert, d.h. auscodiert (Werkstatt)
+				 \item Das Interface wird in einer Headerdatei (*.h) beschrieben, die Implementation liegt in einer *.cpp- Datei
 			\end{compactitem}
+			\begin{center}
+			\includegraphics[width=0.28\textwidth]{pics/unit.jpg}
+			\end{center}
 	\end{minipage}
-\newpage
-	\begin{minipage}[t]{12 cm}
-			\subsection{Die Schnittstellen-/Headerdatei \verweiscpp{10.3.1}}
-			    Jede .h-Datei enthält als erste Anweisungsfolge (Umfasst die Punkte 2-7) eine Include-Guard welche Mehrfacheinfügen verhindert. Der Syntax lautet:
-			    \lstinputlisting[language=C,tabsize=2]{code/includeguard.c}
-			    Deklarationsreihenfolge in Headerdatei (*.h)  (Beispiel Kap 16.1)
-				\begin{enumerate}
+
+    \subsection{Die Schnittstellen-/Headerdatei \verweiscpp{10.3.1}}
+		\begin{minipage}[t]{11 cm}
+			 Jede .h-Datei enthält als erste Anweisungsfolge eine Include-Guard welche Mehrfacheinfügen verhindert. Der Syntax lautet:
+			 \lstinputlisting[language=C,tabsize=2]{code/includeguard.c}
+			 Deklarationsreihenfolge in Headerdatei (*.h)  (Beispiel Kap 16.1)
+			\begin{enumerate}
 				\item Dateikommentar
-				\item \#include der verwendeten System-Header (iostream, etc.)
+				\item \#include der verwendeten System-Header (iostream, etc.) \newline
 				      \#include <...>
 				\item \#include der projektbezogenen Header (\#include "...")
 				\item Konstantendefinitionen
 				\item typedefs und Definition von Strukturen
 				\item Allenfalls extern-Deklaration von globalen Variablen
 				\item Funktionsprototypen, inkl. Kommentare der Schnittstelle, bzw. Klassendeklarationen
-				\end{enumerate}
+			\end{enumerate}
+		\end{minipage}	
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{7.5 cm}	
+		  	\subsection{Beispiel Unit Rechteck}
+		  	\lstinputlisting[language=c++,tabsize=2]{code/example_unit.cpp}
+		\end{minipage}
+\newpage
+     	\begin{minipage}[t]{19 cm}
 			\subsection{Die Implementierungsdatei \verweiscpp{10.3.2}}
 				Deklarationsreihenfolge in Implementierungsdatei (*.cpp) (Beispiel Kap 16.1)
 				\begin{enumerate}
 			 		\item Dateikommentar
 					\item \#include der verwendeten System-Header (iostream, etc.)
 					      \#include <...>
-					\item \#include der projektbezogenen Header (\#include "...")
+					\item \#include der projektbezogenen Header (\#include "...") \newline
+					      a) Hier käme die Verwendung von $using$ $namespace$
+					\item allenfalls globale Variablen und statische Variablen
 					\item Präprozessor-Direktiven
-					\item typedefs und Definition von Strukturen
 					\item Funktionsprototypen von lokalen, internen Funktionen
-					\item Definition von Funktionen und Klassen (Kommentare aus Headerdatei nicht wiederholen!!)
+					\item Definition von Funktionen und Klassen (Kommentare aus Headerdatei nicht wiederholen!!) 
+					\linebreak
 				\end{enumerate}
 		\end{minipage}
 		
-		\begin{minipage}[t]{11 cm}
-			\subsection{Buildprozess / Makefile}
+		\subsection{Buildprozess / Makefile}
+			\begin{minipage}[t]{11 cm}
 			    Der Buildprozess erstellt aus den einzelnen Dateien einen ausführbaren Code. Dazu werden zuerst alle *.cpp-Files compiliert.
 			    Die daraus entstandenen Objektdatei müssen anschliessend gelinkt und somit zu einer auführbaren Datei zusammengesetzt. Die Eingabe in der Konsole sieht wie folgt aus:
 			    \lstinputlisting[language=C,tabsize=2]{code/compileUnit.c}
-		\end{minipage}
+			    Es wäre mühsam, wenn diese Befehle jedesmal neu eingetippt werden müssten. Deshalb wird in der Praxis oft ein Buildtool eingesetzt, z.B. make 
+			 	\subsubsection{Make-File}
+			 	\begin{compactitem}	
+			 		\item In einem make-File können Abhängigkeiten definiert werden
+			 		\item  Wenn eine Datei geändert wurde, dann werden alle Operationen ausgeführt mit den Dateien, welche von dieser geänderten Datei abhängen
+			 		\item Der Befehl (g++) wird z.B. nur dann ausgeführt, wenn sich an den Dateien, zu denen eine Abhängigkeit besteht, etwas geändert hat
+			 		\linebreak
+				\end{compactitem}
+				
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{7.5 cm}
+				Abhängigkeitsliste gemäss  UML-Notation:
+				\linebreak
+				\includegraphics[width=1\textwidth]{pics/abhaengigkeitUML.jpg}
+			    
+			\end{minipage}
+			\begin{minipage}[t]{19 cm}
+			    \includegraphics[width=0.6\textwidth]{pics/makefile.jpg}
+			\end{minipage}
+		
 		
