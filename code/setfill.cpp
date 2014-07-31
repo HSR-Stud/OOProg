@@ -1,5 +1,2 @@
-cout << setfill ('x') << setw (10);
+cout << setfill ('x') << setw (8);
 cout << 77 << endl;
-
-Ausgabe: 
-xxxxxxxx77

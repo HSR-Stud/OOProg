@@ -5,8 +5,3 @@ cout.width(6);
 cout << left << n << endl;
 cout.width(6); 
 cout << right << n << endl;
-
-Ausgabe: 
--   77
--77
-   -77

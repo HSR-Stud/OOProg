@@ -6,7 +6,7 @@
 		\lstinputlisting[language=C++,tabsize=2]{code/using_namespace_std.cpp}
 	\end{minipage}
 	\hspace*{0.5cm}			
-	\begin{minipage}[t]{11 cm}	
+	\begin{minipage}[t]{10.5 cm}	
 		\vspace*{-0.32cm}	
 		\subsection{Streamkonzept}
 			\begin{compactitem}
@@ -35,7 +35,7 @@
 			\lc{flush} bewirkt das Leeren des Puffers auf das Ausgabemedium. 
 	\end{minipage}
 	\hspace*{0.5cm}			
-	\begin{minipage}[t]{12 cm}				
+	\begin{minipage}[t]{11.5 cm}				
 			\subsubsection{Ausgabebeispiele}
 				\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_3.cpp}
 				\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_4.cpp}	
@@ -69,73 +69,103 @@
 		\hspace*{0.4cm}	
 		\begin{minipage}[t]{2 cm}
 				\vspace*{1cm}\lstinputlisting[language=C++,tabsize=2]{code/showbase_aus.cpp}
-		\end{minipage}
-		\newline
-		\begin{minipage}[t]{9 cm}
+		\end{minipage}		
+		
+		\begin{minipage}[t]{6.5 cm}
 			\subsubsection{showpoint} 
 				Dezimalpunkt wird immer ausgegeben.
 				\lstinputlisting[language=C++,tabsize=2]{code/showpoint.cpp}
+				
+			\subsubsection{skipws} 
+				Führende Whitespaces werden nicht angezeigt.
 		\end{minipage}
-		\hspace*{0.8cm}			
-		\begin{minipage}[t]{9 cm}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{1.5 cm}
+				\vspace*{1cm}\lstinputlisting[language=C++,tabsize=2]{code/showpoint_aus.cpp}
+		\end{minipage}
+		\hspace*{0.9cm}	
+		\begin{minipage}[t]{6.5 cm}
 			\subsubsection{showpos} 
 				Vorzeichen bei positiven Zahlen wird angezeigt.
 				\lstinputlisting[language=C++,tabsize=2]{code/showpos.cpp}
 		\end{minipage}
-		\newline
-		\begin{minipage}[t]{9 cm}
-			\subsubsection{skipws} 
-				Führende Whitespaces werden nicht angezeigt.
-		\end{minipage}	
-		\hspace*{0.8cm}					
-		\begin{minipage}[t]{9 cm}
-			\subsubsection{unitbuf} 
-				Leert Buffer des Outputstreams nach Schreiben.
-		\end{minipage}
-		\vspace{0.6cm}		
-		\begin{minipage}[t]{9 cm}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{2 cm}
+				\vspace*{1.4cm}\lstinputlisting[language=C++,tabsize=2]{code/showpos_aus.cpp}
+		\end{minipage}			
+		
+		\begin{minipage}[t]{6.5 cm}
 			\subsubsection{uppercase} 
 				Alle Kleinbuchstaben in Grossbuchstaben wandeln.
 				\lstinputlisting[language=C++,tabsize=2]{code/uppercase.cpp}
+				
+			\subsubsection{unitbuf} 
+				Leert Buffer des Outputstreams nach Schreiben.
 		\end{minipage}
-		\hspace*{0.8cm}
-		\begin{minipage}[t]{9 cm}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{1.5 cm}
+				\vspace*{1.4cm}\lstinputlisting[language=C++,tabsize=2]{code/uppercase_aus.cpp}
+		\end{minipage}
+		\hspace*{0.9cm}	
+		\begin{minipage}[t]{6.5 cm}
 			\subsubsection{dec, hex, oct} 
 				Ausgabe erfolgt in dezimal, hexadezimal oder oktal.
 				\lstinputlisting[language=C++,tabsize=2]{code/dec_hex_oct.cpp}
-		\end{minipage}	
-		\newline		
-		\begin{minipage}[t]{9 cm}
+		\end{minipage}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{2 cm}
+				\vspace*{1.4cm}\lstinputlisting[language=C++,tabsize=2]{code/dec_hex_oct_aus.cpp}
+		\end{minipage}			
+		
+		\begin{minipage}[t]{5.5 cm}
 			\subsubsection{fixed, scientific} 
 				Gleitkommazahlen im Fixpunktformat oder wissenschaftlich.
 				\lstinputlisting[language=C++,tabsize=2]{code/fixed_scientific.cpp}
 		\end{minipage}
-		\hspace*{0.8cm}			
-		\begin{minipage}[t]{9 cm}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{2.5 cm}
+				\vspace*{1.4cm}\lstinputlisting[language=C++,tabsize=2]{code/fixed_scientific_aus.cpp}
+		\end{minipage}
+		\hspace*{0.9cm}	
+		\begin{minipage}[t]{6.5 cm}
 			\subsubsection{internal, left, right} 
 				Ausgabe innerhalb Feld bzw. links oder rechtsbündig.
 				\lstinputlisting[language=C++,tabsize=2]{code/internal_left_right.cpp} 
 		\end{minipage}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{2 cm}
+				\vspace*{1.4cm}\lstinputlisting[language=C++,tabsize=2]{code/internal_left_right_aus.cpp}
+		\end{minipage}	
 
 	\subsection{Formatierte Ein- und Ausgabe: Manipulatoren mit Parameter} 
-		Hier muss zwingend <iomanip> eingebunden werden!\newline\newline
-			\begin{minipage}[t]{9 cm}
-				\subsubsection{setw()} 
-					Angabe der Feldbreite.
-					\lstinputlisting[language=C++,tabsize=2]{code/setw.cpp} 
-			\end{minipage}
-			\hspace*{0.8cm}
-			\begin{minipage}[t]{9 cm}
-				\subsubsection{setprecision()} 
-					Angabe der Genauigkeit einer Zahl.
-					\lstinputlisting[language=C++,tabsize=2]{code/setprecision.cpp} 
-			\end{minipage}
-			\newline
-			\begin{minipage}[t]{9 cm}
-				\subsubsection{setfill()} 
-					Kann ein beliebiges Füllzeichen verwendet werden.
-					\lstinputlisting[language=C++,tabsize=2]{code/setfill.cpp} 
-			\end{minipage}						
+		Hier muss zwingend \lc{<iomanip>} eingebunden werden! \\
+		
+		\begin{minipage}[t]{7 cm}
+			\subsubsection{setw()} 
+				Angabe der Feldbreite.
+				\lstinputlisting[language=C++,tabsize=2]{code/setw.cpp} 
+				
+			\subsubsection{setfill()} 
+				Kann ein beliebiges Füllzeichen verwendet werden.
+				\lstinputlisting[language=C++,tabsize=2]{code/setfill.cpp} 
+		\end{minipage}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{1.5 cm}
+				\vspace*{1cm}\lstinputlisting[language=C++,tabsize=2]{code/setw_aus.cpp}
+				\vspace*{1.4cm}\lstinputlisting[language=C++,tabsize=2]{code/setfill_aus.cpp}
+		\end{minipage}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{6.5 cm}
+			\subsubsection{setprecision()} 
+				Angabe der Genauigkeit einer Zahl.
+				\lstinputlisting[language=C++,tabsize=2]{code/setprecision.cpp} 
+		\end{minipage}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{2 cm}
+				\vspace*{1.4cm}\lstinputlisting[language=C++,tabsize=2]{code/setprecision_aus.cpp}
+		\end{minipage}	
+		
+\newpage						
 	
 	\subsection{Streams und Dateien \verweiscpp{A.5}}
 		Streams sind Abstraktionen für die zeichenweise Ein-/Ausgabe. Dabei ist es unerheblich, ob die Ausgabe auf den Bildschirm erfolgt oder auf eine Datei. Dateien können also über die normalen Möglichkeiten der Ein-/Ausgabe beschrieben werden.
@@ -145,14 +175,14 @@
 			\item Die Verarbeitung von Dateien kann im Textmodus oder im Binärmodus erfolgen.
 			\begin{compactitem}
 				\item Binärmodus: Streams werden Zeichen für Zeichen eingelesen/geschrieben ohne jegliche Transformation.
-				\item Textmodus: Im Textmodus werden einzelne Zeichen umgewandelt. So wird zum Beispiel $endl$ in die plattformübliche Zeilenende-Sequent ($0x0A$ $0x0D$)
+				\item Textmodus: Im Textmodus werden einzelne Zeichen umgewandelt. So wird zum Beispiel \lc{endl} in die plattformübliche Zeilenende-Sequent (\lc{0x0A 0x0D})
 			\end{compactitem}
 		\end{compactitem}
 		
 		\subsubsection{Öffnen von Dateien \verweiscpp{A.5.1}}
-			Das Öffnen einer Datei erfolgt beim Anlegen eines Stream-Objektes beziehungsweise über die Funktion $open$. Dabei werden der Name der Datei und der Öffnungsmodus als Parameter übergeben. \\
+			Das Öffnen einer Datei erfolgt beim Anlegen eines Stream-Objektes beziehungsweise über die Funktion \lc{open}. Dabei werden der Name der Datei und der Öffnungsmodus als Parameter übergeben. \\
 			\begin{minipage}[t]{10 cm}
-				\lstinputlisting[language=C++,tabsize=2]{code/file_open.cpp} 
+				\vspace*{-0.4cm}\lstinputlisting[language=C++,tabsize=2]{code/file_open.cpp} 
 			\end{minipage}
 			\hspace*{0.8cm}
 			\begin{minipage}[t]{8 cm}
@@ -160,12 +190,12 @@
 					\hline
 						Modus & Kommentar \\
 					\hline 
-						$in$ & Datei für Eingabe öffnen \\
-						$out$ & Datei für Ausgabe öffnen \\
-						$app$ & Schreiboperationen am Dateiende ausführen \\
-						$ate$ & Nach dem Öffnen der Datei sofort an das Dateiende verzweigen \\
-						$trunc$ & Zu öffnende Datei zerstören, falls sie bereits existiert \\
-						$bin[ary]$ & Ein-/Ausgabe wird binär durchgeführt und nicht im Textmodus \\
+						\lc{in} & Datei für Eingabe öffnen \\
+						\lc{out} & Datei für Ausgabe öffnen \\
+						\lc{app} & Schreiboperationen am Dateiende ausführen \\
+						\lc{ate} & Nach dem Öffnen der Datei sofort an das Dateiende verzweigen \\
+						\lc{trunc} & Zu öffnende Datei zerstören, falls sie bereits existiert \\
+						\lc{bin[ary]} & Ein-/Ausgabe wird binär durchgeführt und nicht im Textmodus \\
 					\hline
 				\end{tabular}
 			\end{minipage}
@@ -173,13 +203,13 @@
 		\subsubsection{Lesen und Setzen von Positionen \verweiscpp{A.5.2}}
 			Die aktuelle Position innerhalb einer Datei kann beliebig verändert werden. Dazu stehen folgende Typen und Methoden zur Verfügung:
 			\begin{compactitem}
-				\item $streampos$ ist der Typ einer Dateiposition.
-				\item $seekg(offset,direction)$ zum Beispiel setzt die aktuelle Dateiposition einer Datei. $offset$ gibt die Position vom Dateianfang bzw. -ende aus an, $direction$ legt fest, von wo aus die Position bestimmt wird.
+				\item \lc{streampos} ist der Typ einer Dateiposition.
+				\item \lc{seekg(offset, direction)} zum Beispiel setzt die aktuelle Dateiposition einer Datei. \lc{offset} gibt die Position vom Dateianfang bzw. -ende aus an, \lc{direction} legt fest, von wo aus die Position bestimmt wird.
 				\begin{compactitem}
-					\item $ios::beg$: Dateianfang
-					\item $ios::cur$: Aktuelle Position
-					\item $ios::end$: Dateiende
+					\item \lc{ios::beg}: Dateianfang
+					\item \lc{ios::cur}: Aktuelle Position
+					\item \lc{ios::end}: Dateiende
 				\end{compactitem}
-				\item $tellg$ liefert die aktuelle Position in der Datei.
-				\item $seekp$ und $tellp$ sind die entsprechenden Versionen für die Put-Varianten.
+				\item \lc{tellg} liefert die aktuelle Position in der Datei.
+				\item \lc{seekp} und \lc{tellp} sind die entsprechenden Versionen für die Put-Varianten.
 			\end{compactitem}

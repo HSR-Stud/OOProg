@@ -1,6 +1,2 @@
-cout << setw(10);
+cout << setw(8);
 cout << 77 << endl;
-
-Ausgabe: 
-        77
-
