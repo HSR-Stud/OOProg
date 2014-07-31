@@ -18,12 +18,11 @@ int main()
   pcc->sing();
   pcc->dance();
 
-  SuperHero sh("Speed");         //hat alle Funktionen die auch CC hat und weitere
-  sh.setName("Lucky Luke");
+  SuperHero sh("Lucky Luke", "Speed");
   sh.fight();
-  sh.dance();
   cout << "Power of " << sh.getName() << " is " << sh.getSuperPower() << endl;
-  //Output: Power of Lucky Luke is Speed \n
+  sh.dance();
+
   delete pcc;
   return 0;
 }

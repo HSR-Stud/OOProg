@@ -7,19 +7,24 @@
 #include "SuperHero.h"
 using namespace std;
 
-SuperHero::SuperHero(const string& thePower) :
-  superPower(thePower) // base class ctor is implicitely called first!
+SuperHero::SuperHero(const string& aName,
+                     const string& thePower) :
+    ComicCharacter(aName), superPower(thePower)
 {
 }
 
 SuperHero::~SuperHero()
 {
-  cout << "SuperHero::~SuperHero()" << endl;
 }
 
 void SuperHero::fight() const
 {
   cout << getName() << " fights" << endl;
+}
+
+void SuperHero::dance() const  //überschreibt die virtual Methode der Basisklasse
+{
+  cout << "Superheroes don't dance!" << endl;
 }
 
 void SuperHero::setSuperPower(const string& thePower)

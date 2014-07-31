@@ -15,7 +15,6 @@ ComicCharacter::ComicCharacter(const string& aName) :
 
 ComicCharacter::~ComicCharacter()
 {
-  cout << "ComicCharacter::~ComicCharacter()" << endl;
 }
 
 void ComicCharacter::print() const

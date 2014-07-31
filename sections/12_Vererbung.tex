@@ -6,7 +6,7 @@
 		\begin{compactitem}
 			\item Bestehende Klassen erweitern (zusätzliche Attribute und Elementfunktionen)
 			\item Bestehende Methoden einer Basisklasse ändern (überschreiben)
-			\item Einsatz nur wenn eine \textbf{IST-EIN (\phantom{}is a")} Beziehung besteht (z.B. Baum \textbf{ist eine} Pflanze, Blume \textbf{ist eine} Pflanze)
+			\item Einsatz nur wenn eine \textbf{IST-EIN (is a)} Beziehung besteht (z.B. Baum \textbf{ist eine} Pflanze, Blume \textbf{ist eine} Pflanze)
 			\linebreak
 		\end{compactitem}
 		\includegraphics[width=1\textwidth]{pics/bsp_Vererbung.jpg}
@@ -48,37 +48,50 @@
 	\subsection{Slicing Problem \verweiscpp{13.3}}
 		Links: Beim Kopieren werden nur die ComicCharacter-Teile berücksichtigt. Durch das Kopieren wird alles überflüssige weggeschnitten, übrig bleibt ein reines ComicCharacter Objekt im Fall von s führt dies dazu, dass die erweiterten SuperHero Daten und Funktionen verloren gehen.\newline
 		Rechts: Hier wird dank des Referenzparameters der gesamte Superheld ausgegeben.\newline
-		\includegraphics[width=0.8\textwidth]{pics/SlicingProblem.jpg}
-	\subsection{Vererbung und Gültigkeitsbereiche \verweiscpp{13.4}}
-		\includegraphics[width=0.5\textwidth]{pics/zugriffVererbung.jpg}
+		\includegraphics[width=1\textwidth]{pics/SlicingProblem.jpg}
 	\end{minipage}	
 \newpage
+	\subsection{Vererbung und Gültigkeitsbereiche \verweiscpp{13.4}}
+		Die Klasse C enthält alle Elemente von B und somit auch von A. A jedoch hat kein i un kann auch von keiner Oberklasse erben, dies ergibt den Fehler. B hat zwar auch kein j, erbt aber das von A.\newline
+		\includegraphics[width=0.6\textwidth]{pics/zugriffVererbung.jpg}
 	\subsection{Elementfunktionen bei abgeleiteten Klassen \verweiscpp{13.5}}
 	\begin{minipage}[t]{12 cm}
-    	\subsubsection{Konstruktoren}
-    	In einem Konstruktor müssen alle Elemente eines Objekts (auch die ererbten) initialisiert werden. Folgendes Beispiel zeigt die direkte Initialisierung aller Elemente. Vor allem bei grossen oder mehreren Klassen ist dies nicht zielführend. Stattdessen wird das Chaining Prinzip angewandt. Falls kein Aufruf eines Basislklassen-Konstruktors in der Initialisierungsliste eines Konstruktors erscheint, so fügt der Compiler automatisch den Default-Konstruktor der Basisklasse ein.
-   		\lstinputlisting[language=C++,tabsize=2]{code/initVererbungKonstruktor.cpp}
+    	\subsubsection{Konstruktoren\verweiscpp{13.5.1}}
+    		In einem Konstruktor müssen alle Elemente eines Objekts (auch die ererbten) initialisiert werden. Folgendes Beispiel zeigt die direkte Initialisierung aller Elemente. Vor allem bei grossen oder mehreren Klassen ist dies nicht zielführend. Stattdessen wird das Chaining Prinzip angewandt. Falls kein Aufruf eines Basislklassen-Konstruktors in der Initialisierungsliste eines Konstruktors erscheint, so fügt der Compiler automatisch den Default-Konstruktor der Basisklasse ein.
+   			\lstinputlisting[language=C++,tabsize=2]{code/initVererbungKonstruktor.cpp}
    		\subsubsection{Chaining}
-   		Jede Klasse erledigt nur die eigenen Aufgaben. Aufgaben, die ererbte Methoden übernehmen können, werden diesen delegiert (Aufruf der jeweiligen Konstruktoren)\newline
-   		\textbf{Wichtig: die Elemente der Basisklasse müssen immer als erste initialisiert werden}
-    \lstinputlisting[language=C++,tabsize=2]{code/initVererbungChaining.cpp}
+   			Jede Klasse erledigt nur die eigenen Aufgaben. Aufgaben, die ererbte Methoden übernehmen können, werden diesen delegiert (Aufruf der jeweiligen Konstruktoren)\newline
+   			\textbf{Wichtig: die Elemente der Basisklasse müssen immer als erste initialisiert werden}
+    		\lstinputlisting[language=C++,tabsize=2]{code/initVererbungChaining.cpp}
 	\end{minipage} \hspace*{0.5cm}
 	\begin{minipage}[t]{6.5 cm}
-		\subsubsection{Copy-Konstruktor}
+		\subsubsection{Copy-Konstruktor \verweiscpp{13.5.2}}
 			\begin{compactitem}
 				\item Wenn kein Copy Constructor explizit definiert wird, so erzeugt das System einen
 				\item Darin wird immer (ebenfalls automatisch) zuerst der Copy Constructor der Basisklasse aufgerufen
 				\linebreak
 			\end{compactitem}
-		\subsubsection{Destruktor}
+		\subsubsection{Destruktor \verweiscpp{13.5.3}}
 			\begin{compactitem}
 				\item Auch Destruktoren werden nach dem Chaining-Prinzip aufgebaut
 				\item Jede Klasse kümmert sich um die eigenen Attribute und überlässt jene der
 				Basisklasse auch der Basisklasse
 				\item Destruktoren müssen nie explizit aufgerufen werden. Der Destruktor der
-				Basisklasse wird \textbf{am Schluss} des Destruktors immer automatisch aufgerufen
+				Basisklasse wird \textbf{am Schluss} des Destruktors immer automatisch aufgerufen\newline
+				Ein leerer Destruktor der Art
+				\lstinputlisting[language=C++,tabsize=2]{code/destructor.cpp}
+				ruft automatisch den Basisklassen-Destrukor (von ComicCharacter) auf.
 				\linebreak
-		\end{compactitem}
+			\end{compactitem}
+		\subsubsection{Überschreiben von ererbten Methoden\verweiscpp{13.5.3}}
+			\begin{compactitem}
+				\item Falls ererbte Methoden nicht das erfüllen, was eine bestimmte Klasse möchte, dann
+				können diese Methoden neu definiert (überschrieben) werden.
+				\item Methoden, welche in einer abgeleiteten Klasse überschrieben werden können, müssen in der Basisklasse mit virtual gekennzeichnet sein.
+				\item Im Anhang wird dieses überschreiben einer Methode beim SuperHero für die Funktion $dance()$ vorgenommen. Während ein normaler ComicCharacter tanzt, wird diese Funktion beim SuperHero überschrieben und mit tanzt nicht überschrieben.
+				\linebreak
+			\end{compactitem}
+
 		
 	\end{minipage}
 
