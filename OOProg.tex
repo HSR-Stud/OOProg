@@ -38,6 +38,9 @@
 \usepackage{tikz}
 \usepackage{pgf-umlcd}
 
+% Courier font
+\usepackage{courier}
+
 \definecolor{red}{rgb}{1,0,0}
 \definecolor{blue}{rgb}{0,0,1}
 \definecolor{black}{rgb}{0,0,0}
@@ -45,13 +48,14 @@
 \newcommand{\verweiscpp}[1]{$_{\textcolor{blue}{\mbox{\small{C++ Kap. #1}}}}$}
 \newcommand{\verweisboth}[2]{$_{\textcolor{red}{\mbox{\small{C Kap. #1}}}}$$_{\textcolor{black}{\mbox{\small{, }}}}$$_{\textcolor{blue}{\mbox{\small{C++ Kap. #2}}}}$}
 \newcommand{\verweishoch}[1]{${\textcolor{red}{\mbox{\small{Kapitel #1}}}}$}
+\newcommand{\lc}[1]{\textit{\texttt{#1}}}
 
 %Document Anfang
 \begin{document}	
 
 	\title{\Huge{OOProg}}
 	\maketitle
-	\setcounter{tocdepth}{4}
+	\setcounter{tocdepth}{2}
 	\tableofcontents
 	\newpage
 

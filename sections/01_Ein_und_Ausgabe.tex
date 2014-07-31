@@ -1,59 +1,74 @@
 \section{Ein- und Ausgabe}
-Um die C++ Ein- und Ausgaben nutzen zu können, muss man die Bibliothek iostream einbinden. Das geschieht mit:
-\lstinputlisting[language=C++,tabsize=2]{code/iostream.cpp}
-Danach müssen die Befehle daraus bekannt gegeben werden, da sie sich in einem speziellen Namespace befinden. Um nun die Ein- und Ausgabebefehle nutzen zu können, muss man dem Compiler sagen: Benutze den Namenspace std. Man könnte vor jeden Ein- Ausgabebefehl std:: schreiben. Da dies aber mühsam ist, kann man mit folgender Zeile dieses Problem umgehen:
-\lstinputlisting[language=C++,tabsize=2]{code/using_namespace_std.cpp}
+	\begin{minipage}[t]{7.5 cm}
+		Um die C++ Ein- und Ausgaben nutzen zu können, muss man die Bibliothek iostream einbinden. Das geschieht mit:
+		\lstinputlisting[language=C++,tabsize=2]{code/iostream.cpp}
+		Danach müssen die Befehle daraus bekannt gegeben werden, da sie sich in einem speziellen Namespace befinden. Um nun die Ein- und Ausgabebefehle nutzen zu können, muss man dem Compiler sagen: Benutze den Namenspace std. Man könnte vor jeden Ein- Ausgabebefehl std:: schreiben. Da dies aber mühsam ist, kann man mit folgender Zeile dieses Problem umgehen:
+		\lstinputlisting[language=C++,tabsize=2]{code/using_namespace_std.cpp}
+	\end{minipage}
+	\hspace*{0.5cm}			
+	\begin{minipage}[t]{11 cm}	
+		\vspace*{-0.32cm}	
+		\subsection{Streamkonzept}
+			\begin{compactitem}
+				\item Ein \lc{Stream} repräsentiert einen sequentiellen Datenstrom.
+				\item Die Operatoren auf dem \lc{Stream} sind \lc{<}\lc{<} und \lc{>}\lc{>}.\newline
+				Für vordefinierte Datentypen sind diese Operatoren schon definiert, für eigene selbstdefinierte Klassen können diese Operatoren überladen werden).
+				\item C++ stellt 4 Standardstreams zur Verfügung:
+					\begin{compactitem}
+						\item \lc{cin}: Standard-Eingabesteam, normalerweise die Tastatur
+						\item \lc{cout}: Standard-Ausgabestream, normalerweise der Bildschirm
+						\item \lc{cerr}: Standard-Fehlerausgabestream, normalerweise der Bildschirm
+						\item \lc{clog}: mit \lc{cerr} gekoppelt
+					\end{compactitem}
+				\item Alle diese Streams können auch mit einer Datei verbunden werden.	
+			\end{compactitem} 
+	\end{minipage}
 	
-	\subsection{Streamkonzept}
-		\begin{compactitem}
-			\item Ein Stream repräsentiert einen sequentiellen Datenstrom.
-			\item Die Operatoren auf dem Stream sind << und >>.\newline
-			Für vordefinierte Datentypen sind diese Operatoren schon definiert, für eigene selbstdefinierte Klassen
-			können diese Operatoren überladen werden (folgt später).
-			\item C++ stellt 4 Standardströme zur Verfügung:
-				\begin{compactitem}
-					\item cin: Standard-Eingabestrom, normalerweise die Tastatur
-					\item cout: Standard-Ausgabestrom, normalerweise der Bildschirm
-					\item cerr: Standard-Fehlerausgabestrom, normalerweise der Bildschirm
-					\item clog: mit cerr gekoppelt
-				\end{compactitem}
-			\item Alle diese Ströme können auch mit einer Datei verbunden werden.	
-		\end{compactitem}
-	
-	\subsection{Ausgabe}
-	Die Klasse ostream stellt Methoden zur Ausgabe aller vordefinierten Datentypen (char, bool, int, etc) zur Verfügung. Alle Ausgabemethoden sind überladene Versionen des Operators <<. Die verschiedenen Versionen unterscheiden sich dabei in ihren Parametern und haben etwa folgende Schnittstelle:
-	\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_1.cpp}
-	Nutzung mit cout (vordefiniertes Objekt der Klasse ostream):
-	\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_2.cpp}
-	endl bewirkt bei einer Bildschirmausgabe einen Sprung zum Anfang der nächsten Zeile und das Leeren des Puffers auf das Ausgabemedium. Es bewirkt eigentlich das gleiche wie die Zeile:
-	\lstinputlisting[language=C++,tabsize=2]{code/endl.cpp}	 
-	flush bewirkt das Leeren des Puffers auf das Ausgabemedium.
-	\subsubsection{Ausgabebeispiele}
-		\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_3.cpp}
-		\vspace{0.5cm}
-		\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_4.cpp}\newpage
+	\begin{minipage}[t]{6.5 cm}
+		\subsection{Ausgabe}
+			Die Klasse \lc{ostream} stellt Methoden zur Ausgabe aller vordefinierten Datentypen (\lc{char}, \lc{bool}, \lc{int}, etc) zur Verfügung. Alle Ausgabemethoden sind überladene Versionen des Operators \lc{<}\lc{<}. Die verschiedenen Versionen unterscheiden sich dabei in ihren Parametern und haben etwa folgende Schnittstelle:
+			\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_1.cpp}
+			Nutzung mit \lc{cout} (vordefiniertes Objekt der Klasse \lc{ostream}):
+			\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_2.cpp}
+			\lc{endl} bewirkt bei einer Bildschirmausgabe einen Sprung zum Anfang der nächsten Zeile und das Leeren des Puffers auf das Ausgabemedium. Es bewirkt eigentlich das gleiche wie die Zeile:
+			\lstinputlisting[language=C++,tabsize=2]{code/endl.cpp}	 
+			\lc{flush} bewirkt das Leeren des Puffers auf das Ausgabemedium. 
+	\end{minipage}
+	\hspace*{0.5cm}			
+	\begin{minipage}[t]{12 cm}				
+			\subsubsection{Ausgabebeispiele}
+				\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_3.cpp}
+				\lstinputlisting[language=C++,tabsize=2]{code/ausgabe_4.cpp}	
+				
+		\subsection{Eingabe}
+			Die Eingabe ist ähnlich organisiert wie die Ausgabe. Die Klasse \lc{istream} ist die Abstraktion eines Eingabestreams und stellt unter anderem folgende Möglichkeiten zur Verfügung: 
+			\lstinputlisting[language=C++,tabsize=2]{code/eingabe_1.cpp}
+			Nutzung mit \lc{cin} (vordefiniertes Objekt der Klasse \lc{istream}):
+			\lstinputlisting[language=C++,tabsize=2]{code/eingabe_2.cpp}	
+			\subsubsection{Eingabebeispiele}
+				\lstinputlisting[language=C++,tabsize=2]{code/eingabe_3.cpp}	
+	\end{minipage}	
 		
-		
-	\subsection{Eingabe}
-	Die Eingabe ist ähnlich organisiert wie die Ausgabe. Die Klasse istream ist die Abstraktion eines Eingabestroms und stellt unter anderem folgende Möglichkeiten zur Verfügung: 
-	\lstinputlisting[language=C++,tabsize=2]{code/eingabe_1.cpp}
-	Nutzung mit cin (vordefiniertes Objekt der Klasse istream):
-	\lstinputlisting[language=C++,tabsize=2]{code/eingabe_2.cpp}	
-		\subsubsection{Eingabebeispiele}
-			\lstinputlisting[language=C++,tabsize=2]{code/eingabe_3.cpp}
-		\vspace{0.5cm}
 	\subsection{Formatierte Ein- und Ausgabe: Manipulatoren ohne Parameter}
-	ios, eine Basisklasse von iostream, stellt verschiedene Möglichkeiten (Format Flags) vor, um die Ein- und Ausgabe zu beeinflussen.\newline
-		\begin{minipage}[t]{9 cm}
+	\lc{ios}, eine Basisklasse von \lc{iostream}, stellt verschiedene Möglichkeiten (Format Flags) vor, um die Ein- und Ausgabe zu beeinflussen.\newline
+		\begin{minipage}[t]{7 cm}
 			\subsubsection{boolalpha} 
-				bool-Werte werden textuell ausgegeben.
+				\lc{bool}-Werte werden textuell ausgegeben.
 				\lstinputlisting[language=C++,tabsize=2]{code/boolalpha.cpp}
 		\end{minipage}
-		\hspace*{0.8cm}	
-		\begin{minipage}[t]{9 cm}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{1.5 cm}
+				\vspace*{1cm}\lstinputlisting[language=C++,tabsize=2]{code/boolalpha_aus.cpp}
+		\end{minipage}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{7.5 cm}
 			\subsubsection{showbase} 
 				Zahlenbasis wird gezeigt.
 				\lstinputlisting[language=C++,tabsize=2]{code/showbase.cpp}
+		\end{minipage}
+		\hspace*{0.4cm}	
+		\begin{minipage}[t]{2 cm}
+				\vspace*{1cm}\lstinputlisting[language=C++,tabsize=2]{code/showbase_aus.cpp}
 		\end{minipage}
 		\newline
 		\begin{minipage}[t]{9 cm}

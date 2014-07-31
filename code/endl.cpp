@@ -1,1 +1,1 @@
-<< '\n' << flush;
+cout << '\n' << flush;
