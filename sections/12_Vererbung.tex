@@ -1,12 +1,12 @@
 \section{Vererbung (Inheritance)}
 	Vererbung ist ein Konzept, das es erlaubt, neue Klassen auf Basis von alten Klassen zu definieren. Die neuen (Unter-, Sub-) Klassen besitzen, ohne Eingriffe in den
 	Sourcecode der bereits bestehenden (Ober-, Basis-, Super-) Klassen, all deren Eigenschaften, sie $erben$ deren Verhalten und Daten. Den Vorgang der Vererbung nennt man $Ableiten$.\linebreak
-	\begin{minipage}[t]{6.5 cm}
+	\begin{minipage}[t]{7 cm}
 		\subsection{Einsatz der Vererbung \verweiscpp{13.1}}
 		\begin{compactitem}
 			\item Bestehende Klassen erweitern (zusätzliche Attribute und Elementfunktionen)
 			\item Bestehende Methoden einer Basisklasse ändern (überschreiben)
-			\item Einsatz nur wenn eine \textbf{IST-EIN ("is a")} Beziehung besteht (z.B. Baum \textbf{ist eine} Pflanze, Blume \textbf{ist eine} Pflanze)
+			\item Einsatz nur wenn eine \textbf{IST-EIN (\phantom{}is a")} Beziehung besteht (z.B. Baum \textbf{ist eine} Pflanze, Blume \textbf{ist eine} Pflanze)
 			\linebreak
 		\end{compactitem}
 		\includegraphics[width=1\textwidth]{pics/bsp_Vererbung.jpg}
@@ -20,35 +20,67 @@
 				\item Das Objekt ist somit mindestens so gross wie jenes der Basisklasse (es gibt keine Vererbung $by$ $reference$)
 				\linebreak
 			\end{compactitem}
-				
+			\lstinputlisting[language=C++,tabsize=2]{code/substitutionsprinzip.cpp}
 	\end{minipage}	
 	\hspace*{0.5cm}
-	\begin{minipage}[t]{12 cm}
+	\begin{minipage}[t]{11.5 cm}
 	\subsection{Zugriff auf Elemente der Basisklasse \verweiscpp{13.6}}
 		\textbf{Bei Vererbung mit public (Normalfall):}
 			\begin{compactitem}
 				\item Zugriff möglich auf alle public- und protected- Elemente der Basisklasse, die Zugriffsrechte 
 				(public, protected) der Basisklasse werden in der abgeleiteten Klasse beibehalten
-				\item kein Zugriff auf private-Elemente der Basisklasse
 				\linebreak
 			\end{compactitem}
 		\textbf{Bei Vererbung mit protected:}
 			\begin{compactitem}
 				\item Zugriff möglich auf alle public- und protected- Elemente der Basisklasse, die Zugriffsrechte 
 				von public und protected der Basisklasse werden in der abgeleiteten Klasse zu protected
-				\item kein Zugriff auf private-Elemente der Basisklasse
 				\linebreak
 			\end{compactitem}
 		\textbf{Bei Vererbung mit private:}
 			\begin{compactitem}
 				\item Zugriff möglich auf alle public- und protected- Elemente der Basisklasse, die Zugriffsrechte 
 				von public und protected der Basisklasse werden in der abgeleiteten Klasse zu private
-				\item kein Zugriff auf private-Elemente der Basisklasse
 				\linebreak
 			\end{compactitem}
+		\textbf{Bei allen drei: kein Zugriff auf private-Elemente der Basisklasse}
+		\lstinputlisting[language=C++,tabsize=2]{code/privateFehler.cpp}
 	\subsection{Slicing Problem \verweiscpp{13.3}}
 		Links: Beim Kopieren werden nur die ComicCharacter-Teile berücksichtigt. Durch das Kopieren wird alles überflüssige weggeschnitten, übrig bleibt ein reines ComicCharacter Objekt im Fall von s führt dies dazu, dass die erweiterten SuperHero Daten und Funktionen verloren gehen.\newline
 		Rechts: Hier wird dank des Referenzparameters der gesamte Superheld ausgegeben.\newline
-		\includegraphics[width=1\textwidth]{pics/SlicingProblem.jpg}
+		\includegraphics[width=0.8\textwidth]{pics/SlicingProblem.jpg}
+	\subsection{Vererbung und Gültigkeitsbereiche \verweiscpp{13.4}}
+		\includegraphics[width=0.5\textwidth]{pics/zugriffVererbung.jpg}
 	\end{minipage}	
+\newpage
+	\subsection{Elementfunktionen bei abgeleiteten Klassen \verweiscpp{13.5}}
+	\begin{minipage}[t]{12 cm}
+    	\subsubsection{Konstruktoren}
+    	In einem Konstruktor müssen alle Elemente eines Objekts (auch die ererbten) initialisiert werden. Folgendes Beispiel zeigt die direkte Initialisierung aller Elemente. Vor allem bei grossen oder mehreren Klassen ist dies nicht zielführend. Stattdessen wird das Chaining Prinzip angewandt. Falls kein Aufruf eines Basislklassen-Konstruktors in der Initialisierungsliste eines Konstruktors erscheint, so fügt der Compiler automatisch den Default-Konstruktor der Basisklasse ein.
+   		\lstinputlisting[language=C++,tabsize=2]{code/initVererbungKonstruktor.cpp}
+   		\subsubsection{Chaining}
+   		Jede Klasse erledigt nur die eigenen Aufgaben. Aufgaben, die ererbte Methoden übernehmen können, werden diesen delegiert (Aufruf der jeweiligen Konstruktoren)\newline
+   		\textbf{Wichtig: die Elemente der Basisklasse müssen immer als erste initialisiert werden}
+    \lstinputlisting[language=C++,tabsize=2]{code/initVererbungChaining.cpp}
+	\end{minipage} \hspace*{0.5cm}
+	\begin{minipage}[t]{6.5 cm}
+		\subsubsection{Copy-Konstruktor}
+			\begin{compactitem}
+				\item Wenn kein Copy Constructor explizit definiert wird, so erzeugt das System einen
+				\item Darin wird immer (ebenfalls automatisch) zuerst der Copy Constructor der Basisklasse aufgerufen
+				\linebreak
+			\end{compactitem}
+		\subsubsection{Destruktor}
+			\begin{compactitem}
+				\item Auch Destruktoren werden nach dem Chaining-Prinzip aufgebaut
+				\item Jede Klasse kümmert sich um die eigenen Attribute und überlässt jene der
+				Basisklasse auch der Basisklasse
+				\item Destruktoren müssen nie explizit aufgerufen werden. Der Destruktor der
+				Basisklasse wird \textbf{am Schluss} des Destruktors immer automatisch aufgerufen
+				\linebreak
+		\end{compactitem}
+		
+	\end{minipage}
+
+    
 	
