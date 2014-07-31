@@ -1,6 +1,6 @@
 \section{Ein- und Ausgabe}
 	\begin{minipage}[t]{7.5 cm}
-		Um die C++ Ein- und Ausgaben nutzen zu können, muss man die Bibliothek iostream einbinden. Das geschieht mit:
+		Um die \lc{C++} Ein- und Ausgaben nutzen zu können, muss man die Bibliothek iostream einbinden. Das geschieht mit:
 		\lstinputlisting[language=C++,tabsize=2]{code/iostream.cpp}
 		Danach müssen die Befehle daraus bekannt gegeben werden, da sie sich in einem speziellen Namespace befinden. Um nun die Ein- und Ausgabebefehle nutzen zu können, muss man dem Compiler sagen: Benutze den Namenspace std. Man könnte vor jeden Ein- Ausgabebefehl std:: schreiben. Da dies aber mühsam ist, kann man mit folgender Zeile dieses Problem umgehen:
 		\lstinputlisting[language=C++,tabsize=2]{code/using_namespace_std.cpp}
@@ -13,7 +13,7 @@
 				\item Ein \lc{Stream} repräsentiert einen sequentiellen Datenstrom.
 				\item Die Operatoren auf dem \lc{Stream} sind \lc{<}\lc{<} und \lc{>}\lc{>}.\newline
 				Für vordefinierte Datentypen sind diese Operatoren schon definiert, für eigene selbstdefinierte Klassen können diese Operatoren überladen werden).
-				\item C++ stellt 4 Standardstreams zur Verfügung:
+				\item \lc{C++} stellt 4 Standardstreams zur Verfügung:
 					\begin{compactitem}
 						\item \lc{cin}: Standard-Eingabesteam, normalerweise die Tastatur
 						\item \lc{cout}: Standard-Ausgabestream, normalerweise der Bildschirm
@@ -163,9 +163,7 @@
 		\hspace*{0.4cm}	
 		\begin{minipage}[t]{2 cm}
 				\vspace*{1.4cm}\lstinputlisting[language=C++,tabsize=2]{code/setprecision_aus.cpp}
-		\end{minipage}	
-		
-\newpage						
+		\end{minipage}							
 	
 	\subsection{Streams und Dateien \verweiscpp{A.5}}
 		Streams sind Abstraktionen für die zeichenweise Ein-/Ausgabe. Dabei ist es unerheblich, ob die Ausgabe auf den Bildschirm erfolgt oder auf eine Datei. Dateien können also über die normalen Möglichkeiten der Ein-/Ausgabe beschrieben werden.
