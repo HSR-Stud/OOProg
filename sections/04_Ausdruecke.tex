@@ -1,37 +1,104 @@
-\section{Ausdr"ucke und Operatoren}
-Ähnlich wie mathematische Ausdrücke stellen auch Ausdrücke in C++ Berechnungen das und bestehen aus Operanden und Operatoren. Die Auswertung jedes Ausdrucks liefert einen Wert, der sich aus der Verknüpfung von Operanden durch Operatoren ergibt. 
+\section{Ausdrücke und Operatoren}
+	Ähnlich wie mathematische Ausdrücke stellen auch Ausdrücke in \lc{C++} Berechnungen dar und bestehen aus Operanden und Operatoren. Die Auswertung jedes Ausdrucks liefert einen Wert, der sich aus der Verknüpfung von Operanden durch Operatoren ergibt. 
 	\begin{compactitem}
-		\item Arithmetische Ausdrücke: Ausdrücke, deren Ergebnis als Skalar geschrieben werden kann (char-, int- oder float-Typen). 
+		\item Arithmetische Ausdrücke: Ausdrücke, deren Ergebnis als Skalar geschrieben werden kann (\lc{char}-, \lc{int}- oder \lc{float}-Typen). 
 		\item Logische Ausdrücke: Ausdrücke, die Wahrheitswerte beschreiben. Sie entstehen durch Vergleiche oder logische Verknüpfungen.
-		\item Andere Ausdrücke: Darunter fallen zum Beispiel Typumwandlungen (Cast-Ausdrücke) ebenso wie typeid-Ausdrücke.
+		\item Andere Ausdrücke: Darunter fallen zum Beispiel Typumwandlungen (Cast-Ausdrücke) ebenso wie \lc{typeid}-Ausdrücke.
 	\end{compactitem}
 	
 	\subsection{Auswertungsreihenfolge}
-	Alle Ausdrücke werden nach bestimmten Regeln ausgewertet. Massgeblich für die Art der Auswertung sind dabei Assoziativität und Priorität der Operatoren. \\\\
-	\includegraphics[width=0.6\textwidth]{pics/Priotabelle.png}
-	\\(Priorität 1 hat Vorrang vor allen anderen)
+		%Alle Ausdrücke werden nach bestimmten Regeln ausgewertet. Massgeblich für die Art der Auswertung sind dabei Assoziativität und Priorität der Operatoren. \\
+		\vspace*{-0.3cm}\begin{tabular}[t]{|p{1.5cm}|p{4cm}|p{8.5cm}|p{3.5cm}|}
+			\hline	
+				\textbf{Priorität} & \textbf{Operator} & \textbf{Beschreibung} & \textbf{Assoziativität} \\
+			\hline
+				1 & \lc{::} & Bereichsauflösung &  von links nach rechts\\
+			\hline
+				\multirow{5}{*}{2} & \lc{++ -\phantom{}-} & Suffix-/Postfix-Inkrement und -Dekrement & \multirow{5}{*}{von links nach rechts}\\
+				& \lc{()} & Funktionsaufruf & \\
+				& \lc{[]} & Arrayindizierung & \\
+				& \lc{.} & Elementselektion einer Referenz & \\
+				& \lc{->} & Elementselektion eines Zeigers & \\
+			\hline
+				\multirow{9}{*}{3} & \lc{++ -\phantom{}-} & Präfix-Inkrement und -Dekrement & \multirow{9}{*}{von rechts nach links} \\
+				& \lc{+ -} & unäres plus und unäres Minus & \\
+				& \lc{! \~} & logisches NOT und bitweises NOT & \\
+				& \lc{(type)} & Typkonvertierung & \\
+				& \lc{*} & Dereferenzierung & \\
+				& \lc{\&} & Adresse von & \\
+				& \lc{sizeof} & Typ-/Objektgrösse & \\
+				& \lc{new, new[]} & Reservierung Dynamischen Speichers & \\
+				& \lc{delete, delete[]} & Freigabe Dynamischen Speichers & \\
+			\hline
+		\end{tabular} 
+		
+		\begin{tabular}[t]{|p{1.5cm}|p{4cm}|p{8.5cm}|p{3.5cm}|}
+			\hline	
+				\textbf{Priorität} & \textbf{Operator} & \textbf{Beschreibung} & \textbf{Assoziativität} \\
+			\hline
+				4 & \lc{.* ->*} & Zeiger-auf-Element & von links nach rechts \\
+			\hline
+				5 & \lc{* / \%} & Multiplikation, Division und Rest & von links nach rechts \\
+			\hline
+				6 & \lc{+ -} & Addition und Subtraktion & von links nach rechts \\
+			\hline
+				7 & \lc{<\phantom{}< >\phantom{}>} & bitweise Rechts- und Linksverschiebung & von links nach rechts \\
+			\hline
+				\multirow{2}{*}{8} & \lc{< <=} & kleiner-als und kleiner-gleich & \multirow{2}{*}{von links nach rechts}\\
+				& \lc{> >=} & grösser-als und grösser-gleich & \\
+			\hline
+				9 & \lc{== !=} & gleich und ungleich & von links nach rechts \\
+			\hline
+				10 & \lc{\&} & bitweises AND & von links nach rechts \\
+			\hline
+				11 & \lc{\textasciicircum} & bitweise XOR & von links nach rechts \\
+			\hline
+				12 & \lc{|} & bitweises OR & von links nach rechts \\
+			\hline
+				13 & \lc{\&\&} & logisches AND & von links nach rechts \\
+			\hline
+				14 & \lc{||} & logisches OR & von links nach rechts \\
+			\hline
+				\multirow{6}{*}{15} & \lc{?:} & bedingte Zuweisung & \multirow{6}{*}{von rechts nach links}\\
+				& \lc{=} & einfache Zuweisung & \\
+				& \lc{+= -=} & Zuweisung nach Addition/Subtraktion & \\
+				& \lc{*= /= \%=} & Zuweisung nach Multiplikation, Division, Rest & \\
+				& \lc{<\phantom{}<= >\phantom{}>=} & Zuweisung nach Links-, Rechtsverschiebung & \\
+				& \lc{\&= \textasciicircum= |=} & Zuweisung nach bitweisem AND, XOR und OR & \\
+			\hline
+				16 & \lc{throw} & Ausnahme werfen & von rechts nach links \\
+			\hline
+				17 & \lc{,} & Komma (Sequenzoperator) & von links nach rechts \\
+			\hline
+		\end{tabular}
+
+		\ \\ (Priorität 1 hat Vorrang vor allen anderen)
+		
 		\subsubsection{Assoziativität}
-		Die Assoziativität gibt Auskunft über die Auswertungsreihenfolge der Operanden eines Ausdrucks. So wird zum Beispiel im Ausdruck p++ zuerst p ausgewertet und dann die linke Seite des Operators ++ (p) erhöht, während der Ausdruck ++p zuerst p erhöht und dann den Ausdruck auswertet.
-		\lstinputlisting[language=C++,tabsize=2]{code/prio1.cpp}
+			Die Assoziativität gibt Auskunft über die Auswertungsreihenfolge der Operanden eines Ausdrucks. So wird zum Beispiel im Ausdruck \lc{p++} zuerst \lc{p} ausgewertet und dann die linke Seite des Operators \lc{++} (\lc{p}) erhöht, während der Ausdruck \lc{++p} zuerst \lc{p} erhöht und dann den Ausdruck auswertet.
+			\lstinputlisting[language=C++,tabsize=2]{code/prio1.cpp}
+			
 		\subsubsection{Priorität}
-		Die Priorität von Operatoren wiederum gibt an, in welcher Reihenfolge die verschiedenen Operanden eines Ausdrucks ausgewertet werden. Die multiplikativen Operatoren weisen zum Beispiel eine höhere Priorität als die additiven Operatoren auf.
+			Die Priorität von Operatoren wiederum gibt an, in welcher Reihenfolge die verschiedenen Operanden eines Ausdrucks ausgewertet werden. Die multiplikativen Operatoren weisen zum Beispiel eine höhere Priorität als die additiven Operatoren auf.
+			
 	\begin{minipage}[t]{13 cm}
-	\subsection{L-Werte und R-Werte}
-		\begin{compactitem}
-			\item Ausdrücke haben eine unterschiedliche Bedeutung, je nachdem, ob sie links oder rechts vom Zuweisungsoperator stehen.
-			\item Ein Ausdruck stellt einen L-Wert (lvalue oder left value) dar, wenn er
-			sich auf ein Speicherobjekt bezieht. Ein solcher Ausdruck kann links (und rechts) des Zuweisungsoperators stehen.
-			\item Ein Ausdruck, der sich nicht auf ein Speicherobjekt bezieht, kann nur
-			rechts des Zuweisungsoperators stehen. Er wird als R-Wert (rvalue oder right value) bezeichnet. Einem R-Wert kann nichts zugewiesen werden.\\
-			\lstinputlisting[language=C,tabsize=2]{code/l-r-wert.c}
-		\end{compactitem}
+		\subsection{L-Werte und R-Werte}
+			\begin{compactitem}
+				\item Ausdrücke haben eine unterschiedliche Bedeutung, je nachdem, ob sie links oder rechts vom Zuweisungsoperator stehen.
+				\item Ein Ausdruck stellt einen L-Wert (lvalue oder left value) dar, wenn er
+				sich auf ein Speicherobjekt bezieht. Ein solcher Ausdruck kann links (und rechts) des Zuweisungsoperators stehen.
+				\item Ein Ausdruck, der sich nicht auf ein Speicherobjekt bezieht, kann nur
+				rechts des Zuweisungsoperators stehen. Er wird als R-Wert (rvalue oder right value) bezeichnet. Einem R-Wert kann nichts zugewiesen werden.\\
+				\lstinputlisting[language=C,tabsize=2]{code/l-r-wert.c}
+			\end{compactitem}
 	\end{minipage}
 	\hspace*{1cm}
 	\begin{minipage}[t]{5 cm}
 		\vspace*{-0.2cm}
 		\includegraphics[width=1\textwidth]{pics/l-r-wert1.png}
 		\includegraphics[width=1\textwidth]{pics/l-r-wert2.png}
-	\end{minipage}\\
+	\end{minipage}
+	
 		\subsubsection{Zugriff auf L- und R-Werte}
 			\begin{compactitem}
 				\item Ein lvalue erfordert immer Schreibzugriff
@@ -41,100 +108,83 @@
 	 
 	\subsection{Operatoren im einzelnen}
 		\begin{minipage}[t]{9 cm}
-			\subsubsection{Bereichsoperator (Scope Operator) :: }
-				Der Bereichs-Operator ist erst in C++ verfügbar und liefert dem Compiler den Hinweis, in welchem Namespace er nach einem Symbol suchen soll. Der Namespace steht dabei links der beiden Doppelpunkte :: und der Symbolname steht rechts davon.
-		\end{minipage}
-		\hspace*{0.5cm}
-		\begin{minipage}[t]{9 cm}
+			\subsubsection{Bereichsoperator (Scope Operator) \lc{::}}
+				Der Bereichs-Operator ist erst in \lc{C++} verfügbar und liefert dem Compiler den Hinweis, in welchem Namespace er nach einem Symbol suchen soll. Der Namespace steht dabei links der beiden Doppelpunkte \lc{::} und der Symbolname steht rechts davon.
+				
 			\subsubsection{Unäre arithmetische Operatoren}
 				\begin{compactitem}
-					\item Positiver Vorzeichenoperator $+A$
-					\item Negativer Vorzeichenoperator $-A$
-					\item Postfix-Inkrementoperator $A++$
-					\item Präfix-Inkrementoperator $++A$
-					\item Postfix-Dekrementoperator $A- -$
-					\item Präfix-Dekrementoperator $- -A$
+					\item Positiver Vorzeichenoperator \lc{+A}
+					\item Negativer Vorzeichenoperator \lc{-A}
+					\item Postfix-Inkrementoperator \lc{A++}
+					\item Präfix-Inkrementoperator \lc{++A}
+					\item Postfix-Dekrementoperator \lc{A-\phantom{}-}
+					\item Präfix-Dekrementoperator \lc{-\phantom{}-A}
 				\end{compactitem}
-		\end{minipage}
-		\\\\
-		\begin{minipage}[t]{9 cm}
+				
 			\subsubsection{Binäre arithmetische Operatoren}
 				\begin{compactitem}
-					\item Additionsoperator $A + B$
-					\item Subtraktionsoperator $A - B$
-					\item Multiplikationsoperator $A * B$
-					\item Divisionsoperator $A / B$
-					\item Modulooperator $A \% B$   
-				\end{compactitem}	
-		\end{minipage}
-		\hspace*{0.5cm}
-		\begin{minipage}[t]{9 cm}
+					\item Additionsoperator \lc{A+B}
+					\item Subtraktionsoperator \lc{A-B}
+					\item Multiplikationsoperator \lc{A*B}
+					\item Divisionsoperator \lc{A/B}
+					\item Modulooperator \lc{A\%B}   
+				\end{compactitem}
+				
 			\subsubsection{Zuweisungsoperatoren}
 				\begin{compactitem}
-					\item Zuweisungsoperator $A = B$
+					\item Zuweisungsoperator \lc{A=B}
 					\item Kombinierte Zuweisungsoperatoren
 					\begin{compactitem}
 						\item Alle arithmetischen und logischen Operatoren haben zusammen mit dem
 						Zuweisungsoperator eine verkürzte Form, die das Schreiben verkürzt (mehr nicht)
 						\item Beispiel:\\
-						$a = a / b;$\\
+						\lc{a=a/b;}\\
 						kann verkürzt geschrieben werden als\\
-						$a /= b;$
+						\lc{a/=b;}
 					\end{compactitem}
 				\end{compactitem}
-		\end{minipage}
-		\\\\
-		\begin{minipage}[t]{9 cm}
-			\subsubsection{Relationale Operatoren\newline  (Vergleichsoperatoren)}
+				
+			\subsubsection{Bit-Operatoren}
 				\begin{compactitem}
-					\item Gleichheitsoperator $A == B$
-					\item Ungleichheitsoperator $A != B$
-					\item Grösseroperator $A \textgreater \ \ B$
-					\item Kleineroperator $A \textless \ \ B$
-					\item Grössergleichoperator $A \textgreater= B$
-					\item Kleinergleichoperator $A \textless= B$ 
-				\end{compactitem}	
+					\item Bitweises AND \lc{A\&B}
+					\item Bitweises OR \lc{A|B}
+					\item Bitweises NOT (Inverter) \lc{\textasciitilde A}
+					\item Bitweises XOR \lc{A\textasciicircum B} 
+				\end{compactitem}
 		\end{minipage}
 		\hspace*{0.5cm}
 		\begin{minipage}[t]{9 cm}
+			\subsubsection{Relationale Operatoren\newline  (Vergleichsoperatoren)}
+				\begin{compactitem}
+					\item Gleichheitsoperator \lc{A==B}
+					\item Ungleichheitsoperator \lc{A!=B}
+					\item Grösseroperator \lc{A\textgreater B}
+					\item Kleineroperator \lc{A\textless B}
+					\item Grössergleichoperator \lc{A\textgreater=B}
+					\item Kleinergleichoperator \lc{A\textless=B} 
+				\end{compactitem}	
+				
 			\subsubsection{Logische Operatoren}
 				\begin{compactitem}
-					\item Logisch UND (AND) $A \&\& B$
-					\item Logisch ODER (OR) $A || B$
-					\item Logisch NICHT (NOT) $!A$\\\\
+					\item Logisch UND (AND) \lc{A\&\&B}
+					\item Logisch ODER (OR) \lc{A||B}
+					\item Logisch NICHT (NOT) \lc{!A}\\
 					0 = false, falsch\\
 					1 = true, wahr (genauer: ungleich 0)
-				\end{compactitem}
-		\end{minipage}
-		\\\\
-		\begin{minipage}[t]{9 cm}
-			\subsubsection{Bit-Operatoren}
-				\begin{compactitem}
-					\item Bitweises AND $A \& B$
-					\item Bitweises OR $A | B$
-					\item Bitweises NOT (Inverter) $\textasciitilde A$
-					\item Bitweises XOR $A \wedge B$ 
 				\end{compactitem}	
-		\end{minipage}	
-		\hspace*{0.5cm}	
-		\begin{minipage}[t]{9 cm}
+				
 			\subsubsection{Schiebe- (Shift-) Operatoren}
 				\begin{compactitem}
-					\item Rechts-Shift um n Bits $A \textgreater \ \textgreater \ \ n$
-					\item Links-Shift um n Bits $A \textless \  \textless \ \ n$
+					\item Rechts-Shift um n Bits \lc{A>\phantom{}>n}
+					\item Links-Shift um n Bits \lc{A<\phantom{}<n}
 				\end{compactitem}
-			\end{minipage}		\\\\					
-			\begin{minipage}[t]{9 cm}
+				
 				\subsubsection{Bedingungsoperator (Ternärer Operator)}
-					$A ? B : C$\\\\
-					Ist eine verkürzte Schreibweise für
+					\lc{A?B:C} ist eine verkürzte Schreibweise für
 					\lstinputlisting[language=C,tabsize=2]{code/Ternaerer_Operator.c}
-			\end{minipage}
-			\hspace*{0.5cm}
-			\begin{minipage}[t]{9 cm}
-				\vspace*{0.5cm}
-				Beispiel Maximum von zwei Zahlen a, b ermitteln:
-				\lstinputlisting[language=C,tabsize=2]{code/Ternaerer_Operator2.c}
-				entspricht:
-				\lstinputlisting[language=C,tabsize=2]{code/Ternaerer_Operator3.c}	
-			\end{minipage}
+					
+					Beispiel Maximum von zwei Zahlen a, b ermitteln:
+					\lstinputlisting[language=C,tabsize=2]{code/Ternaerer_Operator2.c}
+					entspricht:
+					\lstinputlisting[language=C,tabsize=2]{code/Ternaerer_Operator3.c}
+		\end{minipage}
