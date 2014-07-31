@@ -1,5 +1,5 @@
-class SuperClass {};
-class SubClass : public SuperClass {};
+class SuperClass{};
+class SubClass:public SuperClass{};
 SuperClass super;
 SubClass sub;
 super = sub; // ok

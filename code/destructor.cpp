@@ -6,11 +6,7 @@ Book::Book(const string& aName,
            const string& aAuthor,
            const string& aTitle,
            const string& aIsbn) :
-author(aAuthor), title(aTitle), isbn(aIsbn) // eigene Attribute 
-{
-  setName(aName);            // Attribute der Basisklasse
-  setCode(aCode);
-  setPrice(aPrice);
-  setRating(aRating);
-  setComment(aComment);
+Article(aName, aCode, aPrice, aRating, aComment),
+author(aAuthor), title(aTitle), isbn(aIsbn)
+{ 
 }
