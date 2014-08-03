@@ -1,41 +1,274 @@
-\section{H"ohere Datentypen und strukturierte Datentypen}
-  \subsection{Referenzen}
-  Referenzen sind alternative Namen oder Alias f"ur ein Objekt.
-  	\lstinputlisting[language=C,tabsize=2]{code/ref1.c}
-  	
-  	In 2 Situationen anwenden: 
-  				\begin{compactitem}
-  					\item Parameter"ubergabe in Funktionen (call by Reference)
-  					\item Referenz R"uckgabetyp anstatt Pointertyp (Objekte einer Klasse immer bei reference "ubergeben!)
-  				\end{compactitem}
-  				!! Niemals Pointer oder Referenz auf lokale Variable als return Wert bei Funktionen. 
-  \subsection{Grundlagen zu Pointern}
-  Pointer enthalten keinen Wert sondern die Adresse einer Variable.\\
- 
-    	 	\subsubsection{Typgebundene Pointer}
-    	\lstinputlisting[language=C,tabsize=2]{code/ptr.c}
- 
-    	 	\subsubsection{void-Pointer}
-       \lstinputlisting[language=C,tabsize=2]{code/voidptr.c}
-       		\subsubsection{Funktionspointer}
-       \lstinputlisting[language=C,tabsize=2]{code/fktptr.c}
-       \subsubsection{Anlegen und zerst"oren von dynamischen Objekten}
-       \lstinputlisting[language=C,tabsize=2]{code/speicherverw.c}
-       C++ verf"ugt "uber keine automatische Speicherverwaltung (garbage collection), explizit angeforderte Speicherstellen m"ussen daher mit delete freigegeben werden.
-  \subsection{Vektoren}
-  	\lstinputlisting[language=C,tabsize=2]{code/vec1.c}
-  \subsubsection{Dynamische Allozierung}
-  \begin{minipage}[t]{10.5 cm}
-    \lstinputlisting[language=C,tabsize=2]{code/vec2.c}
-  \end{minipage}
-  \begin{minipage}[t]{10.5 cm}
-    \includegraphics[width=0.6\textwidth]{pics/ptrAndVec.jpg}
-    \end{minipage}
-      \subsubsection{Vektor und Pointerarithmetik}
-       \lstinputlisting[language=C,tabsize=2]{code/pointerarithm.c}
+\section{Höhere Datentypen und strukturierte Datentypen \verweiscpp{8}}  		
+  	\subsection{Pointer \verweisboth{6}{8.2}}	
+  \begin{minipage}[t]{7 cm}
+  		\subsubsection{Arbeisspeicher - Memory Map \verweisc{6.1}}
+  			\includegraphics[width=0.8\textwidth]{pics/arbeitsspeicher.jpg}
+  			
+  			\begin{compactitem}
+  				\item Der gesamte Speicher besteht aus einer Folge von einzelnen Bytes, welche durchnumeriert werden.
+  				\item Diese eindeutige Nummer einer Speicherzelle wird als Adresse bezeichnet.
+  				\item Bei einem byteweise adressierbaren Speicher (ist üblich) liegt an jeder Adresse genau 1 Byte.
+  			\end{compactitem}
+  	\end{minipage}
+  	\hspace*{0.5cm}
+  	\begin{minipage}[t]{10.5 cm}
+  		\subsubsection{Pointer \verweisc{6.1}}
+  			\includegraphics[width=0.95\textwidth]{pics/pointer.jpg}
+  				
+  			\begin{compactitem}
+  				\item Ein Pointer ist eine Variable, welche die Adresse einer im Speicher befindlichen Variablen oder Funktion aufnehmen kann.
+  				\item Man sagt, der Pointer zeige (to point) auf diese Speicherzelle.
+  				\item Pointer in \lc{C} sind typisiert, sie zeigen auf eine Variable des definierten Typs.
+  				\item Der Speicherbereich, auf den ein bestimmter Pointer zeigt, wird entsprechend des definierten Pointer-Typs interpretiert.
+  				\item Der Speicherbedarf einer Pointervariablen ist unabhängig vom Pointer-Typ. Er ist so gross, dass die maximale Adresse Platz findet (z.B. 32 Bit).
+  			\end{compactitem}
+  	\end{minipage}	
+
+	\begin{minipage}[t]{10 cm}
+		\subsubsection{Definition einer Pointervariablen \verweisboth {6.1}{8.2.1}}		
+			\vspace*{-0.3cm}\lstinputlisting[language=C,tabsize=2]{code/pointer_init.c}
+	\end{minipage}
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{8.5 cm}
+		\subsubsection{Initialisierung mit Nullpointer \verweisc {6.1}}
+			NULL ist vordefiniert (in \lc{stddef.h}) und setzt den Pointer auf einen definierten Nullwert. Besser ist es, statt \lc{NULL} direkt \lc{0} zu verwenden.
+			\vspace*{-0.2cm}\lstinputlisting[language=C,tabsize=2]{code/pointer_null.c}
+	\end{minipage}		
+			
+	\begin{minipage}[t]{9 cm}
+		\subsubsection{Der Adressoperator (Referenzierung) \verweisboth {6.1}{8.2.2}}	
+			Ist \lc{x} eine Variable vom Typ \lc{Typname}, so liefert der	Ausdruck \lc{\&x} einen Pointer auf die Variable \lc{x}, d.h. er liefert die Adresse der Variablen \lc{x}.	
+			\lstinputlisting[language=C,tabsize=2]{code/pointer_adressoperator.c}
+	\end{minipage}
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{9 cm}
+		\subsubsection{Der Inhaltsoperator * (Dereferenzierung) \verweisboth {6.1}{8.2.3}}
+			Ist \lc{ptr} ein Pointer vom Typ \lc{Typname}, so liefert der	Ausdruck \lc{*ptr} den Inhalt der Speicherzelle, auf welche \lc{ptr} zeigt.
+			\vspace*{-0.2cm}\lstinputlisting[language=C,tabsize=2]{code/pointer_inhaltsoperator.c}
+	\end{minipage}	
+	
+	\subsubsection{Pointerarithmetik \verweisboth{10.1.1}{8.3.2}}
+		\begin{minipage}[t]{9 cm}
+			\textbf{Zuweisung:} 
+			\begin{compactitem}
+				\item Pointer unterschiedlicher Datentypen dürfen einander nicht zugewiesen werden (Schutzmechanismus).
+				\item Einem Pointer eines bestimmten Typs dürfen Pointer dieses Typs oder \lc{void}-Pointer zugewiesen werden.
+				\item Einem \lc{void}-Pointer dürfen beliebige Pointer zugewiesen werden (nützlich aber gefährlich).
+			\end{compactitem}
+			\ \\
+			\textbf{Vergleiche:} 
+			\begin{compactitem}
+				\item Bei Pointern desselben Typs funktionieren Vergleiche wie \lc{==}, \lc{!=}, \lc{<}, \lc{>}, \lc{>=}, etc.
+				\item Hintergrund: ein Pointer ist eine Adresse, d.h. die Vergleiche passieren mit den Adressen. Daraus ist klar, was die Vergleiche bewirken.
+			\end{compactitem}
+		\end{minipage}	
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{9 cm}
+			\textbf{Addition und Subtraktion:} 
+				\begin{compactitem}
+					\item Zu einem Pointer darf eine ganze Zahl oder ein anderer Pointer desselben Typs addiert werden.
+					\item Von einem Pointer kann eine ganze Zahl oder ein anderer Pointer desselben	Typs subtrahiert werden.
+					\item Wenn eine ganze Zahl n addiert / subtrahiert wird, so bewegt sich der Pointer	auf das nächste Element des Pointertyps. Die Zahl n wird also nicht als Byte interpretiert, der Pointer bewegt sich um \lc{n*sizeof(Typ)} Bytes.
+				\end{compactitem}
+				\ \\
+				\textbf{Andere Operationen:} 
+				\begin{compactitem}
+					\item Andere Operationen sind nicht erlaubt!
+				\end{compactitem}
+		\end{minipage}	
+	
+	\subsubsection{Pointer auf void \verweiscpp{8.2.7}}
+		\begin{minipage}[t]{5 cm}
+			\lstinputlisting[language=C,tabsize=2]{code/voidptr.c}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{13 cm}
+			\begin{compactitem}
+				\item Wenn bei der Definition des Pointers der Typ der Variablen, auf die der Pointer zeigen soll, noch nicht feststeht, wird ein Pointer auf den Typ \lc{void} vereinbart.
+				\item Ein Pointer auf \lc{void} umgeht die Typenprüfung des Compilers. Er kann einem typisierten Pointer zugewiesen werden aber er kann keine Zuweisung von einem typisierten Pointer erhalten (in \lc{C} erlaubt).
+				\item Abgesehen von einem Pointer auf \lc{void}, darf ohne explizite Typenkonvertierung kein Pointer auf einen Datentyp an einem Pointer mit einem anderen Datentyp zugewiesen werden.
+				\item Jeder Pointer kann durch Zuweisung in den Typ \lc{void*} und zurück umgewandelt werden, ohne dass Informationen verloren gehen.
+			\end{compactitem}
+ 		\end{minipage}
+\newpage       
+		\subsubsection{Pointer auf Funktionen \verweisboth{10.8}{8.2.7}}
+			\begin{compactitem}
+				\item Jede Funktion befindet sich an einer definierten Adresse im Codespeicher.
+				\item Diese Adresse kann ebenfalls ermittelt werden.
+				\item Interessant wäre, dynamisch zur Laufzeit in Abhängigkeit des Programmablaufs eine unterschiedliche Funktion über einen Funktionspointer aufzurufen (z.B. um unterschiedliche Integrale zu berechnen).
+			\end{compactitem}
+			
+			\begin{minipage}[t]{10 cm}
+				\vspace*{-0.5cm}\lstinputlisting[language=C,tabsize=2]{code/pointer_funktion.c}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{8 cm}
+				\textbf{Vereinbarung eines Pointers}
+					\lstinputlisting[language=C,tabsize=2]{code/pointer_funktion_vereinbarung.c}
+					$ptr$ ist hier ein pointer auf eine Funktion mit Rückgabewert vom Typ $int$ und einem Übergabeparameter vom Typ $char$. Die Klammern müssen unbedingt gesetzt werden. \\
+				
+				\textbf{Zuweisung einer Funktion}
+					\lstinputlisting[language=C,tabsize=2]{code/pointer_funktion_zuweisung.c} \ \\
+					
+				\vspace*{-0.7cm}\textbf{Aufruf einer Funktion}
+					\lstinputlisting[language=C,tabsize=2]{code/pointer_funktion_aufruf.c}
+			\end{minipage}
+             
+       \begin{minipage}[t]{11 cm}
+       		\subsubsection{Anlegen von dynamischen Objekten \verweiscpp{8.2.4}}
+       			\vspace*{-0.4cm}\lstinputlisting[language=C,tabsize=2]{code/speicherverw.c}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{7 cm}   		
+       		\subsubsection{Zerstören von dynamischen Objekten \verweiscpp{8.2.5}}  
+       			\lstinputlisting[language=C,tabsize=2]{code/speicherverw2.c}   		
+       			C++ verfügt über keine automatische Speicherverwaltung (garbage collection), explizit angeforderte Speicherstellen müssen daher mit delete freigegeben werden.
+       \end{minipage}
+       
+		\subsubsection{const bei Pointern und Arrays \verweisboth{10.4}{8.2.6}}
+			\begin{minipage}[t]{9 cm}
+				\paragraph{const bei Pointer - konstanter Pointer}
+					\lstinputlisting[language=C,tabsize=2]{code/const_pointer_2.c}
+					Hier ist nun der Pointer \lc{text} konstant. Die Position von \lc{const} ist sehr	relevant! 						
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{9 cm}
+				\paragraph{const bei Pointer - konstanter String}
+					\lstinputlisting[language=C,tabsize=2]{code/const_pointer_1.c}
+					Dies bedeutet nicht, dass der Pointer \lc{text} konstant ist, sondern dass \lc{text} auf einen konstanten String zeigt.
+			\end{minipage} 
+
+			\begin{minipage}[t]{9 cm}
+				\paragraph{const bei Arrays}
+					\lstinputlisting[language=C,tabsize=2]{code/const_array.c}
+					\lc{arr[0]}, \lc{arr[1]} und \lc{arr[2]} sind alle konstant und können somit nach der Initialisierung nicht mehr abgeändert werden.
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{9 cm}					
+				\paragraph{const bei Pointer - konstanter Pointer auf konstanten String}
+					\lstinputlisting[language=C,tabsize=2]{code/const_pointer_3.c}
+					Bei dieser Variante ist sowohl der Pointer \lc{text} als auch der String, auf welchen \lc{text} zeigt, konstant. 
+			\end{minipage} 
+								
+	\subsection{Vektoren \verweisboth{10.7.1}{8.3}}
+			\begin{minipage}[c]{9 cm}
+				\includegraphics[width=1\textwidth]{pics/pointer_vektoren_1.jpg}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[c]{9 cm}
+				Ein Pointer ist eine Variable, in der die Adresse eines anderen Speicherobjektes gespeichert ist. Entsprechend einem eindimensionalen Vektor von gewöhnlichen Variablen kann natürlich auch ein eindimensionaler Vektor von Pointervariablen gebildet werden.
+			\end{minipage}
+			
+			\begin{minipage}[c]{9 cm}
+				\includegraphics[width=1\textwidth]{pics/pointer_vektoren_2.jpg}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[c]{9 cm}
+				Arbeitet man mit mehreren Zeichenketten, deren Länge nicht von vorherein bekannt ist, so verwendet man ein Array von Pointern auf \lc{char}.
+			\end{minipage}
+			
+			\begin{minipage}[c]{9 cm}
+				\includegraphics[width=1\textwidth]{pics/pointer_vektoren_3.jpg}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[c]{9 cm}
+				Will man nun beispielsweise diese Strings sortieren, so muss dies nicht mit Hilfe von aufwändigen Kopieraktionen für die Strings durchgeführt werden. Es werden lediglich die Pointer so verändert, dass die geforderte Sortierung erreicht wird.
+			\end{minipage}
+			
+			\begin{minipage}[c]{9 cm}
+				\lstinputlisting[language=C,tabsize=2]{code/pointer_vektoren.c}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[c]{9 cm}
+				Formale Parameter für die Übergabe eines Arrays können in der Notation eines offenen Arrays ohne Längenangabe geschrieben werden. \lc{strPointer[]} ist demzufolge ein Vektor. Der Vektor besteht aus Pointern auf \lc{char}.
+			\end{minipage}
+
+		\begin{minipage}[t]{9 cm}
+			\subsubsection{Initialisierung}
+	  			\lstinputlisting[language=C,tabsize=2]{code/vec1.c}
+		\end{minipage}	
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{9 cm}  		
+  			\subsubsection{Dynamische Allozierung}
+    			\lstinputlisting[language=C,tabsize=2]{code/vec2.c}
+    	\end{minipage}  	    			    	    			
     
-  \subsection{Zeichenketten}
-   \lstinputlisting[language=C,tabsize=2]{code/strings.c}
+	\subsection{Zeichenketten \verweisboth{10}{8.4}}
+		\subsubsection{Initialisierung von Zeichenketten \verweisc{10.1.5 und Kapitel 10.1.6}}
+			\lstinputlisting[language=C,tabsize=2]{code/string_init.c}
+	
+	\subsubsection{Kopieren eines Strings \verweisc{10.5}}
+		\begin{minipage}[t]{9 cm}
+			\paragraph{Variante mit Laufvariable}
+				\lstinputlisting[language=C,tabsize=2]{code/string_copy_manuell_1.c}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{9 cm}
+			\paragraph{Variante mit Pointer}
+				\lstinputlisting[language=C,tabsize=2]{code/string_copy_manuell_2.c}
+		\end{minipage}
+		
+	\subsubsection{Standardfunktionen für Strings und Speicher \verweisc{10.6}}
+		\begin{compactitem}
+			\item Funktionen für die String- und Speicherverarbeitung sind prinzipiell dasselbe.
+			\item Diese Funktionen werden in der Bibliothek \lc{string.h} zur Verfügung gestellt.
+			\item Funktionen die mit \lc{str} beginnen, dienen der Stringverarbeitung und erkennen das '\lc{$\backslash$0}'-Zeichen.
+			\item Funktionen die mit \lc{mem} beginnen, dienen der Speicherverarbeitung und erkennen das '\lc{$\backslash$0}'-Zeichen nicht. 
+		\end{compactitem}
+		
+		\begin{minipage}[t]{9 cm}
+			\paragraph{String kopieren \verweisc {10.6.1.1}}
+				\lstinputlisting[language=C,tabsize=2]{code/string_copy.c}
+				\begin{compactitem}
+					\item Dies Funktion kopiert einen String von \lc{src} nach \lc{dest} inklusive '\lc{$\backslash$0}'.
+					\item Hat als Rückgabewert den Pointer auf \lc{dest}.
+					\item \lc{dest} muss auf einen Bereich zeigen, der genügend gross ist. Ist der zu kopierende Buffer grösser als der Zielbuffer, dann werden	nachfolgende Speicherbereiche überschrieben (Buffer overflow).
+				\end{compactitem}
+				
+			\paragraph{Strings zusammenfügen \verweisc {10.6.1.2}}
+				\lstinputlisting[language=C,tabsize=2]{code/string_concatenate.c}
+				\begin{compactitem}
+					\item Diese Funktion hängt einen String \lc{src} an \lc{dest} an, inklusive '\lc{$\backslash$0}'. Das ursprüngliche '\lc{$\backslash$0} von \lc{dest} wird überschrieben.
+					\item Hat als Rückgabewert den Pointer auf \lc{dest}.
+					\item \lc{dest} muss auf einen Bereich zeigen, der genügend gross ist. Ist der zu kopierende Buffer grösser als der Zielbuffer, dann werden	nachfolgende Speicherbereiche überschrieben (Buffer overflow).
+				\end{compactitem}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{9 cm}
+			\paragraph{Strings vergleichen \verweisc {10.6.1.3}}
+				\lstinputlisting[language=C,tabsize=2]{code/string_compare.c}
+				\begin{compactitem}
+					\item Dies Funktion vergleicht die beiden Strings, die auf \lc{s1} und \lc{s2} zeigen. Bei der Funktion \lc{strncmp} werden nur die ersten \lc{n} Zeichen verglichen.
+					\item Dies Funktionen hat die folgenden Rückgabewerte: \\
+						\lc{<0} : \lc{*s1} ist lexikographisch kleiner als \lc{*s2} \\
+						\lc{==0} : \lc{*s1} und \lc{*s2} sind gleich \\
+						\lc{>0} : \lc{*s1} ist lexikographisch grösser als \lc{*s2}						
+				\end{compactitem}
+				
+			\paragraph{Stringlänge bestimmen \verweisc {10.6.1.5}}
+				\lstinputlisting[language=C,tabsize=2]{code/string_length.c}
+				\begin{compactitem}
+					\item Diese Funktion bestimmt die Länge von \lc{s}, d.h. die Anzahl der \lc{char}-Zeichen. Das '\lc{$\backslash$0}'-Zeichen wird dabei nicht mitgezählt.
+					\item Hat als Rückgabewert die Länge von \lc{s}.
+				\end{compactitem}
+		\end{minipage}
+		
+		\subsubsection{Funktionen zur Speicherbearbeitung \verweisc{10.6.2}}
+			Die grundsätzlichen Unterschiede zu den Stringfunktionen sind:
+			\begin{compactitem}
+				\item Formelle Parameter sind vom Typ \lc{void*} statt \lc{char*}.
+				\item Die mem-Funktionen arbeiten byteweise.
+				\item Im Gegensatz zu den \lc{str}-Funktionen wird das '\lc{$\backslash$0}'-Zeichen nicht speziell behandelt.
+				\item Die Bufferlänge muss als Parameter übergeben werden.
+			\end{compactitem}
+			
+			\paragraph{Funktionen \verweisc{10.6.2.1 bis Kapitel 10.6.2.5}}
+				\lstinputlisting[language=C,tabsize=2]{code/mem_funktionen.c}
+				Bei \lc{memcpy()} dürfen sich die Buffer nicht überlappen, \lc{memmove()} kann auch mit überlappenden Buffern umgehen.\\
+				
+				
+				
+   
   \subsection{Pointer und Referenzen als R"uckgabewert und Parameter"ubergabe}
   Bei Variablen"ubergabe (call by value) werden Kopien "ubergeben, welche nicht ver"andert werden k"onnen.\\
   Bei Referenz"ubergabe (call by reference) kann die Subroutine die Werte bleibend ver"andern.
@@ -48,3 +281,18 @@
     
   \subsection{Zugriff auf Class und Struct Elemente}
   \lstinputlisting[language=C,tabsize=2]{code/classelem.c} 
+
+
+	\subsection{Referenzen \verweiscpp{8.1}}
+		Referenzen sind alternative Namen oder Alias für ein Objekt. \\
+		\begin{minipage}[t]{10.5 cm}
+	  		\vspace*{-0.4cm}\lstinputlisting[language=C,tabsize=2]{code/ref1.c}
+	  	\end{minipage}
+	  	\begin{minipage}[t]{8 cm}	  		
+			In 2 Situationen anwenden: 
+  			\begin{compactitem}
+  				\item Parameter"ubergabe in Funktionen (call by Reference)
+  				\item Referenz R"uckgabetyp anstatt Pointertyp (Objekte einer Klasse immer bei reference übergeben!)
+  			\end{compactitem}
+  			Niemals Pointer oder Referenz auf lokale Variable als \lc{return} Wert bei Funktionen. 
+  		\end{minipage}
