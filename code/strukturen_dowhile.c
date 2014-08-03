@@ -1,0 +1,3 @@
+do
+	Anweisung;
+while (Ausdruck);

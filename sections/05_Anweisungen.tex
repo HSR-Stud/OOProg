@@ -1,96 +1,138 @@
 \section{Anweisungen}
-  These der strukturierten Programmierung: 3 Anweisungen reichen aus, um jedes algorithmische Problem zu lÃ¶sen:
-  	\begin{compactitem}
+	These der strukturierten Programmierung: 3 Anweisungen reichen aus, um jedes algorithmische Problem zu lösen:
+	\begin{compactitem}
   		\item Sequenz: Aufeinanderfolgende Anweisungen
-  		\item Iteration: Die selbe Anweisung n-mal ausf"uhren
-  		\item Selektion: Anweisungen in Abh"angigkeit einer Bedingung
+  		\item Iteration: Die selbe Anweisung n-mal ausführen
+  		\item Selektion: Anweisungen in Abhängigkeit einer Bedingung
   	\end{compactitem}
-  \subsection{Ausdrucksanweisungen}
-    \begin{minipage}[c]{6 cm}
-    Nullanweisung:
-    
-    Alleinstehender Strichpunkt
+  	
+	\subsection{Ausdrucksanweisungen}
+    	\vspace*{-0.4cm}\begin{minipage}[t]{5 cm}
+    		\subsubsection{Nullanweisung}  
+   		 		Alleinstehender Strichpunkt   \\ 	
+    			\lc{while(i < 5)\textbf{;}}    
+    	\end{minipage}
+    	\hspace*{0.5cm}
+    	\begin{minipage}[t]{7 cm}
+	    	\subsubsection{Zuweisung} 	    	
+    			Einem Lvalue mittels \lc{=} , \lc{*=} , \lc{/=}, \lc{+=} oder \lc{-=} einen Wert zuweisen. \\   	
+    			\lc{a=b=0 // entspricht a=(b=0)}
+    	\end{minipage}	
+   		\hspace*{0.5cm}
+    	\begin{minipage}[t]{5 cm}
+			\subsubsection{Funktionsaufruf} 
+				\lc{getForFree(a, b);}
+    	\end{minipage}
     	
-    while(i < 5)\textbf{;}
-    
-    \end{minipage}
-    \hspace*{0.5cm}
-    \begin{minipage}[c]{6 cm}
-    	Zuweisung:	
+	\subsection{Sprunganweisungen \verweisc{8.4}}
+		Sprunganweisungen führen zu schlechtem Programmierstil und sollten nur in bestimmen Fällen eingesetzt werden, wie zum Bsp. \lc{break} bei \lc{switch}.
+		\begin{compactitem}
+			\item \lc{break}: \lc{do-while}-, \lc{while}-,  \lc{for}-Schleife und \lc{switch}-Anweisung abbrechen
+			\item \lc{continue}: in den nächsten Schleifendurchgang (Schleifenkopf) springen bei \lc{do-while}-, \lc{while}- und \lc{for}-Schleife 
+			\item \lc{return}: aus Funktion an aufrufende Stelle zurückspringen mit Rückgabe des Funktionswertes
+			\item \lc{goto}: innerhalb einer Funktion an eine Marke (Label) springen
+		\end{compactitem}
     	
-    	Einem Lvalue mittels = , *= , /=, += oder -= einen Wert zuweisen.
-    	
-    	a = b = 0 //entspricht a = (b = 0)
-    \end{minipage}	
-   	\hspace*{0.5cm}
-    \begin{minipage}[c]{5 cm}
-		Funktionsaufruf: \\
-		getForFree(a,b);
-    \end{minipage}
+	\begin{minipage}[t]{9 cm}
+		\subsection{Sequenz \verweisc{8.1}}
+			Die Sequenz ist eine zeitlich geordnete Abfolge von Anweisungen. \\
+			\includegraphics[width=1\textwidth]{pics/Sequenz.jpg}	
+			
+	\end{minipage}
+	%
+	\begin{minipage}[t]{9 cm}
+			\subsubsection{Block}
+				\begin{compactitem}
+					\item Erfordert die Syntax genau eine Anweisung, so können dennoch mehrere Anweisungen geschrieben werden, wenn man sie in Form eines Blocks zusammenfasst.
+					\item Ein Block wird mit geschweiften Klammern eingefasst. $\{ \dots \}$ Ein Block zählt syntaktisch als eine einzige Anweisung.
+				\end{compactitem}
+				\includegraphics[width=1\textwidth]{pics/Block.jpg}
+	\end{minipage}	   
     
-   \subsection{Sprungmarken}
-     Ansprungstellen von: \\
-          \begin{minipage}[c]{6 cm}
-          \begin{compactitem}
-           \item goto's: Sind sowieso verboten.
-          \end{compactitem}
-
-          \end{minipage}	
-         	\hspace*{0.5cm}
-          \begin{minipage}[c]{5 cm}
-          \begin{compactitem}
-           \item switch Labels
-          \end{compactitem}
-          \end{minipage}
-    \subsection{Blockanweisungen}
-    Anweisungen und Ausdr"ucke innerhalb geschweifter Klammern. \\
-    \begin{minipage}[t]{10 cm}
-        \lstinputlisting[language=C,tabsize=2]{code/block.c}
+	\subsection{Blockanweisungen}
+		Anweisungen und Ausdrücke innerhalb geschweifter Klammern. \\
+    	\begin{minipage}[t]{9 cm}
+        	\vspace*{-0.4cm}\lstinputlisting[language=C,tabsize=2]{code/block.c}
         \end{minipage}	
        	\hspace*{0.5cm}
-        \begin{minipage}[c]{5 cm}
-        
-    	  Ausgabe: \\x=15  y=20 \\ x=5  y=10 \\ kein Fehler, da der G"ultigkeitsbereich nur innerhalb des Blockes ist. Die ersten Variablen x und y werden im inneren Block lediglich "uberdeckt.
+        \begin{minipage}[t]{9 cm}
+			Ausgabe: \\ \lc{x=15}  \lc{y=20} \\ \lc{x=5}  \lc{y=10} \\ kein Fehler, da der Gültigkeitsbereich nur innerhalb des Blockes ist. Die ersten Variablen \lc{x} und \lc{y} werden im inneren Block lediglich überdeckt.
         \end{minipage}
-     \subsection{Selektionsanweisung}  
-     			\begin{minipage}[t]{8.5 cm}
-     				\textbf{if...else}
-     				\lstinputlisting[language=C,tabsize=2]{code/if.c}
-     				Wird innerhalb if()eine Variable deklariert, gilt sie bis Ende if().
+        
+	\subsection{Selektionsanweisung \verweisc{8.2}}
+		Von Selektion spricht man zum einen, wenn man eine Anweisung nur dann ausführen will, wenn eine bestimmte Bedingung zutrifft. Zum anderen möchte man mit Selektionsanweisungen zwischen zwei Möglichkeiten (entweder/oder) bzw. zwischen mehreren Möglichkeiten genau eine auswählen.
+		
+		\begin{minipage}[t]{5.5 cm}
+			\subsubsection{Einfache Alternative}
+				\lstinputlisting[language=C,tabsize=2]{code/strukturen_if_else.c}
+		\end{minipage}
+		%
+		\begin{minipage}[t]{5.5 cm}
+			\subsubsection{Bedingte Anweisung}
+				\lstinputlisting[language=C,tabsize=2]{code/strukturen_if.c}
+		\end{minipage}
+		%
+		\begin{minipage}[t]{7 cm}
+			\subsubsection{Mehrfache Alternative - else if}
+				\lstinputlisting[language=C,tabsize=2]{code/strukturen_else_if.c}
+		\end{minipage}
+		
+		Wird innerhalb eines \lc{if} eine Variable deklariert, gilt sie bis zum Ende des \lc{if}.
+		
+		\subsubsection{Mehrfache Alternative - switch case}
+			\begin{minipage}[t]{9 cm}
+				
+				\begin{compactitem}
+					\item Für eine Mehrfach-Selektion, d.h. eine Selektion unter mehreren Alternativen, kann die \lc{switch}-Anweisung verwendet werden, falls die Alternativen ganzzahligen Werten eines Ausdrucks von einem Integer-Typ entsprechen.
+					\item Hat der Ausdruck der \lc{switch}-Anweisung den gleichen Wert wie einer der konstanten Ausdrücke der \lc{case}-Marken, wird die Ausführung des Programms mit der Anweisung hinter dieser \lc{case}-Marke weitergeführt.
+					\item Stimmt keiner der konstanten Ausdrücke mit dem \lc{switch}-Ausdruck überein, wird zu \lc{default} gesprungen.
+				\end{compactitem}							
+			\end{minipage}
+			\hspace*{1cm}
+			\begin{minipage}[t]{9 cm}
+				\vspace*{-0.5cm}
+				\lstinputlisting[language=C,tabsize=2]{code/strukturen_switch.c}
+			\end{minipage}
+			
+	\subsection{Iteration \verweisc{8.3}}
+		\begin{minipage}[t]{4 cm}
+			\vspace*{-0.4cm}\subsubsection{While}
+				\vspace*{-0.4cm}\lstinputlisting[language=C,tabsize=2]{code/strukturen_while.c}			
+		\end{minipage}
+		\begin{minipage}[t]{14 cm}
+			\vspace*{0.05cm}Schleifenrumpf wird ausgeführt solange Bedingung \lc{true} ergibt. \lc{do..while} und \lc{for} können grundsätzlich aus \lc{while} gebaut werden.
+		\end{minipage}
+		
+		\begin{minipage}[t]{10 cm}
+			\subsubsection{For-Schleife}
+				\vspace*{-0.4cm}\lstinputlisting[language=C,tabsize=2]{code/strukturen_for.c}
+		\end{minipage}
+		\begin{minipage}[t]{8 cm}
+			\vspace*{0.45cm}Laufvariablen lokal deklarieren: \\\lc{for(int i=0; i<100; ++i)} \\Damit gilt sie nur innerhalb der Schleife.
+		\end{minipage}
 
-     			\end{minipage}
-     			\hspace*{0.5cm}
-     			\begin{minipage}[t]{8.5 cm}
-     				\textbf{switch - case}
-     			  	\lstinputlisting[language=C,tabsize=2]{code/switch.c}
-     			\end{minipage}
-     \subsection{Iteration}
-          			\begin{minipage}[t]{6 cm}
-          				\textbf{while}
-          				\lstinputlisting[language=C,tabsize=2]{code/while.c}
-          				Schleifenrumpf wird ausgefÃ¼hrt solange Bedingung true ergibt. do..while und for k"onnen grunds"atzlich aus while gebaut werden.
-     
-          			\end{minipage}
-          			\hspace*{0.5cm}
-          			\begin{minipage}[t]{6 cm}
-          				\textbf{do...while}
-          			  	\lstinputlisting[language=C,tabsize=2]{code/dowhile.c}
-          			  	Schleifenrumpf wird mind. einmal ausgef"uhrt und wiederholt falls Bedingung true ergibt.
-          			\end{minipage}
-          			\begin{minipage}[t]{6 cm}
-          				\textbf{for}
-          			  	\lstinputlisting[language=C,tabsize=2]{code/for.c}
-          			  	Laufvariablen lokal deklarieren! Damit gilt sie nur innerhalb der Schleife.
-          			\end{minipage}          
-      \subsection{Sprunganweisung}		
-      !!Sprunganweisungen f"uhren zu schlechtem Programmierstil und sollten nur in bestimmen F"allen eingesetzt werden, wie zBsp. break bei switch..case.
-	  	  \begin{compactitem}
-	  		\item break: Sprung aus der umschliessenden Schleife.
-	  		\item continue: Sprung zur"uck zur Bedingungspr"ufung einer Schleife.
-	  		\item return: R"ucksprung aus Funktion an Aufrufstelle mit r"uckgabe des Funktionswertes
-	  		\item goto: Sprung zur entsprechenden Sprungmarke im Programm.
-	  	  \end{compactitem}	
-
-    
-    
-     
+		\begin{minipage}[t]{4 cm}
+			\subsubsection{Do-While}
+				\vspace*{-0.4cm}\lstinputlisting[language=C,tabsize=2]{code/strukturen_dowhile.c}
+		\end{minipage}
+		\begin{minipage}[t]{14 cm}
+			\vspace*{0.45cm}Schleifenrumpf wird mind. einmal ausgeführt und wiederholt falls Bedingung \lc{true} ergibt.
+		\end{minipage}
+		
+		\subsubsection{Endlosschleife}
+			\begin{minipage}[c]{3 cm}
+				\vspace*{-0.4cm}\lstinputlisting[language=C,tabsize=2]{code/strukturen_endlos_for.c}
+			\end{minipage}
+			%
+			\begin{minipage}[c]{3 cm}
+				\vspace*{-0.4cm}\lstinputlisting[language=C,tabsize=2]{code/strukturen_endlos_while.c}
+			\end{minipage}
+		
+		\subsubsection{Wann wird welche Schleife eingesetzt?}
+			\begin{compactitem}
+				\item For-Schleife: Bei Zählschleifen, d.h. wenn die Anzahl Durchläufe (kann auch variabel sein) im
+				voraus feststeht.
+				\item Do-While-Schleife: Wenn es keine Zählschleife ist, und die Schleife muss mindestens einmal
+				durchlaufen werden
+				\item While-Schleife: In allen anderen Fällen
+			\end{compactitem}        
