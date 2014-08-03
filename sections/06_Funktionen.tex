@@ -19,7 +19,7 @@
 		\end{minipage}	
 			
 	\subsection{Eingaben/Ausgaben einer Funktion \verweisboth{9.3}{7.3}}
-		\begin{minipage}[t]{8.5 cm}
+		\vspace*{-0.4cm}\begin{minipage}[t]{8.5 cm}
 			\subsubsection{Eingabedaten}
 				Es sind folgende Möglichkeiten vorhanden um Daten an Funktionen zu übergeben:
 				\begin{compactitem}
@@ -42,9 +42,6 @@
 			\begin{minipage}[t]{8.5 cm}
 				\textbf{Parameterlos und ohne Rückgabewert:}
 				\lstinputlisting[language=C,tabsize=2]{code/funktionen_parameter_1.c}
-				
-				\textbf{Parameter und ohne Rückgabewert:}
-				\lstinputlisting[language=C,tabsize=2]{code/funktionen_parameter_2.c}
 			\end{minipage}
 			\hspace*{0.5cm}
 			\begin{minipage}[t]{8.5 cm}
@@ -52,6 +49,10 @@
 				\lstinputlisting[language=C,tabsize=2]{code/funktionen_parameter_3.c}
 			\end{minipage}
 
+			\textbf{Parameter und ohne Rückgabewert:}
+			\lstinputlisting[language=C,tabsize=2]{code/funktionen_parameter_2.c}
+			
+			
 	\subsection{Deklaration von Funktionen \verweisboth{9.4}{7.2}}
 		Es ist festgelegt, dass die Konsistenz zwischen Funktionskopf und Funktionsaufrufen vom Compiler überprüft werden soll. Dazu muss beim Aufruf der Funktion die Schnittstelle der Funktion, d.h. der Funktionskopf, bereits bekannt sein. Steht aber die Definition einer Funktion im Programmcode erst nach ihrem Aufruf, so muss eine Vorwärtsdeklaration der Funktion erfolgen, indem vor dem Aufruf die Schnittstelle der Funktion mit dem Funktionsprototypen deklariert wird. \\
 		Desweitern ist zu beachten, dass Parameternamen im Funktionsprototyp und in der Funktionsdefinition nicht übereinstimmen müssen. Es ist jedoch zu empfehlen.
@@ -75,45 +76,7 @@
 				\item Jedes C-File, welches diese Schnittstelle nutzt, inkludiert dieses Headerfile und somit die Funktionsprototypen.
 				\item Funktionsprototypen von internen Funktionen der Unit werden zuoberst im C-File aufgelistet und kommen nicht ins Headerfile.
 			\end{compactitem}
-			
-	\subsection{$inline$-Funktionen vs. $C$-Makros \verweiscpp{7.5}}
-		\begin{minipage}[t]{7 cm}
-			\subsubsection{$C$-Makros}
-				\begin{compactitem}
-					\item $C$-Makros werden definiert mit $\#define$.
-					\item $C$-Makros bewirken eine reine Textersetzung ohne jegliche Typenprüfung.
-					\item Bei Nebeneffekten (welche zwar vermieden werden sollten) verhalten sich Makros nicht wie beabsichtigt.
-					\item $C$-Makros lösen zwar das Problem mit dem Overhead, sind aber sehr unsicher.				
-				\end{compactitem}
-				\lstinputlisting[language=C,tabsize=2]{code/c_makro.c}
-			\end{minipage}
-			\hspace*{0.5cm}
-			\begin{minipage}[t]{11 cm}	
-				\subsubsection{$inline$-Funktionen}
-					\begin{compactitem}
-						\item Lösen das Overhead-Problem.
-						\item Der Code wird direkt eingefügt, kein Funktionsaufruf findet statt.
-						\item Eine Typenprüfung wird durchgeführt.
-						\item Einsetzen wenn der Codeumfang der Funktion sehr klein ist und die Funktion häufig aufgerufen wird (z.B. in Schleifen).
-						\item Rekursive Funktionen und Funktionen, auf die mit einem Funktionspointer gezeigt wird, werden nicht $inlined$.
-					\end{compactitem}
-					\lstinputlisting[language=C++,tabsize=2]{code/inline.cpp}
-			\end{minipage}	
 		
-	\subsection{Vorbelegte Parameter \verweiscpp{7.6}}
-		\begin{minipage}[t]{7 cm}
-			\begin{compactitem}
-				\item Parametern können im Funktionsprototypen Defaultwerte	zugewiesen werden. 
-				\item Beim Funktionsaufruf können (aber müssen nicht) die Parameter mit Defaultwerten weggelassen	werden.
-				\item Achtung: Hinter (rechts von) einem Default-Argument darf kein nicht vorbelegter Parameter mehr folgen, d.h. wenn bei einem Parameter ein Default definiert wird, dann müssen bei allen weiteren Parametern dieser Funktion ebenfalls Defaults definiert werden.
-			\end{compactitem}
-		\end{minipage}
-		\hspace*{0.5cm}
-		\begin{minipage}[t]{10 cm}	
-			\vspace*{-0.5cm}
-			\lstinputlisting[language=C++,tabsize=2]{code/default_parameter.cpp}
-		\end{minipage}
-\newpage		
 	\subsection{Überladene Funktionen \verweiscpp{7.7.1}}
 		\begin{minipage}[t]{7 cm}
 			\begin{compactitem}
@@ -141,7 +104,50 @@
 			\end{minipage}
 			\hspace*{0.5cm}
 			\begin{minipage}[t]{7.5 cm}
+				\ \\ \ \\
 				\begin{compactitem}
 					\item \textbf{Auf keinen Fall sind Default-Parameter in überladenen Funktionen zu verwenden!}
 				\end{compactitem}
-			\end{minipage}		
+			\end{minipage}	
+		
+	\subsection{Vorbelegte Parameter \verweiscpp{7.6}}
+		\begin{minipage}[t]{7 cm}
+			\begin{compactitem}
+				\item Parametern können im Funktionsprototypen Defaultwerte	zugewiesen werden. 
+				\item Beim Funktionsaufruf können (aber müssen nicht) die Parameter mit Defaultwerten weggelassen	werden.
+				\item Achtung: Hinter (rechts von) einem Default-Argument darf kein nicht vorbelegter Parameter mehr folgen, d.h. wenn bei einem Parameter ein Default definiert wird, dann müssen bei allen weiteren Parametern dieser Funktion ebenfalls Defaults definiert werden.
+			\end{compactitem}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{10 cm}	
+			\vspace*{-0.5cm}
+			\lstinputlisting[language=C++,tabsize=2]{code/default_parameter.cpp}
+		\end{minipage}
+					
+	\subsection{$inline$-Funktionen vs. $C$-Makros \verweiscpp{7.5}}
+		\begin{minipage}[t]{7 cm}
+			\subsubsection{$C$-Makros}
+				\begin{compactitem}
+					\item $C$-Makros werden definiert mit $\#define$.
+					\item $C$-Makros bewirken eine reine Textersetzung ohne jegliche Typenprüfung.
+					\item Bei Nebeneffekten (welche zwar vermieden werden sollten) verhalten sich Makros nicht wie beabsichtigt.
+					\item $C$-Makros lösen zwar das Problem mit dem Overhead, sind aber sehr unsicher.				
+				\end{compactitem}
+				\lstinputlisting[language=C,tabsize=2]{code/c_makro.c}
+			\end{minipage}
+			\hspace*{0.5cm}
+			\begin{minipage}[t]{11 cm}	
+				\subsubsection{$inline$-Funktionen}
+					\begin{compactitem}
+						\item Lösen das Overhead-Problem.
+						\item Der Code wird direkt eingefügt, kein Funktionsaufruf findet statt.
+						\item Eine Typenprüfung wird durchgeführt.
+						\item Einsetzen wenn der Codeumfang der Funktion sehr klein ist und die Funktion häufig aufgerufen wird (z.B. in Schleifen).
+						\item Rekursive Funktionen und Funktionen, auf die mit einem Funktionspointer gezeigt wird, werden nicht $inlined$.
+					\end{compactitem}
+					\lstinputlisting[language=C++,tabsize=2]{code/inline.cpp}
+			\end{minipage}	
+		
+
+	
+	
