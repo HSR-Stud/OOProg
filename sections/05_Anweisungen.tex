@@ -1,1 +1,96 @@
 \section{Anweisungen}
+  These der strukturierten Programmierung: 3 Anweisungen reichen aus, um jedes algorithmische Problem zu lösen:
+  	\begin{compactitem}
+  		\item Sequenz: Aufeinanderfolgende Anweisungen
+  		\item Iteration: Die selbe Anweisung n-mal ausf"uhren
+  		\item Selektion: Anweisungen in Abh"angigkeit einer Bedingung
+  	\end{compactitem}
+  \subsection{Ausdrucksanweisungen}
+    \begin{minipage}[c]{6 cm}
+    Nullanweisung:
+    
+    Alleinstehender Strichpunkt
+    	
+    while(i < 5)\textbf{;}
+    
+    \end{minipage}
+    \hspace*{0.5cm}
+    \begin{minipage}[c]{6 cm}
+    	Zuweisung:	
+    	
+    	Einem Lvalue mittels = , *= , /=, += oder -= einen Wert zuweisen.
+    	
+    	a = b = 0 //entspricht a = (b = 0)
+    \end{minipage}	
+   	\hspace*{0.5cm}
+    \begin{minipage}[c]{5 cm}
+		Funktionsaufruf: \\
+		getForFree(a,b);
+    \end{minipage}
+    
+   \subsection{Sprungmarken}
+     Ansprungstellen von: \\
+          \begin{minipage}[c]{6 cm}
+          \begin{compactitem}
+           \item goto's: Sind sowieso verboten.
+          \end{compactitem}
+
+          \end{minipage}	
+         	\hspace*{0.5cm}
+          \begin{minipage}[c]{5 cm}
+          \begin{compactitem}
+           \item switch Labels
+          \end{compactitem}
+          \end{minipage}
+    \subsection{Blockanweisungen}
+    Anweisungen und Ausdr"ucke innerhalb geschweifter Klammern. \\
+    \begin{minipage}[t]{10 cm}
+        \lstinputlisting[language=C,tabsize=2]{code/block.c}
+        \end{minipage}	
+       	\hspace*{0.5cm}
+        \begin{minipage}[c]{5 cm}
+        
+    	  Ausgabe: \\x=15  y=20 \\ x=5  y=10 \\ kein Fehler, da der G"ultigkeitsbereich nur innerhalb des Blockes ist. Die ersten Variablen x und y werden im inneren Block lediglich "uberdeckt.
+        \end{minipage}
+     \subsection{Selektionsanweisung}  
+     			\begin{minipage}[t]{8.5 cm}
+     				\textbf{if...else}
+     				\lstinputlisting[language=C,tabsize=2]{code/if.c}
+     				Wird innerhalb if()eine Variable deklariert, gilt sie bis Ende if().
+
+     			\end{minipage}
+     			\hspace*{0.5cm}
+     			\begin{minipage}[t]{8.5 cm}
+     				\textbf{switch - case}
+     			  	\lstinputlisting[language=C,tabsize=2]{code/switch.c}
+     			\end{minipage}
+     \subsection{Iteration}
+          			\begin{minipage}[t]{6 cm}
+          				\textbf{while}
+          				\lstinputlisting[language=C,tabsize=2]{code/while.c}
+          				Schleifenrumpf wird ausgeführt solange Bedingung true ergibt. do..while und for k"onnen grunds"atzlich aus while gebaut werden.
+     
+          			\end{minipage}
+          			\hspace*{0.5cm}
+          			\begin{minipage}[t]{6 cm}
+          				\textbf{do...while}
+          			  	\lstinputlisting[language=C,tabsize=2]{code/dowhile.c}
+          			  	Schleifenrumpf wird mind. einmal ausgef"uhrt und wiederholt falls Bedingung true ergibt.
+          			\end{minipage}
+          			\begin{minipage}[t]{6 cm}
+          				\textbf{for}
+          			  	\lstinputlisting[language=C,tabsize=2]{code/for.c}
+          			  	Laufvariablen lokal deklarieren! Damit gilt sie nur innerhalb der Schleife.
+          			\end{minipage}          
+      \subsection{Sprunganweisung}		
+      !!Sprunganweisungen f"uhren zu schlechtem Programmierstil und sollten nur in bestimmen F"allen eingesetzt werden, wie zBsp. break bei switch..case.
+	  	  \begin{compactitem}
+	  		\item break: Sprung aus der umschliessenden Schleife.
+	  		\item continue: Sprung zur"uck zur Bedingungspr"ufung einer Schleife.
+	  		\item return: R"ucksprung aus Funktion an Aufrufstelle mit r"uckgabe des Funktionswertes
+	  		\item goto: Sprung zur entsprechenden Sprungmarke im Programm.
+	  	  \end{compactitem}	
+
+    
+    
+     
