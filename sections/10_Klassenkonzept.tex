@@ -25,66 +25,65 @@
 				\item Eine Klasse besteht aus Daten (Attribute) und den Funktionen (Methoden) auf diesen Daten.
 				\item Sichtbarkeit: 
 				\begin{compactitem}
-					\item $+$ : $public$
-					\item $-$ : $private$
-					\item $\#$ : $protected$
+					\item \lc{+} : \lc{public}
+					\item \lc{-} : \lc{private}
+					\item \lc{\#} : \lc{protected}
 				\end{compactitem}
 			\end{compactitem}
-	\end{minipage}
+	\end{minipage} \\
 	
 	\begin{minipage}[t]{8 cm}	
 		\subsection{Üblicher Aufbau einer Klassensyntax \verweiscpp{11.1.1}}
 			\lstinputlisting[language=C++,tabsize=2]{code/klassenschnittstelle.cpp} 
-			
-			\subsubsection{Operationen einer Klasse}
-					Operationen eine Klasse (= Funktionen, die im Klassenrumpf definiert sind) werden als
-					Elementfunktionen oder Methoden bezeichnet.	Üblicherweise beginnen Elementfunktionen mit einem Kleinbuchstaben und werden in camelCase (mixedCase) notiert.	
-					\begin{lstlisting}[language=C++,tabsize=2]
-						isEmpty();
-					\end{lstlisting}
-
-			\subsubsection{Information Hiding}
-				\begin{compactitem}
-					\item Klassen exportieren generell ausschliesslich Methoden. Alle Daten sind im Innern (private-Abschnitt) verborgen, der Zugriff erfolgt über die so genannten Elementfunktionen.
-					\item Jede Klasse besteht damit aus zwei Dateien, der Schnittstellendatei ($.h$) und	der Implementierungsdatei ($.cpp$).
-				\end{compactitem}
 	\end{minipage}
 	\hspace*{0.5cm}
 	\begin{minipage}[t]{10 cm}		
 			\subsubsection{Zugriffsschutz \verweiscpp{11.4}}
 			\begin{compactitem}
-				\item $public$ - Elemente können innerhalb und von ausserhalb der Klasse
+				\item \lc{public} - Elemente können innerhalb und von ausserhalb der Klasse
 				angesprochen werden.
 					\begin{compactitem}
-						\item fast alle Methoden sind $public$
-						\item Attribute sollen nie $public$ sein
+						\item fast alle Methoden sind \lc{public}
+						\item Attribute sollen nie \lc{public} sein
 					\end{compactitem}
-				\item $protected$ - Elemente können von innerhalb der Klasse und von abgeleiteten
+				\item \lc{protected} - Elemente können von innerhalb der Klasse und von abgeleiteten
 				Klassen angesprochen werden.
 					\begin{compactitem}
 						\item nur sparsam einsetzen!
 					\end{compactitem}
-				\item $private$ - Elemente können nur innerhalb der Klasse angesprochen werden.
+				\item \lc{private} - Elemente können nur innerhalb der Klasse angesprochen werden.
 					\begin{compactitem}
 						\item grundsätzlich für alle Attribute und für einzelne (lokale) Methoden
 					\end{compactitem}
 			\end{compactitem}
-				
-				\paragraph{$friend$-Elemente \verweiscpp{11.4.2}}
-					\begin{compactitem}
-						\item $friend$ - Jede Klasse kann andere Klassen oder Funktionen zum Freund	erklären. Dadurch werden die Zugriffsregeln durchbrochen.
-						\item Jeder $friend$ darf auf alle Elemente der Klasse zugreifen.
-						\item $friend$ ist eine $C++$ - Spezialität, welche die meisten anderen
-						Programmiersprachen (z.B. $Java$) nicht anbieten.
-						\item $friends$, insbesondere $friend$-Klassen, können ein Anzeichen für
-						schlechtes Design sein. Sie durchbrechen wichtige Prinzipien der objektorientierten Programmierung.
-					\end{compactitem}
+	\end{minipage} \\
+	
+	\begin{minipage}[t]{8 cm}
+		\subsubsection{Operationen einer Klasse}
+			Operationen eine Klasse (= Funktionen, die im Klassenrumpf definiert sind) werden als
+			Elementfunktionen oder Methoden bezeichnet.	Üblicherweise beginnen Elementfunktionen mit einem Kleinbuchstaben und werden in camelCase (mixedCase) notiert.	
+			\lc{isEmpty();}
 	\end{minipage}
-
-\newpage
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{10 cm}	
+		\subsubsection{Information Hiding}
+			\begin{compactitem}
+				\item Klassen exportieren generell ausschliesslich Methoden. Alle Daten sind im Innern (private-Abschnitt) verborgen, der Zugriff erfolgt über die so genannten Elementfunktionen.
+				\item Jede Klasse besteht damit aus zwei Dateien, der Schnittstellendatei (\lc{.h}) und	der Implementierungsdatei (\lc{.cpp}).
+			\end{compactitem}
+	\end{minipage}	
+	
+			\paragraph{$friend$-Elemente \verweiscpp{11.4.2}}
+				\begin{compactitem}
+					\item \lc{friend} - Jede Klasse kann andere Klassen oder Funktionen zum Freund	erklären. Dadurch werden die Zugriffsregeln durchbrochen.
+					\item Jeder \lc{friend} darf auf alle Elemente der Klasse zugreifen.
+					\item \lc{friend} ist eine \lc{C++} - Spezialität, welche die meisten anderen Programmiersprachen (z.B. \lc{Java}) nicht anbieten.
+					\item \lc{friends}, insbesondere \lc{friend}-Klassen, können ein Anzeichen für schlechtes Design sein. Sie durchbrechen wichtige Prinzipien der objektorientierten Programmierung.
+				\end{compactitem}					
+					
 		\subsubsection{Beispiel an der Klasse Rechteck}
 			\begin{minipage}[t]{9cm}
-				\lstinputlisting[language=C++,tabsize=2]{code/class_rectangle_header.cpp}				
+				\vspace*{-0.5cm}\lstinputlisting[language=C++,tabsize=2]{code/class_rectangle_header.cpp}				
 				\begin{tikzpicture}
 					\begin{class}[text width=8cm]{Rectangle}{0 ,0}
 						\attribute{-a : double}
@@ -99,17 +98,17 @@
 			\end{minipage}
 			\hspace*{0.5cm}
 			\begin{minipage}[t]{9 cm}
-				\lstinputlisting[language=C++,tabsize=2]{code/class_rectangle.cpp} 
-			\end{minipage}
+				\vspace*{-0.5cm}\lstinputlisting[language=C++,tabsize=2]{code/class_rectangle.cpp} 
+			\end{minipage} \\
 			
 	\begin{minipage}[t]{9cm}
 		\subsection{Elementfunktionen \verweiscpp{11.2}}
 			\begin{compactitem}
 				\item sind Funktionen, die in der Schnittstelle der Klasse spezifiziert sind.
 				\item Elementfunktionen haben vollen Zugriff auf alle Klassenelemente (auch auf
-				solche, die mit private: gekennzeichnet sind.
-				\item Auf Elementfunktionen kann nur unter Bezugnahme auf ein Objekt der Klasse, bzw. mit dem Scope-Operator (::) zugegriffen werden.
-				\item Elementfunktionen sollen prinzipiell in der Implementierungsdatei (.cpp) implementiert werden. Dem Funktionsnamen muss dabei der Klassenname gefolgt von $::$ vorangestellt werden. (Beispiel: $int$ $Stack::pop()$)
+				solche, die mit \lc{private:} gekennzeichnet sind.
+				\item Auf Elementfunktionen kann nur unter Bezugnahme auf ein Objekt der Klasse, bzw. mit dem Scope-Operator (\lc{::}) zugegriffen werden.
+				\item Elementfunktionen sollen prinzipiell in der Implementierungsdatei (\lc{.cpp}) implementiert werden. Dem Funktionsnamen muss dabei der Klassenname gefolgt von \lc{::} vorangestellt werden. (Beispiel: \lc{int Stack::pop()})
 			\end{compactitem}
 	\end{minipage}
 	\hspace*{0.5cm}
@@ -127,75 +126,70 @@
 						\end{compactitem}
 					\item Selektoren
 						\begin{compactitem}
-							\item greifen nur lesend auf ein Objekt zu (immer const definieren!)
-							\item Beispiel: $bool$ $Stack::isEmpty()$ $const;$
+							\item greifen nur lesend auf ein Objekt zu (immer \lc{const} definieren!)
+							\item Beispiel: \lc{bool Stack::isEmpty() const;}
 						\end{compactitem}
 					\item Iteratoren
 						\begin{compactitem}
 							\item Erlauben, auf Elemente eines Objekts in einer definierten Reihenfolge	zuzugreifen
 						\end{compactitem}
 				\end{compactitem}
-	\end{minipage}
-		
-	\begin{minipage}[t]{9cm}
+	\end{minipage} \\
+	
 			\subsubsection{$inline$-Funktionen \verweiscpp{11.2.1}}
 				\begin{compactitem}
-					\item Elementfunktionen, die innerhalb der Deklaration der Klassenschnittstelle (im	.h-File) implementiert sind, werden als (implizite) $inline$ - Funktionen
+					\item Elementfunktionen, die innerhalb der Deklaration der Klassenschnittstelle (im	.h-File) implementiert sind, werden als (implizite) \lc{inline} - Funktionen
 					behandelt.
 					\item Elementfunktionen können in der Klassenimplementation explizit mit dem
-					Schlüsselwort $inline$ gekennzeichnet werden.
-					\item Implizite $inline$ - Funktionen verletzen zwar das Information Hiding Prinzip	und sollten deshalb grundsätzlich vermieden werden.
-					\item Jedoch: die impliziten $inline$ - Funktionen sind die Funktionen, die garantiert immer $inline$ verwendet werden (mit einigen wenigen
+					Schlüsselwort \lc{inline} gekennzeichnet werden.
+					\item Implizite \lc{inline} - Funktionen verletzen zwar das Information Hiding Prinzip	und sollten deshalb grundsätzlich vermieden werden.
+					\item Jedoch: die impliziten \lc{inline} - Funktionen sind die Funktionen, die garantiert immer \lc{inline} verwendet werden (mit einigen wenigen
 					Ausnahmen).
 				\end{compactitem}	
+		
+	\vspace*{-1cm}\begin{minipage}[t]{7cm}
+			\subsubsection{mutable - Attribut}
+				Ein Datenelement, das nie \lc{const} werden soll (auch nicht bei \lc{const}-Elementfunktionen) kann mit \lc{mutable} gekennzeichnet werden.
+				\lstinputlisting[language=C++,tabsize=2]{code/mutable.cpp}		
 	\end{minipage}
 	\hspace*{0.5cm}
-	\begin{minipage}[t]{9 cm}			
-			\subsubsection{$const$ - Elementfunktion \verweiscpp{11.2.2}}
+	\begin{minipage}[t]{11 cm}			
+			\subsubsection{const - Elementfunktion \verweiscpp{11.2.2}}
 				\begin{compactitem}
 					\item Elementfunktionen, die den Zustand eines Objekts nicht ändern (Selektoren)
-					sollen explizit mit dem Schlüsselwort $const$ gekennzeichnet werden.
-					\item Das Schlüsselwort $const$ muss sowohl im Prototypen als auch in der
+					sollen explizit mit dem Schlüsselwort \lc{const} gekennzeichnet werden.
+					\item Das Schlüsselwort \lc{const} muss sowohl im Prototypen als auch in der
 					Implementierung geschrieben werden.
 				\end{compactitem}
-				\lstinputlisting[language=C++,tabsize=2]{code/elementfunktion_const.cpp} 
-	\end{minipage}
-\newpage	
-	\begin{minipage}[t]{6cm}
-			\paragraph{$mutable$ - Attribut}
-				Ein Datenelement, das nie $const$ werden soll (auch nicht bei $const$-Elementfunktionen) kann	mit	$mutable$ gekennzeichnet werden.
-				\lstinputlisting[language=C++,tabsize=2]{code/mutable.cpp}
-	\end{minipage}
-	\hspace*{0.5cm}
-	\begin{minipage}[t]{12cm}			
-		\subsection{$this$ - Pointer \verweiscpp{11.3}}
-			Der $this$-Pointer ist ein Pointer auf das eigene aktuelle Objekt, welches eine
-			Methode aufgerufen hat.
-			\lstinputlisting[language=C++,tabsize=2]{code/this_pointer.cpp}
-			
-		\subsection{$static$ - Klassenelemente \verweiscpp{11.5}}
+				\lstinputlisting[language=C++,tabsize=2]{code/elementfunktion_const.cpp}
+				
+		\subsection{static - Klassenelemente \verweiscpp{11.5}}
 			\begin{compactitem}
 				\item Grundsätzlich besitzt jedes Objekt einer Klasse seine eigene private Instanz
 				aller Attribute einer Klasse.
-				\item Wenn ein Attribut mit $static$ gekennzeichnet wird, dann teilen sich alle
+				\item Wenn ein Attribut mit \lc{static} gekennzeichnet wird, dann teilen sich alle
 				Objekte dieser Klasse eine einzige Instanz dieses Attributs, d.h. ein
 				statisches Attribut ist nur einmal für alle Objekte einer Klasse im Speicher
 				vorhanden.
-				\item $static$ - Elemente befinden sich ausserhalb eines Objektkontexts.
-				\item $static$ - Elemente können auch über den Klassennamen angesprochen
+				\item \lc{static} - Elemente befinden sich ausserhalb eines Objektkontexts.
+				\item \lc{static} - Elemente können auch über den Klassennamen angesprochen
 				werden (da sie sich im Kontext einer Klasse befinden).
-			\end{compactitem}
+			\end{compactitem}	
 	\end{minipage}
+			
+	\subsection{$this$ - Pointer \verweiscpp{11.3}}
+		Der \lc{this}-Pointer ist ein Pointer auf das eigene aktuelle Objekt, welches eine Methode aufgerufen hat.
+		\lstinputlisting[language=C++,tabsize=2]{code/this_pointer.cpp}
 	
-	\subsection{Konstruktor (am Beispiel der Klasse $TString$) \verweiscpp{11.7.1}}
+	\subsection{Konstruktor (am Beispiel der Klasse TString) \verweiscpp{11.7.1}}
 		\begin{minipage}[t]{9cm}
 			\subsubsection{Aufgaben des Konstruktors}
 				\begin{compactitem}
 					\item die Neugründung eines Objekts einer Klasse
 					\item das saubere Initialisieren des Objekts, d.h. alle Attribute des Objekts
 					müssen auf einen definierten Wert gesetzt werden
-					\item Der Konstruktor hat in $C++$ denselben Namen wie die Klasse, hat keinen
-					Rückgabetyp (auch nicht $void$) und kann überladen werden. Beispiel: $Stack::Stack();$ $//(Default-)Konstruktor$
+					\item Der Konstruktor hat in \lc{C++} denselben Namen wie die Klasse, hat keinen
+					Rückgabetyp (auch nicht \lc{void}) und kann überladen werden. Beispiel: \lc{Stack::Stack();}
 				\end{compactitem}
 		\end{minipage}
 		\hspace*{0.5cm}
@@ -204,20 +198,20 @@
 				\begin{compactitem}
 					\item Der Konstruktor soll nie explizit aufgerufen werden.
 					\item Der Konstruktor wird vom System automatisch (implizit) aufgerufen, wenn
-					ein Objekt erzeugt wird: $Stack$ $s;$
-					\item Wenn durch den $new$-Operator Speicher angefordert und erhalten wird,
-					dann wird der Konstruktor vom System ebenfalls automatisch aufgerufen: \\ $Stack*$ $pS$ $=$ $new$ $Stack;$
+					ein Objekt erzeugt wird: \lc{Stack s;}
+					\item Wenn durch den \lc{new}-Operator Speicher angefordert und erhalten wird,
+					dann wird der Konstruktor vom System ebenfalls automatisch aufgerufen: \\ \lc{Stack* pS = new Stack;}
 				\end{compactitem}	
-		\end{minipage}
+		\end{minipage} 
 		
 		\subsubsection{Default-Konstruktor}
 			\begin{minipage}[t]{13cm}
 				\begin{compactitem}
 					\item Der Default-Konstruktor ist der Konstruktor ohne Parameter: \\
-					$Stack::Stack();$ \\
+					\lc{Stack::Stack();} \\
 					Er wird immer aufgerufen, wenn bei der Objekterzeugung keine Parameter
 					mitgegeben werden: \\
-					$Stack$ $s;$
+					\lc{Stack s;}
 					\item Der Default-Konstruktor wird vom System automatisch erzeugt, wenn für
 					eine Klasse kein Konstruktor explizit definiert ist.
 					\item Der Default-Konstruktor kann selbst definiert werden.
@@ -230,8 +224,8 @@
 			\hspace*{0.5cm}
 			\begin{minipage}[t]{5cm}
 				\lstinputlisting[language=C++,tabsize=2]{code/constructor_default.cpp}
-			\end{minipage}
-\newpage			
+			\end{minipage} \\
+			
 		\subsubsection{Implementation/Initialisierung}
 			Es gibt zwei Arten den Konstruktor zu implementieren. \\
 			\begin{minipage}[t]{9cm}
@@ -249,11 +243,11 @@
 			\begin{minipage}[t]{6cm}
 				\begin{compactitem}
 					\item Der Default-Konstruktor wird implizit aufgerufen mit \\
-					$TString$ $str;$
-					\item Ein $TString$-Objekt soll auch z.B. mit folgenden Anweisungen gegründet
+					\lc{TString str;}
+					\item Ein \lc{TString}-Objekt soll auch z.B. mit folgenden Anweisungen gegründet
 					werden können: \\
-					$TString$ $str1$ $=$ $"Hello";$ $//$ $implicit$ $call$ \\
-					$TString$ $str2$ $=$ $TString("Guten$ $Morgen");$ $//$ $explicit$ $call$
+					\lc{TString str1 = "Hello"; // implicit call} \\
+					\lc{TString str2 = TString("Guten Morgen"); // explicit call}
 					\item Dazu bedarf es anderer (überladener) Konstruktoren.
 				\end{compactitem}
 			\end{minipage}
@@ -279,10 +273,10 @@
 			\begin{minipage}[t]{12cm}
 				\begin{compactitem}
 					\item Die implicit calls (bei Konstruktoren mit einem Parameter) \\
-					$TString$ $str2$ $=$ $12345;$ \\
-					$str2$ $=$ $789;$ \\
+					\lc{TString str2 = 12345;} \\
+					\lc{str2 = 789;} \\
 					sind gelegentlich nicht erwünscht.
-					\item Wenn der Konstruktor mit $explicit$ gekennzeichnet wird, kann dieser Konstruktor	nicht mehr implizit, sondern nur explizit aufgerufen werden.
+					\item Wenn der Konstruktor mit \lc{explicit} gekennzeichnet wird, kann dieser Konstruktor	nicht mehr implizit, sondern nur explizit aufgerufen werden.
 					\lstinputlisting[language=C++,tabsize=2]{code/constructor_explicit_1.cpp}
 				\end{compactitem}
 			\end{minipage}
@@ -292,13 +286,13 @@
 					\lstinputlisting[language=C++,tabsize=2]{code/constructor_explicit_2.cpp}
 			\end{minipage}
 			
-		\subsubsection{Copy-Konstruktor}
+			\vspace*{-1cm}\subsubsection{Copy-Konstruktor}
 			\begin{minipage}[t]{10cm}
 				\begin{compactitem}
 					\item Der Copy-Konstruktor wird dazu verwendet, Objekte zu kopieren.
 					\item Der Copy-Konstruktor erhält als Parameter immer eine konstante Referenz auf
-					ein Objekt der Klasse. Für $TString$ sieht er wie folgt aus: 
-					$TString(const$ $TString\&$ $s);$
+					ein Objekt der Klasse. Für \lc{TString} sieht er wie folgt aus: 
+					\lc{TString(const TString\& s);}
 				\end{compactitem}
 				Der Copy-Konstruktor wird automatisch aufgerufen, wenn ...
 				\begin{compactitem}
@@ -311,8 +305,8 @@
 				Bei Zuweisungen wird der vom System bereitgestellte Zuweisungsoperator benutzt,
 				sofern kein eigener definiert wurde.
 				
-				\paragraph{Shallow Copy vs. Deep Copy}
-					\begin{compactitem}
+				\vspace*{-0.4cm}\paragraph{Shallow Copy vs. Deep Copy}
+					\vspace*{-0.2cm}\begin{compactitem}
 						\item Wenn für eine Klasse kein Copy-Konstruktor definiert wird, erzeugt das System einen Standard-Copy-Konstruktor.
 						\item Dieser kopiert alle Datenelemente (memberwise assignment). Bei Pointern, welche auf den Heap zeigen, wird nur die Adresse kopiert, nicht aber der Speicher auf dem Heap. Man nennt das shallow copy. (shallow = flach).
 						\item Bei einer deep copy werden auch die Speicherbereiche, auf welche Pointer
@@ -327,17 +321,17 @@
 			\end{minipage} \\
 			
 			\begin{minipage}[t]{9cm}
-				\paragraph{Shallow-Copy}
-					\includegraphics[width=1\textwidth]{pics/shallow_copy.jpg}
+				\vspace*{-0.3cm}\paragraph{Shallow-Copy}
+					\vspace*{-0.5cm}\includegraphics[width=1\textwidth]{pics/shallow_copy.jpg}
 			\end{minipage}
 			\hspace*{0.5cm}
 			\begin{minipage}[t]{9cm}
-				\paragraph{Deep-Copy}
-					\includegraphics[width=1\textwidth]{pics/deep_copy.jpg}
+				\vspace*{-0.3cm}\paragraph{Deep-Copy}
+					\vspace*{-0.5cm}\includegraphics[width=1\textwidth]{pics/deep_copy.jpg}
 			\end{minipage}
 			
-	\subsection{Destruktor \verweiscpp{11.7.2}}
-		\begin{minipage}[t]{7cm}
+	\vspace*{-0.1cm}\subsection{Destruktor \verweiscpp{11.7.2}}
+		\vspace*{-0.4cm}\begin{minipage}[t]{7cm}
 			\subsubsection{Aufgaben des Destruktors}
 				\begin{compactitem}
 					\item die vollständige Zerstörung eines nicht mehr benötigten Objekts
@@ -354,7 +348,7 @@
 					\item Destruktoren haben keine Argumente und keinen Rückgabetyp
 					\item Ihr Name besteht aus dem Klassennamen mit vorgestellter Tilde. Der
 					Destruktor soll meist virtual deklariert werden (wenn es einen Destruktor
-					braucht): $virtual$ $~TString();$					
+					braucht): \lc{virtual ~TString();}					
 					\item Destruktoren werden automatisch aufgerufen, wenn der Gültigkeitsbereich des definierten Objektes ausläuft 
 					\item Die Reihenfolge des Aufrufs der Destruktoren ist umgekehrt wie die der
 					Konstruktoren
@@ -377,31 +371,30 @@
 		\end{compactitem}
 		
 	\subsection{Benutzerdefinierte Typumwandlung \verweiscpp{11.7.6}}
-		Wenn zwei ganze Zahlen unterschiedlichen Typs (z.B. $int$ und $short$) addiert werden, so ist der Additionsoperator vom System für folgende Varianten	definiert:
+		Wenn zwei ganze Zahlen unterschiedlichen Typs (z.B. \lc{int} und \lc{short}) addiert werden, so ist der Additionsoperator vom System für folgende Varianten	definiert:
 		\begin{compactitem}
-			\item $int+int$
-			\item $int+short$
-			\item $short+int$
-			\item $short+short$
+			\item \lc{int+int}
+			\item \lc{int+short}
+			\item \lc{short+int}
+			\item \lc{short+short}
 		\end{compactitem}
-		Wenn nun eine neue Klasse $VeryLargeInt$ eingeführt wird, so sind die Operatoren für diese Klasse noch nicht definiert. Nur schon für den Additionsoperator zwischen $VeryLargeInt$ und $int$ müssten folgende Varianten definiert werden:
+		Wenn nun eine neue Klasse \lc{VeryLargeInt} eingeführt wird, so sind die Operatoren für diese Klasse noch nicht definiert. Nur schon für den Additionsoperator zwischen \lc{VeryLargeInt} und \lc{int} müssten folgende Varianten definiert werden:
 		\begin{compactitem}
-			\item $int+VeryLargeInt$
-			\item $VeryLargeInt+int$
-			\item $VeryLargeInt+VeryLargeInt$
+			\item \lc{int+VeryLargeInt}
+			\item \lc{VeryLargeInt+int}
+			\item \lc{VeryLargeInt+VeryLargeInt}
 		\end{compactitem}
-		Dasselbe gilt auch für alle weiteren Operatoren. Für die Grundoperatoren +, -, *,
-		/, +=, -=, *=, /= müssten somit 24 Operatoren definiert werden. \\
+		Dasselbe gilt auch für alle weiteren Operatoren. Für die Grundoperatoren \lc{+}, \lc{-}, \lc{*},
+		\lc{/}, \lc{+=}, \lc{-=}, \lc{*=}, \lc{/=} müssten somit 24 Operatoren definiert werden. \\
 		Die einfachere Variante ist, wenn für jeden Typ eine Typumwandlung definiert
 		wird. Somit braucht es pro Typ eine Umwandlungsfunktion, die Operatoren arbeiten
-		anschliessend nur noch mit der Klasse $VeryLargeInt$.
+		anschliessend nur noch mit der Klasse \lc{VeryLargeInt}.
 		\begin{compactitem}
-			\item $VeryLargeInt+VeryLargeInt$
+			\item \lc{VeryLargeInt+VeryLargeInt}
 		\end{compactitem}
-		Für die Grundoperatoren +, -, *, /, +=, -=, *=, /= müssten nur noch die 8
-		Operatoren definiert werden. Zusätzlich müsste noch die Typumwandlung von jedem Typ ($short$, $int$, etc.) in $VeryLargeInt$ definiert werden. \\
+		Für die Grundoperatoren \lc{+}, \lc{-}, \lc{*},	\lc{/}, \lc{+=}, \lc{-=}, \lc{*=}, \lc{/=} müssten nur noch die 8 Operatoren definiert werden. Zusätzlich müsste noch die Typumwandlung von jedem Typ (\lc{short}, \lc{int}, etc.) in \lc{VeryLargeInt} definiert werden. \\
 		Häufig werden Typumwandlungen aber auch mit Hilfe von Konstruktoren implementiert:
-		$VeryLargeInt(int);$
+		\lc{VeryLargeInt(int);}
 		
 	\subsection{Überladen von Operatoren \verweiscpp{11.7.3}}
 		Operatoren (z.B. +, ==, etc.) können wie Funktionen überladen werden.
@@ -409,76 +402,76 @@
 		\subsubsection{Überladbare Operatorfunktionen in C++}
 			\begin{minipage}[c]{2.2 cm}
 	 			\begin{compactitem}
-	 				\item $new$
-	 				\item $delete$				
-	 				\item $new[$ $]$				
-	 				\item $delete[$ $]$ 	
-	 				\item $+$
-	 				\item $-$							
+	 				\item \lc{new}
+	 				\item \lc{delete}				
+	 				\item \lc{new[ ]}				
+	 				\item \lc{delete[ ]} 	
+	 				\item \lc{+}
+	 				\item \lc{-}							
 	 			\end{compactitem}
  			\end{minipage}
  			\begin{minipage}[c]{2.3 cm}
 	 			\begin{compactitem}	
-	 				\item $*$
-	 				\item $/$			
-	 				\item $\%$
-	 				\item $\textasciicircum$	 
-	 				\item $\&$	
-	 				\item $|$		
+	 				\item \lc{*}
+	 				\item \lc{/}			
+	 				\item \lc{\%}
+	 				\item \lc{\textasciicircum}
+	 				\item \lc{\&}	
+	 				\item \lc{|}		
 	 			\end{compactitem}
  			\end{minipage}
  			\begin{minipage}[c]{2.2 cm}
 	 			\begin{compactitem}	
-	 			 	\item $\textasciitilde$
-	  			 	\item $!$	
-	 			 	\item $=$ 			 	
-	 			 	\item $<$ 	
-	 			 	\item $>$	 		 	
+	 			 	\item \lc{\textasciitilde}
+	  			 	\item \lc{!}	
+	 			 	\item \lc{=} 			 	
+	 			 	\item \lc{<} 	
+	 			 	\item \lc{>}	 		 	
 	 			\end{compactitem}
  			\end{minipage}
  			\begin{minipage}[c]{2.2 cm}
 	 			\begin{compactitem}	
-	 			 	\item $+=$			 	
-	 			 	\item $-=$			 	
-	 			 	\item $*=$		
-	 			 	\item $/=$	
-	 			 	\item $\%=$		 	
+	 			 	\item \lc{+=}			 	
+	 			 	\item \lc{-=}			 	
+	 			 	\item \lc{*=}		
+	 			 	\item \lc{/=}	
+	 			 	\item \lc{\%=}		 	
 	 			\end{compactitem}
 	 		\end{minipage}
  			\begin{minipage}[c]{2.2 cm}
 	 			\begin{compactitem} 
-	 			 	\item $\textasciicircum=$			 	
-	 			 	\item $\&=$ 		 	
-	 			 	\item $|=$			 	
-	 			 	\item $<<$ 		
-	 			 	\item $>>$	 	
+	 			 	\item \lc{\textasciicircum=}			 	
+	 			 	\item \lc{\&=} 		 	
+	 			 	\item \lc{|=}			 	
+	 			 	\item \lc{<<}		
+	 			 	\item \lc{>>}	 	
 	 			\end{compactitem}
 	 		\end{minipage}
  			\begin{minipage}[c]{2.2 cm}
 	 			\begin{compactitem}		 
-	 			 	\item $>>=$ 			 	
-	 			 	\item $<<=$ 			 	
-	 			 	\item $==$ 			 	
-	 			 	\item $!=$
-	 			 	\item $<=$	
+	 			 	\item \lc{>>=} 			 	
+	 			 	\item \lc{<<=}			 	
+	 			 	\item \lc{==} 			 	
+	 			 	\item \lc{!=}
+	 			 	\item \lc{<=}	
 	 			\end{compactitem}
 	 		\end{minipage}
  			\begin{minipage}[c]{2.2 cm}
 	 			\begin{compactitem}		 	
-	 			 	\item $>=$ 		 	
-	 			 	\item $\&\&$ 			 	
-	 			 	\item $||$ 			 	
-	 			 	\item $++$ 		
-	 			 	\item $--$	 	
+	 			 	\item \lc{>=} 		 	
+	 			 	\item \lc{\&\&} 			 	
+	 			 	\item \lc{||} 			 	
+	 			 	\item \lc{++} 		
+	 			 	\item \lc{--}	 	
 	 			\end{compactitem}
 	 		\end{minipage}
  			\begin{minipage}[c]{2.4 cm}
 	 			\begin{compactitem}		 	
-	 			 	\item $,$ 			 	
-	 			 	\item $->*$	
-	 			 	\item $->$		 	
-	 			 	\item $()$
-	 			 	\item $[$ $]$
+	 			 	\item \lc{,} 			 	
+	 			 	\item \lc{->*}	
+	 			 	\item \lc{->}		 	
+	 			 	\item \lc{()}
+	 			 	\item \lc{[ ]}
 	 			\end{compactitem}
 	 		\end{minipage}
 	 		
@@ -493,20 +486,15 @@
 		\begin{minipage}[t]{9cm}	
 			\subsubsection{Operator Overloading als Elementfunktion}
 				Der neu definierte Operator wird als Elementfunktion implementiert. Damit ist
-				der Zugriff auf $private$ und $protected$ Attribute der Klasse möglich.
+				der Zugriff auf \lc{private} und \lc{protected} Attribute der Klasse möglich.
 				\lstinputlisting[language=C++,tabsize=2]{code/operator_overloading_element.cpp}
-				Zwingend als Elementfunktion zu implementieren sind: 
-				\begin{compactitem}
-					\item Zuweisungsoperator $=$
-					\item Indexaufruf $[$ $]$
-					\item Funktionsaufruf $()$
-					\item Zeigeroperator $->$
-				\end{compactitem}
+				Zwingend als Elementfunktion zu implementieren sind: \\
+				Zuweisungsoperator \lc{=}, Indexaufruf \lc{[ ]}, Funktionsaufruf \lc{()} und Zeigeroperator \lc{->}			
 		\end{minipage}
 		\hspace*{0.5cm}
 		\begin{minipage}[t]{9cm}	
 			\subsubsection{Operator Overloading als normale Funktion}
-				Die Operatorfunktionen werden meist als normale Funktion implementiert. Dadurch besteht jedoch kein Zugriff mehr auf die $private$ und $protected$ Elemente der Klasse. Die Operatorfunktion muss deshalb als $friend$ deklariert werden.
+				Die Operatorfunktionen werden meist als normale Funktion implementiert. Dadurch besteht jedoch kein Zugriff mehr auf die \lc{private} und \lc{protected} Elemente der Klasse. Die Operatorfunktion muss deshalb als \lc{friend} deklariert werden.
 				\lstinputlisting[language=C++,tabsize=2]{code/operator_overloading_normal.cpp}
 		\end{minipage} \\
 		
@@ -517,7 +505,7 @@
 					\item Daten, welche logisch zusammengehören, können zusammengenommen werden
 					\item Die Struktur ist ein zusammengesetzter Datentyp, sie setzt sich aus den Feldern zusammen
 					\item Die einzelnen Felder der Strukturen können (müssen aber nicht) unterschiedliche Typen haben
-					\item Jedes Feld wird mit einem innerhalb der Struktur eindeutigen Namen versehen $\rightarrow$ Strukturspezifische Präfixe für die Feldnamen (z.B. $Angestellter\_Vorname$) sind deshalb sinnlos. 
+					\item Jedes Feld wird mit einem innerhalb der Struktur eindeutigen Namen versehen $\rightarrow$ Strukturspezifische Präfixe für die Feldnamen (z.B. \lc{Angestellter\_Vorname}) sind deshalb sinnlos. 
 				\end{compactitem}
 			
 			\begin{minipage}[t]{10 cm}
@@ -526,8 +514,8 @@
 					\lstinputlisting[language=C,tabsize=2]{code/strukturen1.c}
 					\vspace*{0.3cm}
 					\begin{compactitem}
-						\item $StructName$ kann frei gewählt werden
-						\item $struct$ $StructName$ ist hier ein selbst\\ definierter Typ, der weiter verwendet werden kann
+						\item \lc{StructName} kann frei gewählt werden
+						\item \lc{struct StructName} ist hier ein selbst\\ definierter Typ, der weiter verwendet werden kann
 						\item Der Datentyp ist definiert durch den Inhalt der\\ geschweiften Klammer
 						\item Der Feldtyp kann wiederum eine Struktur sein
 					\end{compactitem}
@@ -538,7 +526,7 @@
 					\vspace*{-0.2cm}
 					\lstinputlisting[language=C,tabsize=2]{code/strukturen2.c}
 			\end{minipage}
-\newpage		
+		
 			\paragraph{Beispiele für die Definition von Strukturvariablen}
 				\vspace*{-0.2cm}
 				\lstinputlisting[language=C,tabsize=2]{code/strukturen3.c}
@@ -546,31 +534,35 @@
 					
 			\paragraph{Operationen auf Strukturvariablen}
 				\begin{compactitem}
-					\item Zuweisung: liegen zwei Strukturvariablen a und b vom gleichen Strukturtyp vor, so kann der Wert der einen Variablen der anderen zugewiesen werden $\rightarrow$ $a=b;$
-					\item Ermittlung der Grösse der Struktur: mit $sizeof$-Operator
-					\item Ermittlung der Adresse der Strukturvariablen: mit Adressoperator $\&$
+					\item Zuweisung: liegen zwei Strukturvariablen a und b vom gleichen Strukturtyp vor, so kann der Wert der einen Variablen der anderen zugewiesen werden \lc{$\rightarrow$ a=b;}
+					\item Ermittlung der Grösse der Struktur: mit \lc{sizeof}-Operator
+					\item Ermittlung der Adresse der Strukturvariablen: mit Adressoperator \lc{\&}
 				\end{compactitem}
 				
 			\paragraph{Zugriff auf eine Strukturvariable und deren Felder}
-				Der Zugriff auf ein Feld einer Strukturvariablen erfolgt über
-				\begin{compactitem}
-					\item den Namen der Strukturvariablen,
-					\item gefolgt von einem Punkt
-					\item und dem Namen des Feldes 
-				\end{compactitem}			
-				\vspace*{0.2cm}
-				... wenn der Zugriff über einen Pointer auf eine Strukturvariable erfolgt, über
-				\begin{compactitem}
-					\item den Namen des Pointers,
-					\item gefolgt von einem Pfeil (--\textgreater)
-					\item und dem Namen des Feldes 
-				\end{compactitem}
+				\begin{minipage}[t]{9cm}
+					Der Zugriff auf ein Feld einer Strukturvariablen erfolgt über
+					\begin{compactitem}
+						\item den Namen der Strukturvariablen,
+						\item gefolgt von einem Punkt
+						\item und dem Namen des Feldes 
+					\end{compactitem}	
+				\end{minipage}
+				\hspace*{0.5cm}
+				\begin{minipage}[t]{9cm}		
+					... wenn der Zugriff über einen Pointer erfolgt, über
+					\begin{compactitem}
+						\item den Namen des Pointers,
+						\item gefolgt von einem Pfeil (--\textgreater)
+						\item und dem Namen des Feldes 
+					\end{compactitem}
+				\end{minipage}
 							
 			\paragraph{Beispiele für den Zugriff auf eine Strukturvariable}
 				\vspace*{-0.2cm}
 				\lstinputlisting[language=C,tabsize=2]{code/strukturen4.c}
 				\vspace*{0.3cm}
-\newpage
+
 			\begin{minipage}[c]{8 cm}
 				\paragraph{Lage im Speicher}
 					\begin{compactitem}
@@ -599,52 +591,59 @@
 					\lstinputlisting[language=C,tabsize=2]{code/strukturen7.c} 
 				\end{compactitem}
 			
+		\begin{minipage}[t]{9cm}
 			\paragraph{Initialisierung einer Strukturvariablen}
-				Eine Initialisierung einer Strukturvariablen kann direkt bei der Definition der Strukturvariablen mit Hilfe einer Initialisierungsliste durchgeführt werden (Reihenfolge beachten). Natürlich muss der Datentyp $struct$ $Angestellter$ bereits bekannt sein. 
+				Eine Initialisierung einer Strukturvariablen kann direkt bei der Definition der Strukturvariablen mit Hilfe einer Initialisierungsliste durchgeführt werden (Reihenfolge beachten). Natürlich muss der Datentyp \lc{struct Angestellter} bereits bekannt sein. 
 				\lstinputlisting[language=C,tabsize=2]{code/strukturen6.c} 	
-							
-		\subsubsection{Unions \verweisboth{11.2}{11.8.2}}
-			\paragraph{Eigenschaften}
-				\begin{compactitem}
-					\item ähnlich wie Struktur
-					\item beinhaltet auch mehrere Felder unterschiedlichen Typs
-					\item im Gegensatz zur Struktur ist aber nur ein einziges Feld jeweils aktiv (abhängig vom Typ)
-					\item Die Grösse einer $Union$ ist so gross wie das grösste Feld der $Union$
-					\item Bei der Union sind dieselben Operationen wie bei einer Struktur definiert 
-				\end{compactitem}	
-			\begin{minipage}[t]{10 cm}
-				\paragraph{Definition von Uniontypen}
-					\vspace*{-0.2cm}
-					\lstinputlisting[language=C,tabsize=2]{code/unions1.c}
-					\vspace*{0.3cm}
-						\begin{compactitem}
-							\item $UnionName$ kann frei gewählt werden
-							\item $union$ $UnionName$ ist ein hier selbst definierter Typ, \\der weiter verwendet werden kann
-							\item Der Datentyp ist definiert durch den Inhalt der \\geschweiften Klammer
-							\item Der Feldtyp kann wiederum eine Union oder \\auch eine Struktur sein
-						\end{compactitem}
-			\end{minipage}
-			\hspace*{1.5cm}	
-			\begin{minipage}[t]{8 cm}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{10cm}					
+			\subsubsection{Unions \verweisboth{11.2}{11.8.2}}
+				\paragraph{Eigenschaften}
+					\begin{compactitem}
+						\item ähnlich wie Struktur
+						\item beinhaltet auch mehrere Felder unterschiedlichen Typs
+						\item im Gegensatz zur Struktur ist aber nur ein einziges Feld jeweils aktiv (abhängig vom Typ)
+						\item Die Grösse einer Union ist so gross wie das grösste Feld der Union
+						\item Bei der Union sind dieselben Operationen wie bei einer Struktur definiert 
+					\end{compactitem}
+					
+					\paragraph{Definition von Uniontypen}											
+						\begin{minipage}[t]{5.5cm}
+							\begin{compactitem}
+								\item \lc{UnionName} kann frei gewählt werden
+								\item \lc{union UnionName} ist ein hier selbst definierter Typ, \\der weiter verwendet werden kann
+								\item Der Datentyp ist definiert durch den Inhalt der \\geschweiften Klammer
+								\item Der Feldtyp kann wiederum eine Union oder \\auch eine Struktur sein
+							\end{compactitem}
+						\end{minipage}	
+						\hspace*{0.5cm}
+						\begin{minipage}[t]{3.5cm}
+								\vspace*{-0.2cm}
+								\lstinputlisting[language=C,tabsize=2]{code/unions1.c}
+						\end{minipage}	
+		\end{minipage}
+		
+		\begin{minipage}[t]{5 cm}
 				\paragraph{Beispiel}
 					\vspace*{-0.2cm}
 					\lstinputlisting[language=C,tabsize=2]{code/unions2.c}
-					\vspace*{0.5cm}
-					\includegraphics[width=0.5\textwidth]{pics/union.png}
-			\end{minipage}
-			\vspace*{0.8cm}
-			
+					\includegraphics[width=1\textwidth]{pics/union.png}
+		\end{minipage}
+		\hspace*{0.5cm}	
+		\begin{minipage}[t]{13 cm}
 		\subsubsection{Allgemeines zu Strukturen und Unions}
 			\paragraph{Codierstil}
 				\begin{compactitem}
-					\item $Strukturname$ und $Unionname$ mit einem grossen Buchstaben beginnen!\\
-					$struct$ $Angestellter;$\\
-					$union$ $Vario;$
+					\item \lc{Strukturname} und \lc{Unionname} mit einem grossen Buchstaben beginnen!\\
+					\lc{struct Angestellter;}\\
+					\lc{union Vario;}
 					\item Struktur- und Unionvariablen mit einem kleinen Buchstaben beginnen
-					\item Bei Feldern von $Strukturen$ und $Union$ soll kein Präfix bei den Feldnamen verwendet werden
+					\item Bei Feldern von Strukturen und Union soll kein Präfix bei den Feldnamen verwendet werden
 				\end{compactitem}
 				
 			\paragraph{Vorsicht bei Unions}	
 				\begin{compactitem}
-					\item Der Programmierer muss verfolgen, welcher Typ jeweils in der $Union$ gespeichert ist. Der Datentyp, der entnommen wird, muss der sein, der zuletzt gespeichert wurde. 
-				\end{compactitem}			
+					\item Der Programmierer muss verfolgen, welcher Typ jeweils in der Union gespeichert ist. Der Datentyp, der entnommen wird, muss der sein, der zuletzt gespeichert wurde. 
+				\end{compactitem}
+		\end{minipage}			
