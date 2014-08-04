@@ -1,10 +1,7 @@
 // interne Daten
 double a;     // 1. Seite
-double b      // 2. Seite
-double area;  // Rechtecksflaeche, 
-              // Attribut wird entfernt
+double b      // 2. Seite 
 // Schnittstelle (Interface)
-// Attribut area wird entfernt
 // Funktionen setA(), setB(), 
 // getA(), getB(), getArea()
 void setA(double newA)

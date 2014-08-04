@@ -44,7 +44,7 @@
 		    \begin{compactitem}	
 			  	\item Interface definiert die Schnittstelle, d.h. die Deklarationen wie Funktionsprototypen, etc. (Schaufenster)
 			  	\item Implementation: in diesem Teil sind die Unterprogramme definiert, d.h. auscodiert (Werkstatt)
-				 \item Das Interface wird in einer Headerdatei (*.h) beschrieben, die Implementation liegt in einer *.cpp- Datei
+				 \item Das Interface wird in einer Headerdatei (\lc{*.h}) beschrieben, die Implementation liegt in einer \lc{*.cpp}- Datei
 			\end{compactitem}
 			\begin{center}
 			\includegraphics[width=0.28\textwidth]{pics/unit.jpg}
@@ -53,67 +53,64 @@
 
     \subsection{Die Schnittstellen-/Headerdatei \verweiscpp{10.3.1}}
 		\begin{minipage}[t]{11 cm}
-			 Jede .h-Datei enthält als erste Anweisungsfolge eine Include-Guard welche Mehrfacheinfügen verhindert. Der Syntax lautet:
+			 Jede \lc{.h}-Datei enthält als erste Anweisungsfolge eine Include-Guard welche Mehrfacheinfügen verhindert. Der Syntax lautet:
 			 \lstinputlisting[language=C,tabsize=2]{code/includeguard.c}
-			 Deklarationsreihenfolge in Headerdatei (*.h)  (Beispiel Kap 16.1)
-			\begin{enumerate}
+			 Deklarationsreihenfolge in Headerdatei (*.h)  (Beispiel \verweiscpp{16.1})
+			\begin{compactenum}
 				\item Dateikommentar
-				\item \#include der verwendeten System-Header (iostream, etc.) \newline
-				      \#include <...>
-				\item \#include der projektbezogenen Header (\#include "...")
+				\item \lc{\#include} der verwendeten System-Header (\lc{iostream}, etc.) \newline
+				      \lc{\#include <...>}
+				\item \lc{\#include} der projektbezogenen Header (\lc{\#include "..."})
 				\item Konstantendefinitionen
-				\item typedefs und Definition von Strukturen
+				\item \lc{typedef}s und Definition von Strukturen
 				\item Allenfalls extern-Deklaration von globalen Variablen
 				\item Funktionsprototypen, inkl. Kommentare der Schnittstelle, bzw. Klassendeklarationen
-			\end{enumerate}
+			\end{compactenum}
 		\end{minipage}	
 		\hspace*{0.5cm}
 		\begin{minipage}[t]{7.5 cm}	
-		  	\subsection{Beispiel Unit Rechteck}
-		  	\lstinputlisting[language=c++,tabsize=2]{code/example_unit.cpp}
+		  	\vspace*{-0.8cm}\subsection{Beispiel Unit Rechteck}
+		  		\vspace*{-0.25cm}\lstinputlisting[language=c++,tabsize=2]{code/example_unit.cpp}
 		\end{minipage}
-\newpage
+\ \\
      	\begin{minipage}[t]{19 cm}
 			\subsection{Die Implementierungsdatei \verweiscpp{10.3.2}}
-				Deklarationsreihenfolge in Implementierungsdatei (*.cpp) (Beispiel Kap 16.1)
-				\begin{enumerate}
+				Deklarationsreihenfolge in Implementierungsdatei (\lc{*.cpp}) (Beispiel \verweiscpp{16.1})
+				\begin{compactenum}
 			 		\item Dateikommentar
-					\item \#include der verwendeten System-Header (iostream, etc.)
-					      \#include <...>
-					\item \#include der projektbezogenen Header (\#include "...") \newline
-					      a) Hier käme die Verwendung von $using$ $namespace$
+					\item \lc{\#include} der verwendeten System-Header (\lc{iostream}, etc.)
+					      \lc{\#include <...>}
+					\item \lc{\#include} der projektbezogenen Header (\lc{\#include "..."})
+					\item Verwendung von \lc{using namespace}
 					\item allenfalls globale Variablen und statische Variablen
 					\item Präprozessor-Direktiven
 					\item Funktionsprototypen von lokalen, internen Funktionen
-					\item Definition von Funktionen und Klassen (Kommentare aus Headerdatei nicht wiederholen!!) 
-					\linebreak
-				\end{enumerate}
+					\item Definition von Funktionen und Klassen (Kommentare aus Headerdatei nicht wiederholen!) 
+				\end{compactenum}
 		\end{minipage}
 		
 		\subsection{Buildprozess / Makefile}
-			\begin{minipage}[t]{11 cm}
-			    Der Buildprozess erstellt aus den einzelnen Dateien einen ausführbaren Code. Dazu werden zuerst alle *.cpp-Files compiliert.
+			\begin{minipage}[t]{12 cm}
+			    Der Buildprozess erstellt aus den einzelnen Dateien einen ausführbaren Code. Dazu werden zuerst alle \lc{*.cpp}-Files compiliert.
 			    Die daraus entstandenen Objektdatei müssen anschliessend gelinkt und somit zu einer auführbaren Datei zusammengesetzt. Die Eingabe in der Konsole sieht wie folgt aus:
 			    \lstinputlisting[language=C,tabsize=2]{code/compileUnit.c}
-			    Es wäre mühsam, wenn diese Befehle jedesmal neu eingetippt werden müssten. Deshalb wird in der Praxis oft ein Buildtool eingesetzt, z.B. make 
-			 	\subsubsection{Make-File}
-			 	\begin{compactitem}	
-			 		\item In einem make-File können Abhängigkeiten definiert werden
-			 		\item  Wenn eine Datei geändert wurde, dann werden alle Operationen ausgeführt mit den Dateien, welche von dieser geänderten Datei abhängen
-			 		\item Der Befehl (g++) wird z.B. nur dann ausgeführt, wenn sich an den Dateien, zu denen eine Abhängigkeit besteht, etwas geändert hat
-			 		\linebreak
-				\end{compactitem}
-				
+				Es wäre mühsam, wenn diese Befehle jedesmal neu eingetippt werden müssten. Deshalb wird in der Praxis oft ein Buildtool eingesetzt, z.B. \lc{make}.
 			\end{minipage}
 			\hspace*{0.5cm}
-			\begin{minipage}[t]{7.5 cm}
-				Abhängigkeitsliste gemäss  UML-Notation:
-				\linebreak
-				\includegraphics[width=1\textwidth]{pics/abhaengigkeitUML.jpg}
-			    
+			\begin{minipage}[t]{6.5 cm}
+				Abhängigkeitsliste gemäss  UML-Notation: \\
+				\includegraphics[width=0.85\textwidth]{pics/abhaengigkeitUML.jpg}		    
 			\end{minipage}
-			\begin{minipage}[t]{19 cm}
-			    \includegraphics[width=0.6\textwidth]{pics/makefile.jpg}
-			\end{minipage}
-		
-		
+			
+			\subsubsection{Make-File}
+				\begin{minipage}[c]{10 cm}
+					\vspace*{-3.2cm}\begin{compactitem}	
+						\item In einem \lc{make}-File können Abhängigkeiten definiert werden
+						\item  Wenn eine Datei geändert wurde, dann werden alle Operationen ausgeführt mit den Dateien, welche von dieser geänderten Datei abhängen
+						\item Der Befehl (\lc{g++}) wird z.B. nur dann ausgeführt, wenn sich an den Dateien, zu denen eine Abhängigkeit besteht, etwas geändert hat
+					\end{compactitem}
+				\end{minipage}
+				\hspace*{0.5cm}
+				\begin{minipage}[c]{8.5 cm}
+					\includegraphics[width=1\textwidth]{pics/makefile.jpg}	
+				\end{minipage}			     										
