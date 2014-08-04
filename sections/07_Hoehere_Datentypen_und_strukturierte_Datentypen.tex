@@ -200,12 +200,12 @@
 	\subsubsection{Kopieren eines Strings \verweisc{10.5}}
 		\begin{minipage}[t]{9 cm}
 			\paragraph{Variante mit Laufvariable}
-				\lstinputlisting[language=C,tabsize=2]{code/string_copy_manuell_1.c}
+				\vspace*{-0.5cm}\lstinputlisting[language=C,tabsize=2]{code/string_copy_manuell_1.c}
 		\end{minipage}
 		\hspace*{0.5cm}
 		\begin{minipage}[t]{9 cm}
 			\paragraph{Variante mit Pointer}
-				\lstinputlisting[language=C,tabsize=2]{code/string_copy_manuell_2.c}
+				\vspace*{-0.5cm}\lstinputlisting[language=C,tabsize=2]{code/string_copy_manuell_2.c}
 		\end{minipage}
 		
 	\subsubsection{Standardfunktionen für Strings und Speicher \verweisc{10.6}}
@@ -251,37 +251,26 @@
 					\item Diese Funktion bestimmt die Länge von \lc{s}, d.h. die Anzahl der \lc{char}-Zeichen. Das '\lc{$\backslash$0}'-Zeichen wird dabei nicht mitgezählt.
 					\item Hat als Rückgabewert die Länge von \lc{s}.
 				\end{compactitem}
-		\end{minipage}
+		\end{minipage} \\
 		
-		\subsubsection{Funktionen zur Speicherbearbeitung \verweisc{10.6.2}}
-			Die grundsätzlichen Unterschiede zu den Stringfunktionen sind:
-			\begin{compactitem}
-				\item Formelle Parameter sind vom Typ \lc{void*} statt \lc{char*}.
-				\item Die mem-Funktionen arbeiten byteweise.
-				\item Im Gegensatz zu den \lc{str}-Funktionen wird das '\lc{$\backslash$0}'-Zeichen nicht speziell behandelt.
-				\item Die Bufferlänge muss als Parameter übergeben werden.
-			\end{compactitem}
-			
+		\begin{minipage}[t]{6 cm}
+			\subsubsection{Funktionen zur Speicherbearbeitung \verweisc{10.6.2}}
+				Die grundsätzlichen Unterschiede zu den Stringfunktionen sind:
+				\begin{compactitem}
+					\item Formelle Parameter sind vom Typ \lc{void*} statt \lc{char*}.
+					\item Die mem-Funktionen arbeiten byteweise.
+					\item Im Gegensatz zu den \lc{str}-Funktionen wird das '\lc{$\backslash$0}'-Zeichen nicht speziell behandelt.
+					\item Die Bufferlänge muss als Parameter übergeben werden.
+				\end{compactitem}
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{12 cm}			
 			\paragraph{Funktionen \verweisc{10.6.2.1 bis Kapitel 10.6.2.5}}
-				\lstinputlisting[language=C,tabsize=2]{code/mem_funktionen.c}
+				\vspace*{-0.5cm}\lstinputlisting[language=C,tabsize=2]{code/mem_funktionen.c}
 				Bei \lc{memcpy()} dürfen sich die Buffer nicht überlappen, \lc{memmove()} kann auch mit überlappenden Buffern umgehen.\\
-				
-				
-				
-   
-  \subsection{Pointer und Referenzen als R"uckgabewert und Parameter"ubergabe}
-  Bei Variablen"ubergabe (call by value) werden Kopien "ubergeben, welche nicht ver"andert werden k"onnen.\\
-  Bei Referenz"ubergabe (call by reference) kann die Subroutine die Werte bleibend ver"andern.
-  \begin{minipage}[t]{7 cm}
-   \lstinputlisting[language=C,tabsize=2]{code/swap.c} 
-   \end{minipage}
-    \begin{minipage}[t]{10.5 cm}
-      \lstinputlisting[language=C,tabsize=2]{code/swap2.c} 
-      \end{minipage}
-    
-  \subsection{Zugriff auf Class und Struct Elemente}
-  \lstinputlisting[language=C,tabsize=2]{code/classelem.c} 
-
+		\end{minipage} \\
+		
+\phantom{}
 
 	\subsection{Referenzen \verweiscpp{8.1}}
 		Referenzen sind alternative Namen oder Alias für ein Objekt. \\
@@ -291,8 +280,36 @@
 	  	\begin{minipage}[t]{8 cm}	  		
 			In 2 Situationen anwenden: 
   			\begin{compactitem}
-  				\item Parameter"ubergabe in Funktionen (call by Reference)
-  				\item Referenz R"uckgabetyp anstatt Pointertyp (Objekte einer Klasse immer bei reference übergeben!)
+  				\item Parameterübergabe in Funktionen (call by Reference)
+  				\item Referenz Rückgabetyp anstatt Pointertyp (Objekte einer Klasse immer by reference übergeben!)
   			\end{compactitem}
   			Niemals Pointer oder Referenz auf lokale Variable als \lc{return} Wert bei Funktionen. 
-  		\end{minipage}
+  		\end{minipage}	\\					
+   
+	\subsection{Pointer und Referenzen als Rückgabewert und Parameterübergabe \verweiscpp{8.6}}
+  		Bei Variablenübergabe (call by value) werden Kopien übergeben, welche nicht verändert werden können.\\
+  		Bei Referenzübergabe (call by reference) kann die Subroutine die Werte bleibend verändern. \\
+  		\begin{minipage}[t]{6 cm}
+  			\subsubsection{call by reference}
+   				\lstinputlisting[language=C,tabsize=2]{code/swap.c} 
+   		\end{minipage}
+    	\begin{minipage}[t]{6 cm}
+      			\vspace*{0.6cm} \lstinputlisting[language=C,tabsize=2]{code/swap2.c} 
+      	\end{minipage}
+      	\begin{minipage}[t]{8 cm}
+      		\subsubsection{call by value}
+      	      	\lstinputlisting[language=C,tabsize=2]{code/swap3.c} 
+      	\end{minipage}
+    
+	\subsection{Zugriff auf Class und Struct Elemente \verweiscpp{8.7}}
+		\begin{minipage}[t]{7.5 cm}
+			\lstinputlisting[language=C,tabsize=2]{code/classelem.c} 
+		\end{minipage}
+		\begin{minipage}[t]{11 cm}
+			Ähnlich wie bei Vektoren können natürlich auch die einzelnen Elemente von Klassen angesprochen werden. Für den direkten Zugriff verwendet man die Operatoren \lc{.} und \lc{->}. \\
+			Da es sich bei Klassen nicht um eine Aneinanderreihung von Elementen gleichen Types handelt, wird kein Index zur Adressierung der Elemente verwendet, sondern der Komponentenname. Der Unterschied zwischen den beiden Operatoren \lc{.} und \lc{->} besteht darin, dass \lc{.} auf eine Variable eines Klassentypes angewandt wird, während \lc{->} für Zeiger auf Klassentypen benutzt wird. \\
+			Der Operator \lc{->} stellt nichts anderes als eine vereinfachte Schreibweise für eine Kombination von \lc{*} und \lc{.} dar: \\
+			\lc{p->month = 12;} \\
+			ist äquivalent zu: \\
+			\lc{(*p).month = 12;}
+		\end{minipage}

@@ -1,4 +1,4 @@
-void swap(int& a, int& b)
+void swap(int a, int b)
 {
 	int tmp = a;
 	a = b;
@@ -8,6 +8,6 @@ int main()
 {
 	int x = 4;
 	int y = 3;
-	swap(x, y); // OK!
+	swap(x, y); // keine Auswirkung
 	return 0;
 }
