@@ -23,7 +23,7 @@
 					\linebreak
 				\end{compactitem}
 	\end{minipage}
-	\begin{minipage}[t]{6.5 cm}
+	\begin{minipage}[t]{5.5 cm}
 	Im Beispiel rechts wird die Verwendung klar:
 			\begin{compactitem}
 				\item Der statische Datentyp bezeichnet den Datentyp bei der Deklaration. Im Beispiel: a ist ein Array von Pointer auf Article
@@ -31,8 +31,8 @@
 			\end{compactitem}
 	\end{minipage}
 	\hspace*{0.5cm}
-	\begin{minipage}[t]{12 cm}
-	test\linebreak
+	\begin{minipage}[t]{13 cm}
+		-\linebreak
 		\includegraphics[width=1\textwidth]{pics/bsp_Webshop.jpg}
 	\end{minipage}
 \newpage
@@ -51,7 +51,45 @@
 	\end{flushleft}
 		\lstinputlisting[language=C++,tabsize=2]{code/static_call2.cpp}
 	\begin{flushleft}
-		Wichtig ist auch: innerhalb von Konstruktoren und Destruktoren \textbf{alle} Methodenaufrufe statisch aufgelöst werden. 
+		Wichtig ist auch: innerhalb von Konstruktoren und Destruktoren \textbf{alle} Methodenaufrufe \textbf{statisch} aufgelöst werden. 
 	\end{flushleft} 
-	\subsubsection{Aufruf von virtuelle Elementfunktionen \verweiscpp{14.2.2}}
+	\begin{minipage}[t]{6 cm}
+		\subsubsection{Polymorphe (virtuelle) Klassen}
+			\begin{compactitem}
+	 		\item Eine Klasse, welche mindestens eine virtuelle Funktion deklariert, heisst virtuell 	(polymorph)
+			\item Virtuelle Klassen bewirken einen Mehraufwand für den Compiler und sind darum langsamer in der Ausführung
+			\item Konstruktoren sind nie virtuell
+			\item Destruktoren virtueller Klassen müssen immer als virtuell deklariert werden,
+			sonst wird nur der Destruktor der Basisklasse aufgerufen
+			\textbf{ \item Nicht virtuelle Methoden dürfen nicht überschrieben werden} (könnten technisch gesehen, führt aber zu unüberschaubaren Fehlern)
+			\end{compactitem}
+	
+	\end{minipage}\hspace*{0.5cm}
+	\begin{minipage}[t]{12.5 cm}
+		\subsubsection{Repräsentation polymorpher Objekte im Speicher \verweiscpp{14.2.6}}
+			\begin{compactitem}
+				\item In der Virtual Function Table (vtbl) vermerkt das System der Reihe nach die Adressen der für eine Klasse gültigen virtuellen Elementfunktionen
+				\item Das System legt für jede polymorphe Klasse eine vtbl an
+				\item Jedes Objekt einer polymorphen Klasse enthält einen Virtual Pointer vptr,
+						welcher auf die vtbl der entsprechenden Klasse zeigt
+			\end{compactitem}
+		\hspace*{0.5cm}\includegraphics[width=0.85\textwidth]{pics/bsp_vtbl.jpg}
+	\end{minipage}
+	\subsection{Abstrakte Klassen \verweiscpp{14.3}}
+		Eine abstrakte Klasse ist ein Klasse, die mehr oder weniger vollständig ist und dazu dient, Gemeinsamkeiten der abgeleiteten Klassen festzuhalten (z.B. ComicCharacter). ComicCharacter legt fest, dass alle Comicfiguren die Methoden $print()$, $dance()$ und $sing()$ verstehen.
+		\begin{compactitem}
+			\item Ein Kreis ist z.B. ein Spezialfall einer Ellipse. Es ist aber nicht sinnvoll, ihn so zu programmieren, da er sonst Eigenschaften erbt, die nicht verwendet werden
+			\item Es wäre möglich, Kreis und Ellipse als zwei unabhängige Klassen zu programmieren. Dann müssten aber alle Eigenschaften, die diese gemeinsam haben, doppelt programmiert werden
+			\item Dies versucht die objektorientierte Programmierung zu vermeiden
+			\item Es ist besser, die Eigenschaften, die Kreise und Ellipsen gemein haben, in einer Basisklasse zu programmieren
+			\item Die Kreis- und Ellipsenklasse erben dann parallel von der gemeinsamen Basisklasse
+			\item Die Basisklasse ist aber unvollständig, es handelt sich um eine abstrakte Klasse
+			\item Es können \textbf{keine} Objekte von abstrakten Klassen gebildet werden
+			\item In C++ können rein virtuelle Funktionen (pure virtual functions) deklariert werden, die in der Basisklasse nicht von einer Definition begleitet werden
+			\lstinputlisting[language=C++,tabsize=2]{code/pure_virtual_function.cpp}
+			\textbf{\item Klassen, die mindestens eine rein virtuelle Funktion deklarieren, sind abstrakte Klassen}
+			\item Ist eine Klasse erst einmal als abstrakt definiert, kann diese nur durch Vererbung vervollständigt und dadurch nutzbar gemacht werden
+		\end{compactitem}
+	
+	
 		
