@@ -88,8 +88,67 @@
 			\item In C++ können rein virtuelle Funktionen (pure virtual functions) deklariert werden, die in der Basisklasse nicht von einer Definition begleitet werden
 			\lstinputlisting[language=C++,tabsize=2]{code/pure_virtual_function.cpp}
 			\textbf{\item Klassen, die mindestens eine rein virtuelle Funktion deklarieren, sind abstrakte Klassen}
-			\item Ist eine Klasse erst einmal als abstrakt definiert, kann diese nur durch Vererbung vervollständigt und dadurch nutzbar gemacht werden
+			\item Ist eine Klasse erst einmal als abstrakt definiert, kann diese nur durch Vererbung vervollständigt und dadurch nutzbar gemacht werden \linebreak
 		\end{compactitem}
+		\begin{minipage}[t]{9 cm}
+			So ist die folgende Klasse eine abstrakte Klasse (da mind. 1 Funktion rein virtuell ist)
+			\lstinputlisting[language=C++,tabsize=2]{code/virtual_function.cpp}
+		\end{minipage}\hspace*{0.5cm}
+		\begin{minipage}[t]{9.5 cm}
+			Der folgende Aufruf führt daher beim Übersetzen zu einem Fehler. (Es können keine Objekte aus abstrakten Klassen erstellt werden)
+			\lstinputlisting[language=C++,tabsize=2]{code/virtual_function2.cpp}
+		\end{minipage}
+	\subsection{Mehrfachvererbung \verweiscpp{14.3}}
+		\begin{minipage}[t]{7.5 cm}
+		Bei der Mehrfachvererbung wird eine Klasse von mehreren Basisklassen abgeleitet. So kann z.B. eine Klasse DuckHero definiert werden, die sowohl von SuperHero als auch von SingingComicCharacter erbt. \linebreak[2]
+		\includegraphics[width=1\textwidth]{pics/uml_mehrfachvererbung.jpg}
+		Guter Einsatz der Mehrfachvererbung ist, wenn alle ausser höchstens einer Basisklasse ausschliesslich aus rein virtuellen Funktionen bestehen (Interfaces). Die neue Klasse implementiert dann die aufgelisteten Interfaces.\linebreak
+		Das obige Beispiel ist im Anhang unter 15.4 angehängt.
+		\end{minipage}\hspace*{0.5cm}
+		\begin{minipage}[t]{11 cm}
+		Der Syntax bei der Mehrfachvererbung lautet wie folgt (Basisklassen durch Komma getrennt): \linebreak
+			\lstinputlisting[language=C++,tabsize=2]{code/mehrfachvererbung.cpp}
+		Durch die Mehrfachverbung treten oft Probleme auf. Problem 1 ist jenes der Mehrdeutigkeit von Methoden. Im Fall von $print()$ ergeben sich mehrere Möglichkeiten. Um die Mehrdeutigkeit zu umgehen, muss der Gültigkeitsbereich angegeben werden:
+			\lstinputlisting[language=C++,tabsize=2]{code/mehrdeutigkeit.cpp}
+		Oder noch besser:
+			\lstinputlisting[language=C++,tabsize=2]{code/mehrdeutigkeit2.cpp}
+		Das Problem 2 ist das von mehrfachen Basisklassen (linker und rechter Baum). DuckHero ist von Duck und SuperHero abgeleitet und beinhaltet somit zwei ComicCharacter-Teile. Diese Mehrdeutigkeit kann durch virtuelle Basisklassen verhindert werden (siehe Kap. 14.5 im Buch)
+		\end{minipage}
+\newpage
+	\subsection{RTTI (Laufzeit-Typinformation) \verweiscpp{14.3}}
+	RTTI (Run-Time Type Information) ist die Möglichkeit den Typ eines Objekts einer polymorphen Klasse festzustellen. Er steht ausschliesslich für polymorphe Klassen zur Verfügung und sollte sehr zurückhaltend eingesetzt werden.\linebreak
+	Der RTTI-Mechanismus besteht im Wesentlichen aus zwei Operatoren und einer Struktur:
+		\begin{compactitem}
+			\item Operator dynamic\_cast
+			\item Operator typeid
+			\item Klasse type\_info
+		\end{compactitem}
+	\subsubsection{Operator dynamic\_cast}
+	Syntax: 	\lstinputlisting[language=C++,tabsize=2]{code/dynamic_cast.cpp}
+		\begin{compactitem}
+			\item Versucht, den Zeiger p in einen Zeiger auf ein Objekt des Typs SuperHero
+			umzuwandeln
+			\item Der dynamische Datentyp von p ist massgebend
+			\item Umwandlung wird dann durchgeführt, wenn p tatsächlich auf ein Objekt vom Typ SuperHero, bzw. auf eine davon abgeleitete Klasse zeigt.
+			\item Andernfalls ist das Resultat der Umwandlung der Nullpointer!
+		\end{compactitem}
+	\subsubsection{Operator typeid}
+		\begin{compactitem}
+			\item Ermitteln des dynamischen Datentyps eines polymorphen Objekts
+			\item Ergibt eine Referenz auf ein Objekt des Typs $type\_info$. Diese Klasse beinhaltet u.a. eine Methode name(), welche den Namen der Klasse zurückgibt.
+		Beispiel: \lstinputlisting[language=C++,tabsize=2]{code/typeid.cpp}
+		\end{compactitem}
+	\subsubsection{Struktur type\_info}
+		Die Struktur muss eingebunden werden
+		\lstinputlisting[language=C++,tabsize=2]{code/type_info.cpp}
+		Sie bietet mind. folgende Funktionalität:
+		\begin{compactitem}
+			\item die Operatoren $==$ und $!=$
+			\item die Methode $before$
+			\item die Methode $name$ (siehe Beispiel oben)
+		\end{compactitem}
+	
+	
 	
 	
 		

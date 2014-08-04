@@ -1,0 +1,1 @@
+cout << "p ist ein " << typeid(*p).name() << "Objekt";
