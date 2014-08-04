@@ -1,11 +1,34 @@
 \section{G"ultigkeitsbereiche, Namensr"aume und Sichtbarkeit}
-\subsection{Namensr"aume und Sichtbarkeit}
-\subsection{Deklarationen}
-\subsection{Initialisierung}
-\subsection{Type-cast}
-\subsubsection{Standard-Typumwandlung}
-Ausdr"ucke werden bei einer Zuweisung automatisch in erwarteten Typ umgewandelt.
-\lstinputlisting[language=C,tabsize=2]{code/typecast.c} 
-\subsubsection{explizite-Typumwadlung}
- M"ogliche Umwandlungen im C-Stil: (Problematisch)
- \lstinputlisting[language=C,tabsize=2]{code/typecast2.c}
+	\subsection{Namensr"aume und Sichtbarkeit}
+	\subsection{Deklarationen}
+		\subsubsection{Speicherklassenattribute}
+	\begin{compactitem}
+		\item auto: gilt als Standard wenn nichts anderes steht. G"ultigkeitsbereich der auto Variablen ist innerhalb des Blockes in dem sie deklariert wurde.
+		\item register: Hinweis an den Compiler m"oglichst die Variable in einem Register abzulegen.
+		\item static: Variablen leben von ihrer Deklaration bis zum Programmende. Geeignet um zBsp Funktionsaufrufe zu z"ahlen anstatt mit Globaler Variable.
+		\item extern: Zugriff auf eine static Variable in einem anderen File, welches zu einem gesamten Programm gelinkt wurde.
+		\item mutable: Klassenelemente mit const oder static attributen k"onnen nachtr"aglich ver"andert werden.
+	\end{compactitem}
+		\subsubsection{Typqualifikatoren}
+		\begin{compactitem}
+			\item const: Objekte d"urfen nicht ver"andert werden. RValues.
+			\item volatile: Objekte werden evtl. von Aussen im Programmverlauf ver"andert, und d"urfen daher vom Compiler nicht zu Optimierungszwecken zwischengespeichert werden. Sie werden immer aus dem Hauptspeicher eingelesen.
+		\end{compactitem}
+		\subsubsection{Funktionsattribute}
+		\begin{compactitem}
+			\item inline: Compileranweisung den Funktionsinhalt einer inline-Funktion direkt an die Aufrufstelle zu substituieren. Laufzeitoptimierung (kein wirklicher Funktionsaufruf)
+		\end{compactitem}
+		\subsubsection{typedef}
+			\lstinputlisting[language=C,tabsize=2]{code/typedef.c}
+
+	\subsection{Initialisierung}
+		 \lstinputlisting[language=C,tabsize=2]{code/initial.c}
+	\subsection{Type-cast}
+	\subsubsection{Standard-Typumwandlung}
+	Ausdr"ucke werden bei einer Zuweisung automatisch in erwarteten Typ umgewandelt.
+		\lstinputlisting[language=C,tabsize=2]{code/typecast.c} 
+	\subsubsection{explizite-Typumwadlung}
+	 M"ogliche Umwandlungen im C-Stil: (Problematisch)
+		 \lstinputlisting[language=C,tabsize=2]{code/typecast2.c}
+	 neue Typumwandlungen in C++:
+		 \lstinputlisting[language=C,tabsize=2]{code/constcast.c}
