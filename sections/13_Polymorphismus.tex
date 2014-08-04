@@ -1,2 +1,57 @@
-\section{Polymorphismus}
-C. Ham
+\section{Polymorphismus / Mehrfachvererbung / RTTI}
+   	\begin{flushleft}
+   	Dieses Kapitel beschreibt die dynamischen objektorientierten Sprachmerkmale von C++. Erst durch diese wird C++ zu einer echten objektorientierten Programmiersprache.
+   	\end{flushleft}
+	\begin{minipage}[t]{8 cm}
+		\subsection{Polymorphismus \verweiscpp{14.1}}
+			\subsubsection{dynamische vs. statische Bindung}
+			Werden von einer Kasse A die Klassen B und C abgeleitet, so können Objekte vom Typ $Zeiger auf A$ auch auf B- oder C-Objekte verweisen. Implementieren alle drei Klassen eine Operation foo jeweils verschieden so bewirkt die Anweisung
+			\lstinputlisting[language=C++,tabsize=2]{code/foo_poly.cpp}
+			in normalen Programmiersprachen den Aufruf von $A::foo()$. Dabei wird bereits zur Übersetzungszeit (so früh wie möglich; Early Binding) vom Compiler die Funktion $foo$ der Klasse A eingebunden. Diese Art des Bindens wird statische Bindung (static binding) genannt, da sie unveränderbar ist. Die Variable $anAPointer$ kann in C++ auch für Objekte der Klasse B oder C stehen. \linebreak
+			In echten objektorientierten Programmiersprache wird der obige Aufruf nicht zur Übersetzungszeit, sondern erst zur Laufzeit gebunden (dynamische Bindung, dynamic Binding). Beim Aufruf von \lstinputlisting[language=C++,tabsize=2]{code/foo_poly.cpp} wird der Typ des Objekts untersucht. In Abhängigkeit davon wird die Methode $A::foo$, $B::foo$ oder $C::foo$ aufgerufen. Dieses dynamische Verhalten wird als Polymorphismus bezeichnet. Damit dynamisch (zur Laufzeit) die verschiedenen Funktionen foo aufgerufen werden können, müssen diese Funktionen $virtual$ sein. \linebreak
+	\end{minipage}\hspace*{0.5cm}
+	\begin{minipage}[t]{10.5 cm}
+		\subsection{Virtuelle Elementfunktionen \verweiscpp{14.2}}
+			Virtuelle Elementfunktionen sind spezielle Funktionen, die nicht zur Übersetzungs- sondern zur Laufzeit gebunden werden. Es wird erst beim Auruf der Funktion entschieden, welche tatsächlich ausgeführt wird $A::foo$, $B::foo$ oder $C::foo$
+				\begin{compactitem}
+					\item Funktionen, die dynamisch gebunden werden, muss bei der Deklaration das Schlüsselwort virtual vorangestellt werden (zwingend!).
+					In der abgeleiteten Klasse soll (muss aber nicht) die Funktion auch mit virtual gekennzeichnet werden. Dies sieht wie folgt aus:
+						\lstinputlisting[language=C++,tabsize=2]{code/virtual.cpp}
+					\item Faustregel: Eine Funktion sollte als virtual deklariert werden, wenn sie in der abgeleiteten Klasse neu definiert (überschrieben) wird, sonst nicht!
+					\item Achtung: nicht mit Funktionsüberladung (gleicher Name aber unterschiedliche Signatur) verwechseln
+					\item Die neue (überschriebene) Methode muss dieselbe Signatur wie die Methode der Basisklasse haben. Sonst wird neue Methode eingeführt.
+					\linebreak
+				\end{compactitem}
+	\end{minipage}
+	\begin{minipage}[t]{6.5 cm}
+	Im Beispiel rechts wird die Verwendung klar:
+			\begin{compactitem}
+				\item Der statische Datentyp bezeichnet den Datentyp bei der Deklaration. Im Beispiel: a ist ein Array von Pointer auf Article
+				\item Der dynamische Datentyp bezeichnet den effektiven Datentyp zur Laufzeit Im Beispiel: a[0] ist ein Pointer auf Book, a[1] ein Pointer auf CD, etc.
+			\end{compactitem}
+	\end{minipage}
+	\hspace*{0.5cm}
+	\begin{minipage}[t]{12 cm}
+	test\linebreak
+		\includegraphics[width=1\textwidth]{pics/bsp_Webshop.jpg}
+	\end{minipage}
+\newpage
+	\subsubsection{Aufruf von virtuelle Elementfunktionen \verweiscpp{14.2.2}}
+	\begin{minipage}[t]{9 cm}
+		Eine dynamische Methodenauflösung erfolgt über Zeiger oder Pointer:
+		\lstinputlisting[language=C++,tabsize=2]{code/dynamic_call.cpp}
+	\end{minipage}\hspace*{0.5cm}
+	\begin{minipage}[t]{9 cm}
+		Ein Aufruf mit einem Objekt und der Punktnotation wird statisch aufgelöst:
+		\lstinputlisting[language=C++,tabsize=2]{code/static_call.cpp}
+		Dies kommt daher, dass ein echtes Objekt sein Typ nicht verändern kann (nicht polymorph) und der Compiler somit schon zur Übersetzungszeit entscheidet welche Funktion aufgerufen wird.
+	\end{minipage}
+	\begin{flushleft}
+		Eine statische Auflösung wird auch erzwungen, wenn der Gültigkeitsbereich explizit angegeben wird:
+	\end{flushleft}
+		\lstinputlisting[language=C++,tabsize=2]{code/static_call2.cpp}
+	\begin{flushleft}
+		Wichtig ist auch: innerhalb von Konstruktoren und Destruktoren \textbf{alle} Methodenaufrufe statisch aufgelöst werden. 
+	\end{flushleft} 
+	\subsubsection{Aufruf von virtuelle Elementfunktionen \verweiscpp{14.2.2}}
+		
