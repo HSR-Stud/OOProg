@@ -4,7 +4,7 @@
 		\begin{compactitem}
 			\item Single-Source-Prinzip: Für x Varianten derselben Datenstruktur existiert genau eine Version des Sourcecodes, der geändert und gewartet werden muss.
 			\item Höhere Wiederverwendbarkeit: Klassen-Templates sind bei geeigneter Wahl ihrer Parameter allgemein einsetzbar und einfach wiederverwendbar.
-			\item Statische Bindung: Die Bindung zur Übersetzungszeit hat in Bezug auf Typsicherheit und Fehlererkennung zweifellos grosse Vorteile gegenüber generischen C-Lösungen mit $void*$-Zeigern, aber zum Teil auch gegenüber typisch objektorientierten Varianten wie sie zum Beispiel in Smalltalk üblich sind.
+			\item Statische Bindung: Die Bindung zur Übersetzungszeit hat in Bezug auf Typsicherheit und Fehlererkennung zweifellos grosse Vorteile gegenüber generischen C-Lösungen mit \lc{void*}-Zeigern, aber zum Teil auch gegenüber typisch objektorientierten Varianten wie sie zum Beispiel in Smalltalk üblich sind.
 			\item Dead Code: Traditionelle Bibliotheken belegen Speicher unabhängig davon, ob eine
 			einzelne Funktion wirklich verwendet wird. Dies kann zu Dead Code führen,
 			d.h. zu Code, der niemals ausgeführt wird.
@@ -38,12 +38,23 @@
 			\begin{minipage}[t]{7cm}
 				\vspace*{-0.5cm}\lstinputlisting[language=C++,tabsize=2]{code/template_syntax.cpp}
 			\end{minipage} \\
+			
+		\vspace*{-0.1cm}\subsubsection{inline bei Templates}
+			\lc{inline} muss zwischen lc{template} und dem Returntyp stehen.
+			Achtung: Bei Verwendung von lc{inline} speziell zusammen mit Templates besteht die Gefahr von Code Bloat.
+
+		\subsubsection{Überladen \verweiscpp{12.2.2}}
+			\begin{compactitem}
+				\item Funktions-Templates können mit anderen Funktionstemplates und auch mit normalen Funktionen überladen werden.
+				\item Namensauflösung:
+				\begin{compactitem}
+					\item Compiler geht Liste der möglicherweise passenden Funktions-Templates durch und erzeugt die entsprechenden Template-Funktionen.
+					\item Ergebnis ist eine Reihe von (eventuell) passenden Template-Funktionen, ergänzt durch die vorhandenen normalen Funktionen.
+					\item Aus dieser ganzen Auswahl wird die am besten passende Funktion ausgewählt.
+				\end{compactitem}	
+			\end{compactitem}
 		
-		\begin{minipage}[t]{11cm}
-			\subsubsection{$inline$ bei Templates}
-				$inline$ muss zwischen $template$ und dem Returntyp stehen.
-				Achtung: Bei Verwendung von $inline$ speziell zusammen mit Templates besteht die Gefahr von Code Bloat.
-							
+		\vspace*{-1cm}\begin{minipage}[t]{7.5cm}							
 			\subsubsection{Ausprägung \verweiscpp{12.2.1}}
 				\begin{compactitem}
 					\item Sobald ein Typ in einem Funktions-Template verwendet wird, erkennt der
@@ -53,26 +64,14 @@
 					Rückgabetyp wird nicht ausgewertet.			
 				\end{compactitem}
 				\lstinputlisting[language=C++,tabsize=2]{code/template_auspraegung.cpp}
-				
+		\end{minipage}
+		\hspace*{0.5cm}
+		\begin{minipage}[t]{7cm}			
 			\subsubsection{Explizite Qualifizierung}
 				\begin{compactitem}
 					\item Funktions-Templates können explizit mit einem Typ qualifiziert werden.		
 				\end{compactitem}
 				\lstinputlisting[language=C++,tabsize=2]{code/template_explizit.cpp}
-		\end{minipage}
-		\hspace*{0.5cm}
-		\begin{minipage}[t]{7cm}			
-			\subsubsection{Überladen \verweiscpp{12.2.2}}
-				\begin{compactitem}
-					\item Funktions-Templates können mit anderen Funktionstemplates und auch mit
-					normalen Funktionen überladen werden.
-					\item Namensauflösung:
-					\begin{compactitem}
-						\item Compiler geht Liste der möglicherweise passenden Funktions-Templates durch und erzeugt die entsprechenden Template-Funktionen.
-						\item Ergebnis ist eine Reihe von (eventuell) passenden Template-Funktionen, ergänzt durch die vorhandenen normalen Funktionen.
-						\item Aus dieser ganzen Auswahl wird die am besten passende Funktion ausgewählt.
-					\end{compactitem}	
-				\end{compactitem}
 		\end{minipage}
 		
 	\subsection{Klassen-Templates \verweiscpp{12.3}}
@@ -100,13 +99,13 @@
 			\lstinputlisting[language=C++,tabsize=2]{code/template_class.cpp}
 		\end{minipage}
 		
-	\subsection{Klassen-Templates und getrennte Übersetzung}
-		\begin{minipage}[t]{9 cm}
+	\vspace*{-0.4cm}\subsection{Klassen-Templates und getrennte Übersetzung}
+		\vspace*{-0.4cm}\begin{minipage}[t]{9 cm}
 			\subsubsection{Möglichkeit 1}
-				\includegraphics[width=1\textwidth]{pics/template_klasse_1.jpg}
+				\includegraphics[width=0.9\textwidth]{pics/template_klasse_1.jpg}
 		\end{minipage}
 		\hspace*{0.5cm}
 		\begin{minipage}[t]{9 cm}
 			\subsubsection{Möglichkeit 2}
-				\includegraphics[width=1\textwidth]{pics/template_klasse_2.jpg}
+				\includegraphics[width=0.9\textwidth]{pics/template_klasse_2.jpg}
 		\end{minipage}
