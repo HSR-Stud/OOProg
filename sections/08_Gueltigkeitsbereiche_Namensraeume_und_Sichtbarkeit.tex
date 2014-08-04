@@ -1,34 +1,80 @@
-\section{G"ultigkeitsbereiche, Namensr"aume und Sichtbarkeit}
-	\subsection{Namensr"aume und Sichtbarkeit}
-	\subsection{Deklarationen}
-		\subsubsection{Speicherklassenattribute}
-	\begin{compactitem}
-		\item auto: gilt als Standard wenn nichts anderes steht. G"ultigkeitsbereich der auto Variablen ist innerhalb des Blockes in dem sie deklariert wurde.
-		\item register: Hinweis an den Compiler m"oglichst die Variable in einem Register abzulegen.
-		\item static: Variablen leben von ihrer Deklaration bis zum Programmende. Geeignet um zBsp Funktionsaufrufe zu z"ahlen anstatt mit Globaler Variable.
-		\item extern: Zugriff auf eine static Variable in einem anderen File, welches zu einem gesamten Programm gelinkt wurde.
-		\item mutable: Klassenelemente mit const oder static attributen k"onnen nachtr"aglich ver"andert werden.
-	\end{compactitem}
-		\subsubsection{Typqualifikatoren}
+\section{Gültigkeitsbereiche, Namensräume und Sichtbarkeit \verweiscpp{9}}
+	\subsection{Sichtbarkeit \verweiscpp{9.1.1}}
+		\lc{C++} kennt verschiedene Gültigkeitsbereiche: 
 		\begin{compactitem}
-			\item const: Objekte d"urfen nicht ver"andert werden. RValues.
-			\item volatile: Objekte werden evtl. von Aussen im Programmverlauf ver"andert, und d"urfen daher vom Compiler nicht zu Optimierungszwecken zwischengespeichert werden. Sie werden immer aus dem Hauptspeicher eingelesen.
+			\item Blockanweisungen führen einen eigenen Gültigkeitsbereich ein, den so genannten lokalen Gültigkeitsbereich oder \lc{Local Scope}. Alle dort deklarierten Bezeichner gelten genau in diesem Block, genauer gesagt von ihrer Deklaration an bis zum Ende des aktuellen Blocks. Unter diesen Punkt fallen auch die Kontrollanweisungen \lc{if}, \lc{switch}, \lc{for} sowie \lc{while}.\\ \ \\
+			\item Der Gültigkeitsbereich von Funktionsprototypen erstreckt sich bis ans Ende der Deklaration und umfasst die Funktionsparameter. Der Gültigkeitsbereich von Funktionen erstreckt sich über die gesamte Funktion.
+			\item Die so genannten Namensräume (\lc{Namespaces}) sind eigene Gültigkeitsbereiche, die alle darin deklarierten Bezeichner umfassen. Ein Bezeichner, der in einem Namensraum deklariert ist, gilt von seiner Deklaration bis an das Ende des Namensraums.
+			\item Jede Klasse hat einen eigenen Gültigkeitsbereich (\lc{Class Scope}), der sich über die gesamte Klasse erstreckt. Ein Klassenelement gilt in seiner Klasse von seiner Deklaration an bis zum Ende der Klassendeklaration und kann nur in Verbindung mit einer entsprechenden Variablen dieses Klassentyps verwendet werden.
 		\end{compactitem}
-		\subsubsection{Funktionsattribute}
+		
+	\subsection{Namensräume \verweiscpp{9.1.2}}
+		\begin{minipage}[t]{4.5 cm}
+			\lstinputlisting[language=C++,tabsize=2]{code/namespace.cpp}
+		\end{minipage}
+		\begin{minipage}[t]{14.5 cm}
+			Namensräume sind Gültigkeitsbereiche, in denen beliebige Bezeichner (Variablen, Klassen, Funktionen, andere Namensräume, Typen, etc.) deklariert werden können.
+			\begin{compactitem}
+				\item Ein Namensraum kann deklariert werden. Alle enthaltenen Objekte werden diesem Namensraum zugeordnet. Auf Bezeichner eines Namensraumes kann mit dem Scope Operator \lc{::} zugegriffen werden.
+				\item Einem Namensraum kann ein so genannter Alias zugeordnet werden, über den er angesprochen wird. \\
+				\lc{namespace FBSSLIB = Financial\_Branch\_and\_System\_Service\_Library;}
+				\item Eine so genannte \lc{Using}-Deklaration erlaubt den direkten Zugriff auf einen Bezeichner eines Namensraumes. \\
+				\lc{using MyLib1::foo;} \\
+				\lc{foo();}
+				\item Mit einer so genannten \lc{Using}-Direktive kann auf alle Bezeichner eines Namensraums direkt zugegriffen werden. \\
+				\lc{using namespace MyLib1;} \\
+				\lc{foo();}			
+			\end{compactitem}
+		\end{minipage}
+		
+	\subsection{Deklarationen \verweiscpp{9.2}}
+		\subsubsection{Speicherklassenattribute \verweiscpp{9.2.1}}
+			\begin{compactitem}
+				\item \lc{auto}: gilt als Standard wenn nichts anderes steht. Gültigkeitsbereich der \lc{auto} Variablen ist innerhalb des Blockes in dem sie deklariert wurde.
+				\item \lc{register}: Hinweis an den Compiler möglichst die Variable in einem Register abzulegen.
+				\item \lc{static}: Variablen leben von ihrer Deklaration bis zum Programmende. Geeignet um zum Bsp. Funktionsaufrufe zu zählen anstatt mit globaler Variable.
+				\item \lc{extern}: Zugriff auf eine \lc{static} Variable in einem anderen File, welches zu einem gesamten Programm gelinkt wurde.
+				\item \lc{mutable}: Klassenelemente mit \lc{const} oder \lc{static} Attributen können nachträglich verändert werden.
+			\end{compactitem}
+	
+		\subsubsection{Typqualifikatoren \verweiscpp{9.2.2}}
 		\begin{compactitem}
-			\item inline: Compileranweisung den Funktionsinhalt einer inline-Funktion direkt an die Aufrufstelle zu substituieren. Laufzeitoptimierung (kein wirklicher Funktionsaufruf)
+			\item \lc{const}: Objekte dürfen nicht verändert werden. RValues.
+			\item \lc{volatile}: Objekte werden evtl. von Aussen im Programmverlauf verändert, und dürfen daher vom Compiler nicht zu Optimierungszwecken zwischengespeichert werden. Sie werden immer aus dem Hauptspeicher eingelesen.
 		\end{compactitem}
-		\subsubsection{typedef}
-			\lstinputlisting[language=C,tabsize=2]{code/typedef.c}
-
-	\subsection{Initialisierung}
-		 \lstinputlisting[language=C,tabsize=2]{code/initial.c}
-	\subsection{Type-cast}
-	\subsubsection{Standard-Typumwandlung}
-	Ausdr"ucke werden bei einer Zuweisung automatisch in erwarteten Typ umgewandelt.
-		\lstinputlisting[language=C,tabsize=2]{code/typecast.c} 
-	\subsubsection{explizite-Typumwadlung}
-	 M"ogliche Umwandlungen im C-Stil: (Problematisch)
-		 \lstinputlisting[language=C,tabsize=2]{code/typecast2.c}
-	 neue Typumwandlungen in C++:
-		 \lstinputlisting[language=C,tabsize=2]{code/constcast.c}
+		
+		\subsubsection{Funktionsattribute \verweiscpp{9.2.3}}
+		\begin{compactitem}
+			\item \lc{inline}: Compileranweisung den Funktionsinhalt einer \lc{inline}-Funktion direkt an die Aufrufstelle zu substituieren. Laufzeitoptimierung (kein wirklicher Funktionsaufruf)
+			\item \lc{virtual}: Wird im Zusammenhang mit Klassen gebraucht.
+			\item \lc{explicit}: Wird im Zusammenhang mit Klassen gebraucht.
+		\end{compactitem}
+		
+		\subsubsection{typedef \verweiscpp{9.2.4}}
+			\begin{minipage}[t]{10 cm}
+				\vspace*{-0.5cm}\lstinputlisting[language=C,tabsize=2]{code/typedef.c}
+			\end{minipage}
+			\begin{minipage}[t]{9 cm}
+				Das Schlüsselwort \lc{typedef} ermöglicht die Einführung neuer Bezeichner, die dann im Programm anstelle von anderen Typen verwendet werden können. \lc{typedef} führt allerdings keine neuen Typen, sondern Synonyme für einen existierenden Datentyp ein.
+			\end{minipage}
+			
+	\subsection{Initialisierung von Objekten \verweiscpp{9.3}}
+		 \vspace*{-0.29cm}\lstinputlisting[language=C,tabsize=2]{code/initial.c}
+		 Folgende Regeln müssen beachtet werden:
+		 \begin{compactitem}
+		 	\item Alle Initialisatoren müssen Konstantenausdrücke sein.
+		 	\item Konstantenausdrücke müssen eine Konstante oder die Adresse eines externen oder statischen Objektes plus minus einer Konstante liefern.
+		 	\item Bei Konstantenausdrücken dürfen nur unäre und binäre Operatoren sowie Funktionen verwendet werden.
+		 	\item Die Werte von Vektoren und strukturierten Datentypen werden durch die Angabe der einzelnen Komponenten in geschwungenen Klammern festgelegt.
+		 \end{compactitem}
+		 
+	\subsection{Type-cast \verweiscpp{9.4}}
+		\subsubsection{Standard-Typumwandlung \verweiscpp{9.4.1}}
+			Ausdrücke werden bei einer Zuweisung automatisch in den erwarteten Typ umgewandelt.
+			\lstinputlisting[language=C,tabsize=2]{code/typecast.c} 
+			
+	\subsubsection{explizite-Typumwadlung \verweiscpp{9.4.2}}
+	 	\textbf{Mögliche Umwandlungen im C-Stil: (Problematisch)}
+		\lstinputlisting[language=C,tabsize=2]{code/typecast2.c}
+	 	\textbf{neue Typumwandlungen in C++:}
+		\lstinputlisting[language=C,tabsize=2]{code/constcast.c}

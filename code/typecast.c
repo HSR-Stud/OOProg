@@ -1,5 +1,5 @@
-cout << a; //erfordert RValue, falls a LValue wird es autom. Konvertiert
+cout << a; // erfordert RValue, falls a LValue wird es autom. konvertiert
 
 float f = 1.23
-int i = f; //Gleitkomma -> Integer (aufrunden,abrunden Implementationsabhaengig)
-f = 1;     //Integer -> Gleitkomma
+int i = f; // Gleitkomma -> Integer (aufrunden, abrunden implementationsabhaengig)
+f = 1;     // Integer -> Gleitkomma
