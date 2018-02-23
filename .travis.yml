@@ -16,10 +16,10 @@ before_script:
 - pwd
 script:
 # Prefix command with travis_wait x so it times out after 3 mins, because when the LaTeX doesn't compile pdflatex just hangs instead of quitting.
-- travis_wait 3 pdflatex -interaction=nonstopmode -halt-on-error ./OOProg.tex
+- travis_wait 3 pdflatex -interaction=nonstopmode -halt-on-error OOProg.tex
 - bibtex ./OOProg.aux
-- travis_wait 3 pdflatex -interaction=nonstopmode -halt-on-error ./OOProg.tex
-- travis_wait 3 pdflatex -interaction=nonstopmode -halt-on-error ./OOProg.tex
+- travis_wait 3 pdflatex -interaction=nonstopmode -halt-on-error OOProg.tex
+- travis_wait 3 pdflatex -interaction=nonstopmode -halt-on-error OOProg.tex
 
 before_deploy:
 - dir
@@ -28,7 +28,7 @@ deploy:
   api_key:
     secure: $GITHUB_RELEASE_TOKEN
   file:
-    - ./OOProg.pdf
+    - OOProg.pdf
   skip_cleanup: true
   on:
     tags: true
