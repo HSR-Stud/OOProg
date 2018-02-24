@@ -124,6 +124,7 @@ tlmgr install  	\
   pdflscape     \
   pdfpages      \
   pgf           \
+  pgf-umlcd \
   pgfplots      \
   placeins		\
   polynom       \
